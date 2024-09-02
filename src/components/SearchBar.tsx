@@ -2,7 +2,7 @@ import { styled, alpha } from "@mui/material/styles";
 import { AppBar, Box, Toolbar } from "@mui/material";
 import SearchInput from "./SearchInput";
 
-const Search = styled("form")(({ theme }) => ({
+const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 1),
