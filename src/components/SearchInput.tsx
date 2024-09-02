@@ -1,5 +1,4 @@
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import { TextField, Autocomplete } from "@mui/material";
 import { useState } from "react";
 import { getStocksData } from "../helpers/stockApi";
 

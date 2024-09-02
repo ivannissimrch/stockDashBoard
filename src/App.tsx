@@ -1,10 +1,7 @@
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import { styled, Box, Paper, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Chart from "./components/Chart";
 import SearchBar from "./components/SearchBar";
-import { Typography } from "@mui/material";
 import StockDetails from "./components/StockDetails";
 
 const Item = styled(Paper)(({ theme }) => ({
