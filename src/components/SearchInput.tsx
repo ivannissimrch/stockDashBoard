@@ -42,9 +42,6 @@ export default function SearchInput() {
       openOnFocus
       autoSelect
       options={stocksResults.map((option) => option.label)}
-      filterOptions={(options, state) => {
-        return state.inputValue.length > 2 ? options : [];
-      }}
       renderInput={(params) => (
         <TextField {...params} placeholder="Search for Stock" />
       )}

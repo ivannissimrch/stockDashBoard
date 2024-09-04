@@ -1,4 +1,4 @@
-const apiKey = "Replace with own api key";
+const apiKey = "cr2ke9pr01qgsq6me71gcr2ke9pr01qgsq6me720";
 const basePath = "https://finnhub.io/api/v1";
 
 type ApiStockResults = {
