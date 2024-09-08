@@ -1,4 +1,4 @@
-const apiKey = "cr2ke9pr01qgsq6me71gcr2ke9pr01qgsq6me720";
+const apiKey = "Replace with Api Key";
 const basePath = "https://finnhub.io/api/v1";
 
 type ApiStockResults = {
@@ -6,6 +6,22 @@ type ApiStockResults = {
   displaySymbol: string;
   symbol: string;
   type: string;
+};
+
+type StockDetails = {
+  country: string;
+  currency: string;
+  estimateCurrency: string;
+  exchange: string;
+  finnhubIndustry: string;
+  ipo: string;
+  logo: string;
+  marketCapitalization: number;
+  name: string;
+  phone: string;
+  shareOutstanding: number;
+  ticker: string;
+  weburl: string;
 };
 
 export async function getStocksData(
@@ -24,5 +40,24 @@ export async function getStocksData(
   } catch (error: unknown) {
     console.log(error);
     return [];
+  }
+}
+
+export async function fetchStockDetails(
+  stockSymbol: string
+): Promise<StockDetails | undefined> {
+  try {
+    const url = `${basePath}/stock/profile2?symbol=${stockSymbol}&token=${apiKey}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const message = `An error has occurred: ${response.status}`;
+      throw new Error(message);
+    }
+    const results = await response.json();
+    console.log(results);
+    return results;
+  } catch (error: unknown) {
+    console.log(error);
   }
 }

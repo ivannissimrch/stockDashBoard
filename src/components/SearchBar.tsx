@@ -1,6 +1,6 @@
 import { styled, alpha } from "@mui/material/styles";
 import { AppBar, Box, Toolbar } from "@mui/material";
-import SearchInput from "./SearchInput";
+import StockSearchInput from "./StockSearchInput";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -23,7 +23,7 @@ export default function SearchBar() {
       <AppBar position="static">
         <Toolbar>
           <Search>
-            <SearchInput />
+            <StockSearchInput />
           </Search>
         </Toolbar>
       </AppBar>
