@@ -1,4 +1,4 @@
-const apiKey = "Replace with Api Key";
+const apiKey = "crf2qk1r01qk4jsaq0agcrf2qk1r01qk4jsaq0b0";
 const basePath = "https://finnhub.io/api/v1";
 
 type ApiStockResults = {
@@ -28,7 +28,7 @@ export async function getStocksData(
   userQuery: string
 ): Promise<ApiStockResults[]> {
   try {
-    const url = `${basePath}/search?q=${userQuery}&token=${apiKey}`;
+    const url = `${basePath}/search?q=${userQuery}&exchange=US&token=${apiKey}`;
     const response = await fetch(url);
 
     if (!response.ok) {
