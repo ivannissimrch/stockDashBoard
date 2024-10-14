@@ -47,7 +47,7 @@ export default function StockSearchInput() {
   );
 
   function handleSearchQueryChange(
-    event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element, Event>,
     value: string
   ) {
     setSearchQuery(value);
@@ -55,7 +55,7 @@ export default function StockSearchInput() {
   }
 
   async function handleStockSelectionChange(
-    event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element, Event>,
     newValue: StockResultWithLabel | null
   ) {
     if (newValue) {
