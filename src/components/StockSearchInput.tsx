@@ -1,7 +1,12 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
-import { fetchStockDetails, getStocksData } from "../helpers/stockApi";
+import {
+  fetchQuote,
+  fetchStockDetails,
+  fetchStocksSymbols,
+} from "../helpers/stockApi";
+import { stockContext } from "../App";
 
 type StockResultWithLabel = {
   label: string;
@@ -9,6 +14,7 @@ type StockResultWithLabel = {
 };
 
 export default function StockSearchInput() {
+  const { updateStockDetails, updateStockOverview } = useContext(stockContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [stockSuggestionList, setStockSuggestionList] = useState<
     StockResultWithLabel[]
@@ -18,7 +24,7 @@ export default function StockSearchInput() {
   async function fetchStockSuggestions(searchInputText: string) {
     setIsLoading(true);
     try {
-      const stocks = await getStocksData(searchInputText);
+      const stocks = await fetchStocksSymbols(searchInputText);
       const results = stocks.map((stock) => ({
         label: `${stock.description} ${stock.symbol}`,
         symbol: stock.symbol,
@@ -41,7 +47,7 @@ export default function StockSearchInput() {
   );
 
   function handleSearchQueryChange(
-    event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element, Event>,
     value: string
   ) {
     setSearchQuery(value);
@@ -49,11 +55,23 @@ export default function StockSearchInput() {
   }
 
   async function handleStockSelectionChange(
-    event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element, Event>,
     newValue: StockResultWithLabel | null
   ) {
     if (newValue) {
       const selectedStockDetails = await fetchStockDetails(newValue.symbol);
+      const stockQuote = await fetchQuote(newValue.symbol);
+      if (stockQuote && selectedStockDetails) {
+        const stockOverview = {
+          symbol: newValue.symbol,
+          price: stockQuote.pc,
+          change: stockQuote.d,
+          changePercent: stockQuote.dp,
+          currency: selectedStockDetails.currency,
+        };
+        updateStockOverview(stockOverview);
+        updateStockDetails(selectedStockDetails);
+      }
       setStockSuggestionList([]);
     }
   }
