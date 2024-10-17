@@ -5,9 +5,8 @@ import ListItemText from "@mui/material/ListItemText";
 import { stockContext } from "../App";
 import { useContext } from "react";
 
-export default function StockDetails() {
+export default function DisplayStockDetails() {
   const { stockDetails } = useContext(stockContext);
-
   return (
     <Box border="1px solid #cccc">
       <List>

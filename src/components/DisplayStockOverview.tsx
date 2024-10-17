@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   minHeight: "25px",
 }));
 
-export default function StockOverview() {
+export default function DisplayStockOverview() {
   const { stockOverview } = useContext(stockContext);
   return (
     <Grid container border="1px solid #cccc">

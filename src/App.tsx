@@ -2,15 +2,15 @@ import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import Chart from "./components/Chart";
 import SearchBar from "./components/SearchBar";
-import StockDetails from "./components/StockDetails";
+import DisplayStockDetails from "./components/DisplayStockDetails";
 import { useState } from "react";
 import { createContext } from "react";
-import { StockDetailsType } from "./helpers/stockApi";
-import StockOverview from "./components/StockOverview";
+import { StockDetails } from "./helpers/stockApi";
+import DisplayStockOverview from "./components/DisplayStockOverview";
 
 interface ContextTypes {
-  stockDetails: StockDetailsType | undefined;
-  updateStockDetails: (newDetails: StockDetailsType) => void;
+  stockDetails: StockDetails | undefined;
+  updateStockDetails: (newDetails: StockDetails) => void;
   stockOverview: StockOverview | undefined;
   updateStockOverview: (newStockOverview: StockOverview) => void;
 }
@@ -21,6 +21,8 @@ export const stockContext = createContext<ContextTypes>({
   updateStockDetails: () => {},
   stockOverview: undefined,
   updateStockOverview: () => {},
+  stockHistoricalData: undefined,
+  updateStockHistoricalData: () => {},
 });
 
 type StockOverview = {
@@ -32,19 +34,20 @@ type StockOverview = {
 };
 
 export default function App() {
-  const [stockDetails, setStockDetails] = useState<
-    StockDetailsType | undefined
-  >();
+  const [stockDetails, setStockDetails] = useState<StockDetails | undefined>();
   const [stockOverview, setStockOverview] = useState<
     StockOverview | undefined
   >();
+  const [stockHistoricalData, setStockHistoricalData] = useState({});
 
-  function updateStockDetails(newDetails: StockDetailsType) {
+  function updateStockDetails(newDetails: StockDetails) {
     setStockDetails(newDetails);
   }
-
   function updateStockOverview(newStockOverview: StockOverview) {
     setStockOverview(newStockOverview);
+  }
+  function updateStockHistoricalData(newData) {
+    setStockHistoricalData(newData);
   }
 
   return (
@@ -66,8 +69,8 @@ export default function App() {
             <Chart />
           </Grid>
           <Grid xs={12} md={5}>
-            <StockOverview />
-            <StockDetails />
+            <DisplayStockOverview />
+            <DisplayStockDetails />
           </Grid>
         </Grid>
       </Box>

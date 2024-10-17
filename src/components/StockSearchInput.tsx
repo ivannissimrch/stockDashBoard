@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
 import {
+  fetchDailyHistoricalData,
   fetchQuote,
   fetchStockDetails,
   fetchStocksSymbols,
@@ -71,6 +72,8 @@ export default function StockSearchInput() {
         };
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
+        const dataForChart = await fetchDailyHistoricalData(newValue.symbol);
+        const test = dataForChart?.["Time Series (Daily)"]?.[""];
       }
       setStockSuggestionList([]);
     }
