@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useContext } from "react";
+import { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
 import {
@@ -9,13 +9,23 @@ import {
 } from "../helpers/stockApi";
 import { stockContext } from "../App";
 
-type StockResultWithLabel = {
+interface StockResultWithLabel {
   label: string;
   symbol: string;
-};
+}
+
+export interface HistoricalData {
+  "1. open": string;
+  "2. high": string;
+  "3. low": string;
+  "4. close": string;
+  "5. volume": string;
+  date: string;
+}
 
 export default function StockSearchInput() {
-  const { updateStockDetails, updateStockOverview } = useContext(stockContext);
+  const { updateStockDetails, updateStockOverview, updateStockHistoricalData } =
+    useContext(stockContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [stockSuggestionList, setStockSuggestionList] = useState<
     StockResultWithLabel[]
@@ -73,7 +83,16 @@ export default function StockSearchInput() {
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
         const dataForChart = await fetchDailyHistoricalData(newValue.symbol);
-        const test = dataForChart?.["Time Series (Daily)"]?.[""];
+        const datesObjects = dataForChart?.["Time Series (Daily)"];
+        const dateObjectsKeys = datesObjects ? Object.keys(datesObjects) : [];
+        const weekKeys = dateObjectsKeys.filter((_stock, idx) => idx < 7);
+        const oneWeekStocks = weekKeys.map((key) => {
+          return {
+            ...datesObjects?.[key],
+            date: key,
+          } as HistoricalData;
+        });
+        updateStockHistoricalData(oneWeekStocks);
       }
       setStockSuggestionList([]);
     }

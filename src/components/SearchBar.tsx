@@ -1,5 +1,4 @@
-import { styled, alpha } from "@mui/material/styles";
-import { AppBar, Box, Toolbar } from "@mui/material";
+import { AppBar, Box, Toolbar, styled, alpha } from "@mui/material";
 import StockSearchInput from "./StockSearchInput";
 
 const Search = styled("div")(({ theme }) => ({

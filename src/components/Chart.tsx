@@ -1,21 +1,49 @@
 import { Box } from "@mui/material";
 import { LineChart } from "@mui/x-charts/LineChart";
+import { useContext } from "react";
+import { stockContext } from "../App";
 
 export default function Chart() {
-  return (
-    <Box border="1px solid #cccc" height="470px">
+  const { stockHistoricalData } = useContext(stockContext);
+  let chartData = (
+    <LineChart
+      xAxis={[{ data: [] }]}
+      series={[
+        {
+          data: [],
+        },
+      ]}
+      sx={{ maxWidth: 650, maxHeight: 330 }}
+    />
+  );
+
+  if (stockHistoricalData) {
+    const closes = stockHistoricalData.map((data) =>
+      parseFloat(data?.["4. close"])
+    );
+    const dataset = stockHistoricalData.map((data) => ({
+      date: data.date,
+    }));
+
+    chartData = (
       <LineChart
-        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-        series={[
+        dataset={dataset}
+        xAxis={[
           {
-            data: [2, -5.5, 2, -7.5, 1.5, 6],
-            area: true,
-            baseline: "min",
+            scaleType: "band",
+            dataKey: "date",
+            valueFormatter: (date: string) => date,
           },
         ]}
-        max-width={650}
-        max-height={330}
+        series={[{ data: closes, baseline: "min" }]}
+        sx={{ maxWidth: 650, maxHeight: 330 }}
       />
+    );
+  }
+
+  return (
+    <Box border="1px solid #cccc" height="470px" max-width={650}>
+      {chartData}
     </Box>
   );
 }

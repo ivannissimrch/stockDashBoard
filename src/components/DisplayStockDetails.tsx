@@ -1,63 +1,51 @@
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+import { Box, List, ListItem, ListItemText } from "@mui/material";
 import { stockContext } from "../App";
 import { useContext } from "react";
 
 export default function DisplayStockDetails() {
   const { stockDetails } = useContext(stockContext);
+  const {
+    name = "",
+    country = "",
+    currency = "",
+    exchange = "",
+    ipo = "",
+    marketCapitalization = "",
+    finnhubIndustry = "",
+  } = stockDetails || {};
   return (
     <Box border="1px solid #cccc">
       <List>
         <ListItem>
           <ListItemText primary="Name" />
-          <ListItemText
-            primary={stockDetails ? stockDetails.name : ""}
-            sx={{ textAlign: "right" }}
-          />
+          <ListItemText primary={name} sx={{ textAlign: "right" }} />
         </ListItem>
         <ListItem>
           <ListItemText primary="Country" />
-          <ListItemText
-            primary={stockDetails ? stockDetails.country : ""}
-            sx={{ textAlign: "right" }}
-          />
+          <ListItemText primary={country} sx={{ textAlign: "right" }} />
         </ListItem>
         <ListItem>
           <ListItemText primary="Currency" />
-          <ListItemText
-            primary={stockDetails ? stockDetails.currency : ""}
-            sx={{ textAlign: "right" }}
-          />
+          <ListItemText primary={currency} sx={{ textAlign: "right" }} />
         </ListItem>
         <ListItem>
           <ListItemText primary="Exchange" />
-          <ListItemText
-            primary={stockDetails ? stockDetails.exchange : ""}
-            sx={{ textAlign: "right" }}
-          />
+          <ListItemText primary={exchange} sx={{ textAlign: "right" }} />
         </ListItem>
         <ListItem>
           <ListItemText primary="IPO Date" />
-          <ListItemText
-            primary={stockDetails ? stockDetails.ipo : ""}
-            sx={{ textAlign: "right" }}
-          />
+          <ListItemText primary={ipo} sx={{ textAlign: "right" }} />
         </ListItem>
         <ListItem>
           <ListItemText primary="Market Capitalization" />
           <ListItemText
-            primary={stockDetails ? stockDetails.marketCapitalization : ""}
+            primary={marketCapitalization}
             sx={{ textAlign: "right" }}
           />
         </ListItem>
         <ListItem>
           <ListItemText primary="Industry" />
-          <ListItemText
-            primary={stockDetails ? stockDetails.finnhubIndustry : ""}
-            sx={{ textAlign: "right" }}
-          />
+          <ListItemText primary={finnhubIndustry} sx={{ textAlign: "right" }} />
         </ListItem>
       </List>
     </Box>

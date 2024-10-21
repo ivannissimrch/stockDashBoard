@@ -121,7 +121,7 @@ export async function fetchDailyHistoricalData(
       const message = `An error has occurred: ${response.status}`;
       throw new Error(message);
     }
-    const results = await response.json();
+    const results: Welcome = await response.json();
     return results;
   } catch (error: unknown) {
     console.log(error);
