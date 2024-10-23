@@ -72,10 +72,10 @@ export default function App() {
         </Typography>
         <SearchBar />
         <Grid container spacing={2} columns={{ xs: 12, md: 12 }} margin={2}>
-          <Grid xs={12} md={7}>
+          <Grid xs={12} md={12} lg={7}>
             <Chart />
           </Grid>
-          <Grid xs={12} md={5}>
+          <Grid xs={12} md={12} lg={5}>
             <DisplayStockOverview />
             <DisplayStockDetails />
           </Grid>

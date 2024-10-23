@@ -127,3 +127,21 @@ export async function fetchDailyHistoricalData(
     console.log(error);
   }
 }
+
+export async function fetchMonthlyHistoricalData(
+  symbol: string
+): Promise<Welcome | undefined> {
+  try {
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=G755KJ6M6HBI4UG7`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const message = `An error has occurred: ${response.status}`;
+      throw new Error(message);
+    }
+    const results: Welcome = await response.json();
+    return results;
+  } catch (error: unknown) {
+    console.log(error);
+  }
+}
