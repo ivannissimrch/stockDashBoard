@@ -2,41 +2,56 @@ import { Box, Button, ButtonGroup } from "@mui/material";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useContext } from "react";
 import { stockContext } from "../App";
-import { fetchMonthlyHistoricalData } from "../helpers/stockApi";
-import { HistoricalData } from "./StockSearchInput";
+import {
+  fetchDailyStockData,
+  fetchMonthlyStockData,
+  fetchWeeklyStockData,
+  StocksData,
+} from "../helpers/stockApi";
 
 export default function Chart() {
   const { stockHistoricalData, updateStockHistoricalData } =
     useContext(stockContext);
-  let chartData = <div></div>;
 
-  async function updateChart() {
-    const dataForChart = await fetchMonthlyHistoricalData("IBM");
-    console.log(dataForChart);
-    const datesObjects = dataForChart?.["Monthly Time Series"];
-    const dateObjectsKeys = datesObjects ? Object.keys(datesObjects) : [];
-    const weekKeys = dateObjectsKeys.filter((_stock, idx) => idx < 3);
-    const oneWeekStocks = weekKeys.map((key) => {
-      return {
-        ...datesObjects?.[key],
-        date: key,
-      } as HistoricalData;
-    });
-    console.log(oneWeekStocks);
-    updateStockHistoricalData(oneWeekStocks);
+  async function updateChartData(
+    fetchData: (symbol: string) => Promise<StocksData[] | undefined>
+  ) {
+    if (!stockHistoricalData) {
+      return;
+    }
+    const stockSymbol = stockHistoricalData[0]?.symbol;
+    if (!stockSymbol) {
+      return;
+    }
+    const data = await fetchData(stockSymbol);
+    updateStockHistoricalData(data || []);
   }
 
-  if (stockHistoricalData) {
-    const closes = stockHistoricalData.map((data) =>
+  function updateChartWeek() {
+    updateChartData(fetchDailyStockData);
+  }
+  function updateChartMonth() {
+    updateChartData(fetchWeeklyStockData);
+  }
+  function updateChartYear() {
+    updateChartData(fetchMonthlyStockData);
+  }
+
+  function renderChart() {
+    if (!stockHistoricalData) {
+      return <div></div>;
+    }
+
+    const closingPrices = stockHistoricalData.map((data) =>
       parseFloat(data?.["4. close"])
     );
-    const dataset = stockHistoricalData.map((data) => ({
+    const chartDataset = stockHistoricalData.map((data) => ({
       date: data.date,
     }));
 
-    chartData = (
+    return (
       <LineChart
-        dataset={dataset}
+        dataset={chartDataset}
         xAxis={[
           {
             scaleType: "band",
@@ -44,7 +59,7 @@ export default function Chart() {
             valueFormatter: (date: string) => date,
           },
         ]}
-        series={[{ data: closes, baseline: "min" }]}
+        series={[{ data: closingPrices, baseline: "min" }]}
         sx={{ maxWidth: 700, maxHeight: 420 }}
       />
     );
@@ -57,13 +72,16 @@ export default function Chart() {
         aria-label="Basic button group"
         fullWidth
       >
-        <Button color={stockHistoricalData?.length === 7 ? "info" : "primary"}>
+        <Button
+          onClick={updateChartWeek}
+          color={stockHistoricalData?.length === 7 ? "info" : "primary"}
+        >
           Week
         </Button>
-        <Button onClick={updateChart}>Month</Button>
-        <Button>Year</Button>
+        <Button onClick={updateChartMonth}>Month</Button>
+        <Button onClick={updateChartYear}>Year</Button>
       </ButtonGroup>{" "}
-      {chartData}
+      {renderChart()}
     </Box>
   );
 }

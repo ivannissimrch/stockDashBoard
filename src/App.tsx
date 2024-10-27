@@ -5,17 +5,16 @@ import SearchBar from "./components/SearchBar";
 import DisplayStockDetails from "./components/DisplayStockDetails";
 import { useState } from "react";
 import { createContext } from "react";
-import { StockDetails } from "./helpers/stockApi";
+import { StockDetails, StocksData } from "./helpers/stockApi";
 import DisplayStockOverview from "./components/DisplayStockOverview";
-import { HistoricalData } from "./components/StockSearchInput";
 
 interface ContextTypes {
   stockDetails: StockDetails | undefined;
   updateStockDetails: (newDetails: StockDetails) => void;
   stockOverview: StockOverview | undefined;
   updateStockOverview: (newStockOverview: StockOverview) => void;
-  stockHistoricalData: HistoricalData[] | undefined;
-  updateStockHistoricalData: (newDetails: HistoricalData[]) => void;
+  stockHistoricalData: StocksData[] | undefined;
+  updateStockHistoricalData: (newDetails: StocksData[]) => void;
 }
 
 interface StockOverview {
@@ -42,7 +41,7 @@ export default function App() {
     StockOverview | undefined
   >();
   const [stockHistoricalData, setStockHistoricalData] = useState<
-    HistoricalData[] | undefined
+    StocksData[] | undefined
   >();
 
   function updateStockDetails(newDetails: StockDetails) {
@@ -51,7 +50,7 @@ export default function App() {
   function updateStockOverview(newStockOverview: StockOverview) {
     setStockOverview(newStockOverview);
   }
-  function updateStockHistoricalData(newData: HistoricalData[]) {
+  function updateStockHistoricalData(newData: StocksData[]) {
     setStockHistoricalData(newData);
   }
 

@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
 import {
-  fetchDailyHistoricalData,
+  fetchDailyStockData,
   fetchQuote,
   fetchStockDetails,
   fetchStocksSymbols,
@@ -12,15 +12,6 @@ import { stockContext } from "../App";
 interface StockResultWithLabel {
   label: string;
   symbol: string;
-}
-
-export interface HistoricalData {
-  "1. open": string;
-  "2. high": string;
-  "3. low": string;
-  "4. close": string;
-  "5. volume": string;
-  date: string;
 }
 
 export default function StockSearchInput() {
@@ -82,17 +73,11 @@ export default function StockSearchInput() {
         };
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
-        const dataForChart = await fetchDailyHistoricalData(newValue.symbol);
-        const datesObjects = dataForChart?.["Time Series (Daily)"];
-        const dateObjectsKeys = datesObjects ? Object.keys(datesObjects) : [];
-        const weekKeys = dateObjectsKeys.filter((_stock, idx) => idx < 7);
-        const oneWeekStocks = weekKeys.map((key) => {
-          return {
-            ...datesObjects?.[key],
-            date: key,
-          } as HistoricalData;
-        });
-        updateStockHistoricalData(oneWeekStocks);
+
+        const stockDailyData = await fetchDailyStockData(newValue.symbol);
+        if (stockDailyData) {
+          updateStockHistoricalData(stockDailyData);
+        }
       }
       setStockSuggestionList([]);
     }
