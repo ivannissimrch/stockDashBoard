@@ -1,6 +1,4 @@
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
+import { styled, Paper, Grid } from "@mui/material";
 import { useContext } from "react";
 import { stockContext } from "../App";
 
@@ -15,21 +13,27 @@ const Item = styled(Paper)(({ theme }) => ({
   minHeight: "25px",
 }));
 
-export default function StockOverview() {
+export default function DisplayStockOverview() {
   const { stockOverview } = useContext(stockContext);
+  const {
+    symbol = "",
+    price = "",
+    change = "",
+    changePercent = "",
+  } = stockOverview || {};
   return (
     <Grid container border="1px solid #cccc">
       <Grid item xs={12}>
-        <Item>{stockOverview ? stockOverview.symbol : ""}</Item>
+        <Item>{symbol}</Item>
       </Grid>
 
       <Grid item xs={6}>
-        <Item>{stockOverview ? `$${stockOverview.price} USD` : ""}</Item>
+        <Item>{`$${price} USD`}</Item>
       </Grid>
       <Grid item xs={6}>
         <Item>
-          {stockOverview ? stockOverview.change : ""}
-          {stockOverview ? `(${stockOverview.changePercent}%)` : ""}
+          {change}
+          {`(${changePercent}%)`}
         </Item>
       </Grid>
     </Grid>

@@ -1,20 +1,22 @@
-import React, { useState, useMemo, useEffect, useContext } from "react";
+import { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
 import {
+  fetchDailyStockData,
   fetchQuote,
   fetchStockDetails,
   fetchStocksSymbols,
 } from "../helpers/stockApi";
 import { stockContext } from "../App";
 
-type StockResultWithLabel = {
+interface StockResultWithLabel {
   label: string;
   symbol: string;
-};
+}
 
 export default function StockSearchInput() {
-  const { updateStockDetails, updateStockOverview } = useContext(stockContext);
+  const { updateStockDetails, updateStockOverview, updateStockHistoricalData } =
+    useContext(stockContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [stockSuggestionList, setStockSuggestionList] = useState<
     StockResultWithLabel[]
@@ -71,6 +73,11 @@ export default function StockSearchInput() {
         };
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
+
+        const stockDailyData = await fetchDailyStockData(newValue.symbol);
+        if (stockDailyData) {
+          updateStockHistoricalData(stockDailyData);
+        }
       }
       setStockSuggestionList([]);
     }
