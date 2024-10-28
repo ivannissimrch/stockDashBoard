@@ -134,9 +134,9 @@ export async function fetchQuote(
   return await fetchFinnhubStockData<StockQuote>(url);
 }
 
-async function fetchVantageStocksData(
+async function fetchVantageStocksData<T>(
   url: string
-): Promise<{ [key: string]: TimeSeries }> {
+): Promise<T | undefined> {
   try {
     const response = await fetch(url);
 
@@ -154,11 +154,14 @@ async function fetchVantageStocksData(
 export async function fetchDailyStockData(
   symbol: string
 ): Promise<StocksData[] | undefined> {
-  const results = await fetchVantageStocksData(
+  const results = await fetchVantageStocksData<DailyStocksApiResponse>(
     `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`
   );
-  const stocksWithDatesObjects = results?.["Time Series (Daily)"];
   const stockWithDateObjectsKeys = stocksWithDatesObjects
+  if (!results) {
+    return;
+  }
+  const stocksWithDatesObjects = results["Time Series (Daily)"];
     ? Object.keys(stocksWithDatesObjects)
     : [];
   const oneWeekKeys = stockWithDateObjectsKeys.filter((_stock, idx) => idx < 7);
@@ -175,10 +178,13 @@ export async function fetchDailyStockData(
 export async function fetchWeeklyStockData(
   symbol: string
 ): Promise<StocksData[] | undefined> {
-  const results = await fetchVantageStocksData(
+  const results = await fetchVantageStocksData<WeeklyStocksApiResponse>(
     `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`
   );
-  const stocksWithDatesObjects = results?.["Weekly Time Series"];
+  if (!results) {
+    return;
+  }
+  const stocksWithDatesObjects = results["Weekly Time Series"];
   const stockWithDateObjectsKeys = stocksWithDatesObjects
     ? Object.keys(stocksWithDatesObjects)
     : [];
@@ -198,10 +204,13 @@ export async function fetchWeeklyStockData(
 export async function fetchMonthlyStockData(
   symbol: string
 ): Promise<StocksData[] | undefined> {
-  const results = await fetchVantageStocksData(
+  const results = await fetchVantageStocksData<MonthlyStocksApiResponse>(
     `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`
   );
-  const stocksWithDatesObjects = results?.["Monthly Time Series"];
+  if (!results) {
+    return;
+  }
+  const stocksWithDatesObjects = results["Monthly Time Series"];
   const stockWithDateObjectsKeys = stocksWithDatesObjects
     ? Object.keys(stocksWithDatesObjects)
     : [];
