@@ -2,7 +2,7 @@ const FINNHUB_API_KEY = "crf2qk1r01qk4jsaq0agcrf2qk1r01qk4jsaq0b0";
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
 const ALPHA_VANTAGE_API_KEY = "G755KJ6M6HBI4UG7";
 
-interface ApiStockResults {
+interface StockSymbols {
   description: string;
   displaySymbol: string;
   symbol: string;
@@ -51,7 +51,7 @@ export interface WeekMonthMetaData {
   "4. Time Zone": string;
 }
 
-export interface TimeSeries {
+export interface StockTimeSeries {
   "1. open": string;
   "2. high": string;
   "3. low": string;
@@ -61,7 +61,7 @@ export interface TimeSeries {
 
 export interface DailyStocksApiResponse {
   "Meta Data": DailyMetaData;
-  "Time Series (Daily)": { [key: string]: TimeSeries };
+  "Time Series (Daily)": { [key: string]: StockTimeSeries };
 }
 
 export interface WeekMonthlySeries {
@@ -74,12 +74,12 @@ export interface WeekMonthlySeries {
 
 export interface WeeklyStocksApiResponse {
   "Meta Data": WeekMonthMetaData;
-  "Weekly Time Series": { [key: string]: TimeSeries };
+  "Weekly Time Series": { [key: string]: StockTimeSeries };
 }
 
 export interface MonthlyStocksApiResponse {
   "Meta Data": WeekMonthMetaData;
-  "Monthly Time Series": { [key: string]: TimeSeries };
+  "Monthly Time Series": { [key: string]: StockTimeSeries };
 }
 
 export interface StocksData {
@@ -109,11 +109,9 @@ async function fetchFinnhubStockData<T>(url: string): Promise<T | undefined> {
 
 export async function fetchStocksSymbols(
   userQuery: string
-): Promise<ApiStockResults[]> {
+): Promise<StockSymbols[]> {
   const url = `${FINNHUB_BASE_URL}/search?q=${userQuery}&exchange=US&token=${FINNHUB_API_KEY}`;
-  const results = await fetchFinnhubStockData<{ result: ApiStockResults[] }>(
-    url
-  );
+  const results = await fetchFinnhubStockData<{ result: StockSymbols[] }>(url);
   if (!results) {
     return [];
   }
@@ -134,9 +132,7 @@ export async function fetchQuote(
   return await fetchFinnhubStockData<StockQuote>(url);
 }
 
-async function fetchVantageStocksData<T>(
-  url: string
-): Promise<T | undefined> {
+async function fetchVantageStocksData<T>(url: string): Promise<T | undefined> {
   try {
     const response = await fetch(url);
 
@@ -157,11 +153,12 @@ export async function fetchDailyStockData(
   const results = await fetchVantageStocksData<DailyStocksApiResponse>(
     `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`
   );
-  const stockWithDateObjectsKeys = stocksWithDatesObjects
+
   if (!results) {
     return;
   }
   const stocksWithDatesObjects = results["Time Series (Daily)"];
+  const stockWithDateObjectsKeys = stocksWithDatesObjects
     ? Object.keys(stocksWithDatesObjects)
     : [];
   const oneWeekKeys = stockWithDateObjectsKeys.filter((_stock, idx) => idx < 7);
