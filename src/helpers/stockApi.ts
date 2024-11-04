@@ -1,6 +1,9 @@
+import { getWeekNumber } from "./getWeekNumber";
+
 const FINNHUB_API_KEY = "crf2qk1r01qk4jsaq0agcrf2qk1r01qk4jsaq0b0";
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
-const ALPHA_VANTAGE_API_KEY = "G755KJ6M6HBI4UG7";
+// const ALPHA_VANTAGE_API_KEY = "G755KJ6M6HBI4UG7";
+const ALPHA_VANTAGE_API_KEY = "DW35BLMZB3IC3RQV";
 
 interface StockSymbols {
   description: string;
@@ -161,6 +164,7 @@ export async function fetchDailyStockData(
   const stockWithDateObjectsKeys = stocksWithDatesObjects
     ? Object.keys(stocksWithDatesObjects)
     : [];
+
   const oneWeekKeys = stockWithDateObjectsKeys.filter((_stock, idx) => idx < 7);
   const oneWeekStocks: StocksData[] = oneWeekKeys.map((key) => {
     return {
@@ -175,51 +179,149 @@ export async function fetchDailyStockData(
 export async function fetchWeeklyStockData(
   symbol: string
 ): Promise<StocksData[] | undefined> {
-  const results = await fetchVantageStocksData<WeeklyStocksApiResponse>(
-    `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`
+  //get last 6 weeks on weekly steps
+  const results = await fetchVantageStocksData<DailyStocksApiResponse>(
+    `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=full&apikey=${ALPHA_VANTAGE_API_KEY}`
   );
+
   if (!results) {
     return;
   }
-  const stocksWithDatesObjects = results["Weekly Time Series"];
+  const stocksWithDatesObjects = results["Time Series (Daily)"];
   const stockWithDateObjectsKeys = stocksWithDatesObjects
     ? Object.keys(stocksWithDatesObjects)
     : [];
-  const oneMonthKeys = stockWithDateObjectsKeys.filter(
-    (_stock, idx) => idx < 4
-  );
-  const oneMonthStocks: StocksData[] = oneMonthKeys.map((key) => {
-    return {
-      ...stocksWithDatesObjects?.[key],
-      date: key,
-      symbol: symbol,
-    };
+
+  //get five arrays per month of stocks data .
+  const mainObject = {};
+  let weekCount = 0;
+  stockWithDateObjectsKeys.forEach((dayDate) => {
+    const dates = new Date(dayDate);
+    const [year, weekNumber] = getWeekNumber(dates);
+
+    if (mainObject[`${weekNumber}`]) {
+      if (Object.keys(mainObject).length > 6) {
+        return;
+      }
+      mainObject[`${weekNumber}`].push({
+        ...stocksWithDatesObjects?.[dayDate],
+        date: weekNumber,
+
+        symbol: symbol,
+      });
+    } else {
+      mainObject[weekNumber] = [
+        {
+          ...stocksWithDatesObjects?.[dayDate],
+          date: weekNumber,
+          symbol: symbol,
+        },
+      ];
+    }
   });
-  return oneMonthStocks;
+
+  const sixWeeksNumbers = Object.keys(mainObject).filter((stock) => {
+    const isSixWeeks = mainObject[`${stock}`].length > 2;
+    return isSixWeeks;
+  });
+
+  const arraySixWeeksStocks = sixWeeksNumbers.map(
+    (indexMonth) => mainObject[`${indexMonth}`]
+  );
+  console.log(arraySixWeeksStocks);
+
+  // //calculate six weeks close average
+  const sixWeeksAverages = arraySixWeeksStocks.map((sixWeeksData) => {
+    const combinedMonthData = sixWeeksData.reduce(
+      (total, currentWeek) => {
+        const closeValue = parseFloat(currentWeek["4. close"]);
+
+        return {
+          close: total?.close + closeValue,
+          "4. close": (total?.close + closeValue) / sixWeeksData.length,
+          date: `week ${currentWeek.date}`,
+          symbol: symbol,
+        };
+      },
+      { close: 0, closeAverages: 0, date: "", symbol: "" }
+    );
+    return combinedMonthData;
+  });
+
+  return sixWeeksAverages;
 }
 
 export async function fetchMonthlyStockData(
   symbol: string
 ): Promise<StocksData[] | undefined> {
-  const results = await fetchVantageStocksData<MonthlyStocksApiResponse>(
-    `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`
+  const results = await fetchVantageStocksData<DailyStocksApiResponse>(
+    `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=full&apikey=${ALPHA_VANTAGE_API_KEY}`
   );
+
   if (!results) {
     return;
   }
-  const stocksWithDatesObjects = results["Monthly Time Series"];
+  const stocksWithDatesObjects = results["Time Series (Daily)"];
   const stockWithDateObjectsKeys = stocksWithDatesObjects
     ? Object.keys(stocksWithDatesObjects)
     : [];
-  const oneYearKeys = stockWithDateObjectsKeys.filter(
-    (_stock, idx) => idx < 12
-  );
-  const oneYearStocks: StocksData[] = oneYearKeys.map((key) => {
-    return {
-      ...stocksWithDatesObjects?.[key],
-      date: key,
-      symbol: symbol,
-    };
+
+  //get five arrays per month of stocks data .
+  const mainObject = {};
+  stockWithDateObjectsKeys.forEach((dayDate) => {
+    const dates = new Date(dayDate);
+    const monthName = dates.toLocaleString("default", {
+      month: "short",
+    });
+
+    if (mainObject[`${monthName}`]) {
+      if (Object.keys(mainObject).length > 5) {
+        return;
+      }
+      mainObject[`${monthName}`].push({
+        ...stocksWithDatesObjects?.[dayDate],
+        date: monthName,
+        symbol: symbol,
+      });
+    } else {
+      mainObject[monthName] = [
+        {
+          ...stocksWithDatesObjects?.[dayDate],
+          date: monthName,
+          symbol: symbol,
+        },
+      ];
+    }
   });
-  return oneYearStocks;
+
+  const fiveMonthsKeys = Object.keys(mainObject).filter((stock) => {
+    const isFivemonths = mainObject[`${stock}`].length > 2;
+    return isFivemonths;
+  });
+
+  const fiveMonthsDailyData = fiveMonthsKeys.map(
+    (indexMonth) => mainObject[`${indexMonth}`]
+  );
+  //get five arrays per month of stocks data .
+
+  //calculate close average per month and return array of 5 objects 1 object per month
+  const fiveMonthAveragesData = fiveMonthsDailyData.map((monthArray) => {
+    const combinedMonthData = monthArray.reduce(
+      (total, currentMonth) => {
+        const closeValue = parseFloat(currentMonth["4. close"]);
+
+        return {
+          close: total?.close + closeValue,
+          "4. close": (total?.close + closeValue) / monthArray.length,
+          date: currentMonth.date,
+          symbol: symbol,
+        };
+      },
+      { close: 0, closeAverages: 0, date: "", symbol: "" }
+    );
+    return combinedMonthData;
+  });
+  //calculate close average per month and return array of 5 objects 1 object per month
+
+  return fiveMonthAveragesData;
 }

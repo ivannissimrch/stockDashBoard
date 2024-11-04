@@ -42,12 +42,14 @@ export default function Chart() {
       return <div></div>;
     }
 
-    const closingPrices = stockHistoricalData.map((data) =>
-      parseFloat(data?.["4. close"])
-    );
-    const chartDataset = stockHistoricalData.map((data) => ({
-      date: data.date,
-    }));
+    const closingPrices = stockHistoricalData.map((data) => {
+      return parseFloat(data?.["4. close"]);
+    });
+    const chartDataset = stockHistoricalData.map((data) => {
+      return {
+        date: data.date,
+      };
+    });
 
     return (
       <LineChart
@@ -76,10 +78,20 @@ export default function Chart() {
           onClick={updateChartWeek}
           color={stockHistoricalData?.length === 7 ? "info" : "primary"}
         >
-          Week
+          7 days
         </Button>
-        <Button onClick={updateChartMonth}>Month</Button>
-        <Button onClick={updateChartYear}>Year</Button>
+        <Button
+          onClick={updateChartMonth}
+          color={stockHistoricalData?.length === 6 ? "info" : "primary"}
+        >
+          6 Weeks
+        </Button>
+        <Button
+          onClick={updateChartYear}
+          color={stockHistoricalData?.length === 5 ? "info" : "primary"}
+        >
+          5 months
+        </Button>
       </ButtonGroup>{" "}
       {renderChart()}
     </Box>
