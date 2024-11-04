@@ -2,8 +2,7 @@ import { getWeekNumber } from "./getWeekNumber";
 
 const FINNHUB_API_KEY = "crf2qk1r01qk4jsaq0agcrf2qk1r01qk4jsaq0b0";
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
-// const ALPHA_VANTAGE_API_KEY = "G755KJ6M6HBI4UG7";
-const ALPHA_VANTAGE_API_KEY = "DW35BLMZB3IC3RQV";
+const ALPHA_VANTAGE_API_KEY = "G755KJ6M6HBI4UG7";
 
 interface StockSymbols {
   description: string;
