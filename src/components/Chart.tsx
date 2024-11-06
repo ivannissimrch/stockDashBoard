@@ -41,7 +41,6 @@ export default function Chart() {
     if (!stockHistoricalData) {
       return <div></div>;
     }
-
     const closingPrices = stockHistoricalData.map((data) => {
       return parseFloat(data?.["4. close"]);
     });
