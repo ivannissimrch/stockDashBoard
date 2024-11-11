@@ -2,39 +2,22 @@ import { Box, Button, ButtonGroup } from "@mui/material";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useContext } from "react";
 import { stockContext } from "../App";
-import {
-  fetchDailyStockData,
-  fetchMonthlyStockData,
-  fetchWeeklyStockData,
-  StocksData,
-} from "../helpers/stockApi";
+import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
+import { getFiveMonthsStockData } from "../helpers/getFiveMonthsStockData";
+import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 
 export default function Chart() {
   const { stockHistoricalData, updateStockHistoricalData } =
     useContext(stockContext);
 
-  async function updateChartData(
-    fetchData: (symbol: string) => Promise<StocksData[] | undefined>
-  ) {
-    if (!stockHistoricalData) {
-      return;
-    }
-    const stockSymbol = stockHistoricalData[0]?.symbol;
-    if (!stockSymbol) {
-      return;
-    }
-    const data = await fetchData(stockSymbol);
-    updateStockHistoricalData(data || []);
-  }
-
   function updateChartWeek() {
-    updateChartData(fetchDailyStockData);
+    updateStockHistoricalData(getSevenDaysStockData);
   }
   function updateChartMonth() {
-    updateChartData(fetchWeeklyStockData);
+    updateStockHistoricalData(getSixWeeksStockData);
   }
   function updateChartYear() {
-    updateChartData(fetchMonthlyStockData);
+    updateStockHistoricalData(getFiveMonthsStockData);
   }
 
   function renderChart() {
