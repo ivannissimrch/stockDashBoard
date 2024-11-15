@@ -10,14 +10,17 @@ export default function Chart() {
   const { stockHistoricalData, updateStockHistoricalData } =
     useContext(stockContext);
 
-  function updateChartWeek() {
-    updateStockHistoricalData(getSevenDaysStockData);
+  function updateToSevenDays() {
+    const sevenDaysOfStock = getSevenDaysStockData();
+    updateStockHistoricalData(sevenDaysOfStock);
   }
-  function updateChartMonth() {
-    updateStockHistoricalData(getSixWeeksStockData);
+  function updateToSixWeeks() {
+    const sixWeeksOfStocks = getSixWeeksStockData();
+    updateStockHistoricalData(sixWeeksOfStocks);
   }
-  function updateChartYear() {
-    updateStockHistoricalData(getFiveMonthsStockData);
+  function updateToFiveMonths() {
+    const fiveMonthsOfStocks = getFiveMonthsStockData();
+    updateStockHistoricalData(fiveMonthsOfStocks);
   }
 
   function renderChart() {
@@ -25,7 +28,7 @@ export default function Chart() {
       return <div></div>;
     }
     const closingPrices = stockHistoricalData.map((data) => {
-      return parseFloat(data?.["4. close"]);
+      return data.closingPrices;
     });
     const chartDataset = stockHistoricalData.map((data) => {
       return {
@@ -57,19 +60,19 @@ export default function Chart() {
         fullWidth
       >
         <Button
-          onClick={updateChartWeek}
+          onClick={updateToSevenDays}
           color={stockHistoricalData?.length === 7 ? "info" : "primary"}
         >
           7 days
         </Button>
         <Button
-          onClick={updateChartMonth}
+          onClick={updateToSixWeeks}
           color={stockHistoricalData?.length === 6 ? "info" : "primary"}
         >
           6 Weeks
         </Button>
         <Button
-          onClick={updateChartYear}
+          onClick={updateToFiveMonths}
           color={stockHistoricalData?.length === 5 ? "info" : "primary"}
         >
           5 months

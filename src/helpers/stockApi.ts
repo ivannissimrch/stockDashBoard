@@ -64,30 +64,8 @@ export interface DailyStocksApiResponse {
   "Time Series (Daily)": { [key: string]: StockTimeSeries };
 }
 
-// export interface WeekMonthlySeries {
-//   "1. open": string;
-//   "2. high": string;
-//   "3. low": string;
-//   "4. close": string;
-//   "5. volume": string;
-// }
-
-// export interface WeeklyStocksApiResponse {
-//   "Meta Data": WeekMonthMetaData;
-//   "Weekly Time Series": { [key: string]: StockTimeSeries };
-// }
-
-// export interface MonthlyStocksApiResponse {
-//   "Meta Data": WeekMonthMetaData;
-//   "Monthly Time Series": { [key: string]: StockTimeSeries };
-// }
-
 export interface StocksData {
-  "1. open": string;
-  "2. high": string;
-  "3. low": string;
-  "4. close": string;
-  "5. volume": string;
+  closingPrices: number;
   date: string;
 }
 
