@@ -2,12 +2,13 @@ import { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
 import {
-  fetchDailyStockData,
+  fetchVantageStockData,
   fetchQuote,
   fetchStockDetails,
   fetchStocksSymbols,
 } from "../helpers/stockApi";
 import { stockContext } from "../App";
+import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 
 interface StockResultWithLabel {
   label: string;
@@ -74,9 +75,17 @@ export default function StockSearchInput() {
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
 
-        const stockDailyData = await fetchDailyStockData(newValue.symbol);
-        if (stockDailyData) {
-          updateStockHistoricalData(stockDailyData);
+        const stockDailyData = await fetchVantageStockData(newValue.symbol);
+        //store return value to local storage??
+        localStorage.setItem(
+          "storedStocksData",
+          JSON.stringify(stockDailyData)
+        );
+        localStorage.setItem("storedStocksDataSymbol", newValue.symbol);
+        const sevenDaysStocks = getSevenDaysStockData();
+
+        if (sevenDaysStocks) {
+          updateStockHistoricalData(sevenDaysStocks);
         }
       }
       setStockSuggestionList([]);

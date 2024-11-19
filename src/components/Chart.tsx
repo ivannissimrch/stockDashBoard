@@ -2,39 +2,25 @@ import { Box, Button, ButtonGroup } from "@mui/material";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useContext } from "react";
 import { stockContext } from "../App";
-import {
-  fetchDailyStockData,
-  fetchMonthlyStockData,
-  fetchWeeklyStockData,
-  StocksData,
-} from "../helpers/stockApi";
+import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
+import { getFiveMonthsStockData } from "../helpers/getFiveMonthsStockData";
+import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 
 export default function Chart() {
   const { stockHistoricalData, updateStockHistoricalData } =
     useContext(stockContext);
 
-  async function updateChartData(
-    fetchData: (symbol: string) => Promise<StocksData[] | undefined>
-  ) {
-    if (!stockHistoricalData) {
-      return;
-    }
-    const stockSymbol = stockHistoricalData[0]?.symbol;
-    if (!stockSymbol) {
-      return;
-    }
-    const data = await fetchData(stockSymbol);
-    updateStockHistoricalData(data || []);
+  function updateToSevenDays() {
+    const sevenDaysOfStock = getSevenDaysStockData();
+    updateStockHistoricalData(sevenDaysOfStock);
   }
-
-  function updateChartWeek() {
-    updateChartData(fetchDailyStockData);
+  function updateToSixWeeks() {
+    const sixWeeksOfStocks = getSixWeeksStockData();
+    updateStockHistoricalData(sixWeeksOfStocks);
   }
-  function updateChartMonth() {
-    updateChartData(fetchWeeklyStockData);
-  }
-  function updateChartYear() {
-    updateChartData(fetchMonthlyStockData);
+  function updateToFiveMonths() {
+    const fiveMonthsOfStocks = getFiveMonthsStockData();
+    updateStockHistoricalData(fiveMonthsOfStocks);
   }
 
   function renderChart() {
@@ -42,7 +28,7 @@ export default function Chart() {
       return <div></div>;
     }
     const closingPrices = stockHistoricalData.map((data) => {
-      return parseFloat(data?.["4. close"]);
+      return data.closingPrices;
     });
     const chartDataset = stockHistoricalData.map((data) => {
       return {
@@ -74,19 +60,19 @@ export default function Chart() {
         fullWidth
       >
         <Button
-          onClick={updateChartWeek}
+          onClick={updateToSevenDays}
           color={stockHistoricalData?.length === 7 ? "info" : "primary"}
         >
           7 days
         </Button>
         <Button
-          onClick={updateChartMonth}
+          onClick={updateToSixWeeks}
           color={stockHistoricalData?.length === 6 ? "info" : "primary"}
         >
           6 Weeks
         </Button>
         <Button
-          onClick={updateChartYear}
+          onClick={updateToFiveMonths}
           color={stockHistoricalData?.length === 5 ? "info" : "primary"}
         >
           5 months
