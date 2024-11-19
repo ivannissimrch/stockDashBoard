@@ -44,13 +44,6 @@ export interface DailyMetaData {
   "5. Time Zone": string;
 }
 
-export interface WeekMonthMetaData {
-  "1. Information": string;
-  "2. Symbol": string;
-  "3. Last Refreshed": string;
-  "4. Time Zone": string;
-}
-
 export interface StockTimeSeries {
   "1. open": string;
   "2. high": string;
@@ -69,7 +62,9 @@ export interface StocksData {
   date: string;
 }
 
-async function fetchFinnhubStockData<T>(url: string): Promise<T | undefined> {
+export async function fetchFinnhubStockData<T>(
+  url: string
+): Promise<T | undefined> {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -112,7 +107,6 @@ export async function fetchQuote(
 export async function fetchVantageStockData(
   symbol: string
 ): Promise<{ [key: string]: StockTimeSeries } | undefined> {
-  //is this type correct?
   try {
     const response = await fetch(
       `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`

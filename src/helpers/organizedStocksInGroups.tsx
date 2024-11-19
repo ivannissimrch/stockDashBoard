@@ -1,12 +1,12 @@
 import getStoredDataFromStorage from "./getStoredDataFromStorage";
-import { getWeekNumber } from "./getWeekNumber";
+import { weekNumber } from "weeknumber";
 import { StocksData } from "./stockApi";
 
 export default function organizeStocksInGroups(
   groupBy: string,
   lengthOfGroup: number
 ) {
-  const [stockDataFromStorage] = getStoredDataFromStorage();
+  const stockDataFromStorage = getStoredDataFromStorage();
   const stockWithDateObjectsKeys = Object.keys(stockDataFromStorage);
 
   const stockDataByGroup: { [key: string]: StocksData[] } = {};
@@ -19,7 +19,7 @@ export default function organizeStocksInGroups(
         month: "short",
       });
     } else {
-      const [_unusedYear, calendarWeekNumber] = getWeekNumber(date);
+      const calendarWeekNumber: number = weekNumber(date);
       groupCategory = `Week ${calendarWeekNumber}`;
     }
 
