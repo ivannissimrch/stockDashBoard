@@ -3,7 +3,7 @@ import getStoredDataFromStorage from "./getStoredDataFromStorage";
 
 export default function getSevenDaysStockData() {
   const NUMBER_OF_DAYS = 7;
-  const [stockDataFromStorage] = getStoredDataFromStorage();
+  const stockDataFromStorage = getStoredDataFromStorage();
   const stockWithDateObjectsKeys = Object.keys(stockDataFromStorage);
   const sevenDaysKeys = stockWithDateObjectsKeys.filter(
     (_stock, idx) => idx < NUMBER_OF_DAYS
