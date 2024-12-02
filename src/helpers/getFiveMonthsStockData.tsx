@@ -1,8 +1,10 @@
 import calculateClosingAverages from "./calculateClosingAverages";
 import organizeStocksInGroups from "./organizedStocksInGroups";
-import { StocksData } from "./stockApi";
+import { GroupType } from "./organizedStocksInGroups";
 
-export function getFiveMonthsStockData(): StocksData[] {
-  const fiveMonthsDailyData = organizeStocksInGroups("month", 5);
-  return calculateClosingAverages(fiveMonthsDailyData);
+export function getFiveMonthsStockData() {
+  const fiveMonthsDailyData = organizeStocksInGroups(GroupType.Month, 5);
+  if (fiveMonthsDailyData) {
+    return calculateClosingAverages(fiveMonthsDailyData);
+  }
 }

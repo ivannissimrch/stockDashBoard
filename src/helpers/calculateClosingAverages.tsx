@@ -4,18 +4,23 @@ export default function calculateClosingAverages(
   stocksDailyData: StocksData[][]
 ) {
   const stocksPeriodAverages = stocksDailyData.map((stocksData) => {
-    const closingAverages = stocksData.reduce(
+    const { closingPrices, date } = stocksData.reduce(
       (total, currentStock) => {
         const closeValue = currentStock.closingPrices;
 
         return {
-          closingPrices: (total.closingPrices + closeValue) / stocksData.length,
+          closingPrices: total.closingPrices + closeValue,
           date: currentStock.date,
         };
       },
       { closingPrices: 0, date: "" }
     );
-    return closingAverages;
+
+    const averageClosingPrice = closingPrices / stocksData.length;
+    return {
+      closingPrices: averageClosingPrice,
+      date: date,
+    };
   });
   return stocksPeriodAverages;
 }
