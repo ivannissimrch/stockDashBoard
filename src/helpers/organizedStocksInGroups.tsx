@@ -2,11 +2,21 @@ import getStoredDataFromStorage from "./getStoredDataFromStorage";
 import { weekNumber } from "weeknumber";
 import { StocksData } from "./stockApi";
 
+export enum GroupType {
+  Month = "month",
+  Week = "week",
+}
+
 export default function organizeStocksInGroups(
-  groupBy: string,
+  groupBy: GroupType,
   lengthOfGroup: number
 ) {
   const stockDataFromStorage = getStoredDataFromStorage();
+  if (stockDataFromStorage === undefined || stockDataFromStorage === null) {
+    console.log("No valid stock data storage");
+    return;
+  }
+
   const stockWithDateObjectsKeys = Object.keys(stockDataFromStorage);
 
   const stockDataByGroup: { [key: string]: StocksData[] } = {};
@@ -14,11 +24,12 @@ export default function organizeStocksInGroups(
     const date = new Date(stockDate);
 
     let groupCategory = "";
-    if (groupBy === "month") {
+    if (groupBy === GroupType.Month) {
       groupCategory = date.toLocaleString("default", {
         month: "short",
       });
-    } else {
+    }
+    if (groupBy === GroupType.Week) {
       const calendarWeekNumber: number = weekNumber(date);
       groupCategory = `Week ${calendarWeekNumber}`;
     }
@@ -47,6 +58,8 @@ export default function organizeStocksInGroups(
   const groupsKeys = Object.keys(stockDataByGroup).filter(
     (month) => stockDataByGroup[month].length > 2
   );
+
+  console.log(groupsKeys.map((indexMonth) => stockDataByGroup[indexMonth]));
 
   return groupsKeys.map((indexMonth) => stockDataByGroup[indexMonth]);
 }
