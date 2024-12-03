@@ -1,10 +1,10 @@
 import { StocksData } from "./stockApi";
 
 export default function calculateClosingAverages(
-  stocksDailyData: StocksData[][]
+  stocksDataGroups: StocksData[][]
 ) {
-  const stocksPeriodAverages = stocksDailyData.map((stocksData) => {
-    const { closingPrices, date } = stocksData.reduce(
+  const stocksPeriodAverages = stocksDataGroups.map((stockGroup) => {
+    const { closingPrices, date } = stockGroup.reduce(
       (total, currentStock) => {
         const closeValue = currentStock.closingPrices;
 
@@ -16,7 +16,7 @@ export default function calculateClosingAverages(
       { closingPrices: 0, date: "" }
     );
 
-    const averageClosingPrice = closingPrices / stocksData.length;
+    const averageClosingPrice = closingPrices / stockGroup.length;
     return {
       closingPrices: averageClosingPrice,
       date: date,
