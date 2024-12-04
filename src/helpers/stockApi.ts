@@ -1,6 +1,7 @@
 const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
 const ALPHA_VANTAGE_API_KEY = import.meta.env.VITE_ALPHA_VANTAGE_API_KEY;
+import { fetchFinnhubStockData } from "./fetchFinnhubStockData";
 
 interface StockSymbols {
   description: string;
@@ -44,13 +45,6 @@ export interface DailyMetaData {
   "5. Time Zone": string;
 }
 
-export interface WeekMonthMetaData {
-  "1. Information": string;
-  "2. Symbol": string;
-  "3. Last Refreshed": string;
-  "4. Time Zone": string;
-}
-
 export interface StockTimeSeries {
   "1. open": string;
   "2. high": string;
@@ -59,29 +53,17 @@ export interface StockTimeSeries {
   "5. volume": string;
 }
 
-export interface DailyStocksApiResponse {
+export interface WelcomeDailyStocksApiResponse {
   "Meta Data": DailyMetaData;
   "Time Series (Daily)": { [key: string]: StockTimeSeries };
+}
+export interface DailyStocksApiResponse {
+  [key: string]: StockTimeSeries;
 }
 
 export interface StocksData {
   closingPrices: number;
   date: string;
-}
-
-async function fetchFinnhubStockData<T>(url: string): Promise<T | undefined> {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      const message = `An error has occurred: ${response.status}`;
-      throw new Error(message);
-    }
-    const results = await response.json();
-    return results;
-  } catch (error: unknown) {
-    console.log(error);
-    return undefined;
-  }
 }
 
 export async function fetchStocksSymbols(
@@ -111,8 +93,7 @@ export async function fetchQuote(
 
 export async function fetchVantageStockData(
   symbol: string
-): Promise<{ [key: string]: StockTimeSeries } | undefined> {
-  //is this type correct?
+): Promise<DailyStocksApiResponse | undefined> {
   try {
     const response = await fetch(
       `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${ALPHA_VANTAGE_API_KEY}`

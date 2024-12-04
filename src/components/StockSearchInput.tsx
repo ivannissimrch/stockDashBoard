@@ -81,7 +81,6 @@ export default function StockSearchInput() {
           "storedStocksData",
           JSON.stringify(stockDailyData)
         );
-        localStorage.setItem("storedStocksDataSymbol", newValue.symbol);
         const sevenDaysStocks = getSevenDaysStockData();
 
         if (sevenDaysStocks) {
