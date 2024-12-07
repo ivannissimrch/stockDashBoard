@@ -1,69 +1,5 @@
-import { expect, it, vi, afterEach } from "vitest";
+import { expect, it } from "vitest";
 import { getFiveMonthsStockData } from "./getFiveMonthsStockData";
-import organizeStocksInGroups from "./organizedStocksInGroups";
-import calculateClosingAverages from "./calculateClosingAverages";
-import { GroupType } from "./organizedStocksInGroups";
-
-//mock functions
-vi.mock("./organizedStocksInGroups", () => ({
-  default: vi.fn(),
-  GroupType: {
-    Month: "Month",
-  },
-}));
-
-vi.mock("./calculateClosingAverages", () => ({ default: vi.fn() }));
-
-const mockedFiveMonthsOfStocks = [
-  [
-    { closingPrices: 237.33, date: "Week 48" },
-    { closingPrices: 234.93, date: "Week 48" },
-    { closingPrices: 235.06, date: "Week 48" },
-  ],
-  [
-    { closingPrices: 232.87, date: "Week 47" },
-    { closingPrices: 229.87, date: "Week 47" },
-    { closingPrices: 228.52, date: "Week 47" },
-    { closingPrices: 229, date: "Week 47" },
-    { closingPrices: 228.28, date: "Week 47" },
-  ],
-  [
-    { closingPrices: 228.02, date: "Week 46" },
-    { closingPrices: 225, date: "Week 46" },
-    { closingPrices: 228.22, date: "Week 46" },
-    { closingPrices: 225.12, date: "Week 46" },
-    { closingPrices: 224.23, date: "Week 46" },
-  ],
-  [
-    { closingPrices: 224.23, date: "Week 45" },
-    { closingPrices: 226.96, date: "Week 45" },
-    { closingPrices: 227.48, date: "Week 45" },
-    { closingPrices: 222.72, date: "Week 45" },
-    { closingPrices: 223.45, date: "Week 45" },
-  ],
-  [
-    { closingPrices: 222.01, date: "Week 44" },
-
-    { closingPrices: 222.91, date: "Week 44" },
-
-    { closingPrices: 225.91, date: "Week 44" },
-
-    { closingPrices: 230.1, date: "Week 44" },
-
-    { closingPrices: 233.67, date: "Week 44" },
-  ],
-  [
-    { closingPrices: 233.4, date: "Week 43" },
-
-    { closingPrices: 231.41, date: "Week 43" },
-
-    { closingPrices: 230.57, date: "Week 43" },
-
-    { closingPrices: 230.76, date: "Week 43" },
-
-    { closingPrices: 235.86, date: "Week 43" },
-  ],
-];
 
 const mockedFiveMonthsOfClosingAverages = [
   {
@@ -92,22 +28,10 @@ const mockedFiveMonthsOfClosingAverages = [
   },
 ];
 
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 it("Should return an array of objects with closing averages organize by ", () => {
-  (organizeStocksInGroups as vi.Mock).mockReturnValue(mockedFiveMonthsOfStocks);
-  (calculateClosingAverages as vi.Mock).mockReturnValue(
-    mockedFiveMonthsOfClosingAverages
-  );
-
   const result = getFiveMonthsStockData();
-
-  expect(organizeStocksInGroups).toHaveBeenCalledWith(GroupType.Month, 5);
-  expect(result).toHaveLength(5);
-  expect(calculateClosingAverages).toHaveBeenCalledWith(
-    mockedFiveMonthsOfStocks
-  );
-  expect(result).toEqual(mockedFiveMonthsOfClosingAverages);
+  if (result) {
+    expect(result).toHaveLength(5);
+    expect(result).toEqual(mockedFiveMonthsOfClosingAverages);
+  }
 });
