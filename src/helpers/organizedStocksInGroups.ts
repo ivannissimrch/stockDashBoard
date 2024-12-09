@@ -1,6 +1,5 @@
-import getStoredDataFromStorage from "./getStoredDataFromStorage";
-import { weekNumber } from "weeknumber";
-import { StocksData } from "./stockApi";
+import categorizeByTimePeriod from "./categorizeByTimePeriod";
+import { DailyStocksApiResponse, StocksData } from "./stockApi";
 
 export enum GroupType {
   Month = "month",
@@ -9,57 +8,28 @@ export enum GroupType {
 
 export default function organizeStocksInGroups(
   groupBy: GroupType,
-  lengthOfGroup: number
+  maxNumberOfGroups: number,
+  stockDataFromStorage: DailyStocksApiResponse
 ) {
-  const stockDataFromStorage = getStoredDataFromStorage();
-  if (stockDataFromStorage === undefined || stockDataFromStorage === null) {
-    console.log("No valid stock data storage");
-    return;
+  const stockDataByGroup: { [key: string]: StocksData[] } = {};
+
+  for (const stockDateLabel of Object.keys(stockDataFromStorage)) {
+    const date = new Date(stockDateLabel);
+    const timePeriodLabel = categorizeByTimePeriod(groupBy, date);
+
+    const closingPrices = parseFloat(
+      stockDataFromStorage[stockDateLabel]["4. close"]
+    );
+    stockDataByGroup[timePeriodLabel] = stockDataByGroup[timePeriodLabel] || [];
+    stockDataByGroup[timePeriodLabel].push({
+      closingPrices: closingPrices,
+      date: timePeriodLabel,
+    });
+
+    if (Object.keys(stockDataByGroup).length > maxNumberOfGroups) {
+      break;
+    }
   }
 
-  const stockWithDateObjectsKeys = Object.keys(stockDataFromStorage);
-
-  const stockDataByGroup: { [key: string]: StocksData[] } = {};
-  stockWithDateObjectsKeys.forEach((stockDate) => {
-    const date = new Date(stockDate);
-
-    let groupCategory = "";
-    if (groupBy === GroupType.Month) {
-      groupCategory = date.toLocaleString("default", {
-        month: "short",
-      });
-    }
-    if (groupBy === GroupType.Week) {
-      const calendarWeekNumber: number = weekNumber(date);
-      groupCategory = `Week ${calendarWeekNumber}`;
-    }
-
-    if (stockDataByGroup[`${groupCategory}`]) {
-      if (Object.keys(stockDataByGroup).length > lengthOfGroup) {
-        return;
-      }
-
-      stockDataByGroup[`${groupCategory}`].push({
-        closingPrices: parseFloat(stockDataFromStorage[stockDate]["4. close"]),
-        date: groupCategory,
-      });
-    } else {
-      stockDataByGroup[groupCategory] = [
-        {
-          closingPrices: parseFloat(
-            stockDataFromStorage[stockDate]["4. close"]
-          ),
-          date: groupCategory,
-        },
-      ];
-    }
-  });
-
-  const groupsKeys = Object.keys(stockDataByGroup).filter(
-    (month) => stockDataByGroup[month].length > 2
-  );
-
-  console.log(groupsKeys.map((indexMonth) => stockDataByGroup[indexMonth]));
-
-  return groupsKeys.map((indexMonth) => stockDataByGroup[indexMonth]);
+  return Object.values(stockDataByGroup).filter((group) => group.length > 2);
 }
