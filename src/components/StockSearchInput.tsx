@@ -5,10 +5,10 @@ import {
   fetchVantageStockData,
   fetchQuote,
   fetchStockDetails,
-  fetchStocksSymbols,
 } from "../helpers/stockApi";
 import { stockContext } from "../App";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
+import fetchStocksSymbols from "../helpers/fetchStocksSymbols";
 
 interface StockResultWithLabel {
   label: string;
