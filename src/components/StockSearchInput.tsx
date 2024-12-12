@@ -81,7 +81,7 @@ export default function StockSearchInput() {
           "storedStocksData",
           JSON.stringify(stockDailyData)
         );
-        const sevenDaysStocks = getSevenDaysStockData();
+        const sevenDaysStocks = getSevenDaysStockData(stockDailyData!);
 
         if (sevenDaysStocks) {
           updateStockHistoricalData(sevenDaysStocks);
