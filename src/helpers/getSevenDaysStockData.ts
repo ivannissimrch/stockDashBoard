@@ -12,7 +12,7 @@ export default function getSevenDaysStockData() {
   );
   const sevenDaysStocks = sevenDaysKeys.map((key) => {
     return {
-      closingPrices: stockDataFromStorage[key]["4. close"],
+      closingPrices: +stockDataFromStorage[key]["4. close"],
       date: key,
     };
   });

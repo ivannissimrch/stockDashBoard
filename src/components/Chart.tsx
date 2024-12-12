@@ -12,15 +12,21 @@ export default function Chart() {
 
   function updateToSevenDays() {
     const sevenDaysOfStock = getSevenDaysStockData();
-    updateStockHistoricalData(sevenDaysOfStock);
+    if (sevenDaysOfStock) {
+      updateStockHistoricalData(sevenDaysOfStock);
+    }
   }
   function updateToSixWeeks() {
     const sixWeeksOfStocks = getSixWeeksStockData();
-    updateStockHistoricalData(sixWeeksOfStocks);
+    if (sixWeeksOfStocks) {
+      updateStockHistoricalData(sixWeeksOfStocks);
+    }
   }
   function updateToFiveMonths() {
     const fiveMonthsOfStocks = getFiveMonthsStockData();
-    updateStockHistoricalData(fiveMonthsOfStocks);
+    if (fiveMonthsOfStocks) {
+      updateStockHistoricalData(fiveMonthsOfStocks);
+    }
   }
 
   function renderChart() {

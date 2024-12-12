@@ -1,13 +1,9 @@
 import calculateClosingAverages from "./calculateClosingAverages";
-import getStoredDataFromStorage from "./getStoredDataFromStorage";
 import organizeStocksInGroups from "./organizedStocksInGroups";
 import { GroupType } from "./organizedStocksInGroups";
+import { DailyStocksApiResponse } from "./stockApi";
 
-export function getFiveMonthsStockData() {
-  const stocksData = getStoredDataFromStorage();
-  if (stocksData === undefined || stocksData === null) {
-    return;
-  }
+export function getFiveMonthsStockData(stocksData: DailyStocksApiResponse) {
   const fiveMonthsDailyData = organizeStocksInGroups(
     GroupType.Month,
     5,
