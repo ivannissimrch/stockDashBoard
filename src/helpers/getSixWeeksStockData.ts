@@ -1,13 +1,11 @@
 import calculateClosingAverages from "./calculateClosingAverages";
-import getStoredDataFromStorage from "./getStoredDataFromStorage";
 import organizeStocksInGroups from "./organizedStocksInGroups";
 import { GroupType } from "./organizedStocksInGroups";
+import { DailyStocksApiResponse } from "./stockApi";
 
-export default function getSixWeeksStockData() {
-  const stocksData = getStoredDataFromStorage();
-  if (stocksData === undefined || stocksData === null) {
-    return;
-  }
+export default function getSixWeeksStockData(
+  stocksData: DailyStocksApiResponse
+) {
   const sixWeeksDailyData = organizeStocksInGroups(
     GroupType.Week,
     6,
