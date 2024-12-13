@@ -1,14 +1,11 @@
 import { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
-import {
-  fetchVantageStockData,
-  fetchQuote,
-  fetchStockDetails,
-} from "../helpers/stockApi";
+import { fetchVantageStockData, fetchQuote } from "../helpers/stockApi";
 import { stockContext } from "../App";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import fetchStocksSymbols from "../helpers/fetchStocksSymbols";
+import fetchStockDetails from "../helpers/fetchStockDetails";
 
 interface StockResultWithLabel {
   label: string;
