@@ -133,3 +133,16 @@ it("should return a list of stock symbols", async () => {
   const result = await fetchStocksSymbols(userQuery);
   expect(result).toEqual(mockStockSymbols);
 });
+
+it("should expect an empy array if no results", async () => {
+  (fetchFinnhubStockData as any).mockResolvedValue({
+    count: 0,
+    result: [],
+  });
+
+  const userQuery = "no a real stock name";
+  const result = await fetchStocksSymbols(userQuery);
+  expect(fetchFinnhubStockData).toHaveBeenCalled();
+
+  expect(result).toEqual([]);
+});
