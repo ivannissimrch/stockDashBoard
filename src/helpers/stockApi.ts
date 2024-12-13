@@ -3,17 +3,6 @@ const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
 const ALPHA_VANTAGE_API_KEY = import.meta.env.VITE_ALPHA_VANTAGE_API_KEY;
 import { fetchFinnhubStockData } from "./fetchFinnhubStockData";
 
-export interface StockQuote {
-  c: number;
-  d: number;
-  dp: number;
-  h: number;
-  l: number;
-  o: number;
-  pc: number;
-  t: number;
-}
-
 export interface DailyMetaData {
   "1. Information": string;
   "2. Symbol": string;
@@ -41,13 +30,6 @@ export interface DailyStocksApiResponse {
 export interface StocksData {
   closingPrices: number;
   date: string;
-}
-
-export async function fetchQuote(
-  stockSymbol: string
-): Promise<StockQuote | undefined> {
-  const url = `${FINNHUB_BASE_URL}/quote?symbol=${stockSymbol}&token=${FINNHUB_API_KEY}`;
-  return await fetchFinnhubStockData<StockQuote>(url);
 }
 
 export async function fetchVantageStockData(
