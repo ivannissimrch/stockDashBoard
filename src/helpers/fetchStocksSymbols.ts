@@ -14,7 +14,7 @@ export default async function fetchStocksSymbols(
 ): Promise<StockSymbols[]> {
   const url = `${FINNHUB_BASE_URL}/search?q=${userQuery}&exchange=US&token=${FINNHUB_API_KEY}`;
   const results = await fetchFinnhubStockData<{ result: StockSymbols[] }>(url);
-  console.log(results);
+
   if (!results) {
     return [];
   }

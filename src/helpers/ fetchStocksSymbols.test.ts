@@ -111,7 +111,7 @@ const mockStockSymbols = [
   },
 ];
 
-it("should return a list of stock symbols", async () => {
+it("should expect fethcFinnhubStockData to have been call", async () => {
   (fetchFinnhubStockData as any).mockResolvedValue({
     count: 17,
     result: mockStockSymbols,
@@ -119,6 +119,17 @@ it("should return a list of stock symbols", async () => {
 
   const userQuery = "apple";
   const result = await fetchStocksSymbols(userQuery);
-  console.log(result);
+  expect(fetchFinnhubStockData).toHaveBeenCalled();
+
+  expect(result).toEqual(mockStockSymbols);
+});
+
+it("should return a list of stock symbols", async () => {
+  (fetchFinnhubStockData as any).mockResolvedValue({
+    count: 17,
+    result: mockStockSymbols,
+  });
+  const userQuery = "apple";
+  const result = await fetchStocksSymbols(userQuery);
   expect(result).toEqual(mockStockSymbols);
 });
