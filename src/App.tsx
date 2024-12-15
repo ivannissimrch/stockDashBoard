@@ -5,7 +5,7 @@ import SearchBar from "./components/SearchBar";
 import DisplayStockDetails from "./components/DisplayStockDetails";
 import { useState } from "react";
 import { createContext } from "react";
-import { StockDetails, StocksData } from "./helpers/stockApi";
+import { StockDetails } from "./helpers/fetchStockDetails";
 import DisplayStockOverview from "./components/DisplayStockOverview";
 
 interface ContextTypes {
@@ -23,6 +23,11 @@ interface StockOverview {
   change: number;
   changePercent: number;
   currency: string;
+}
+
+export interface StocksData {
+  closingPrices: number;
+  date: string;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components

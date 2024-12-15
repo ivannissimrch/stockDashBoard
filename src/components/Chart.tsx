@@ -5,22 +5,31 @@ import { stockContext } from "../App";
 import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
 import { getFiveMonthsStockData } from "../helpers/getFiveMonthsStockData";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
+import getStoredDataFromStorage from "../helpers/getStoredDataFromStorage";
 
 export default function Chart() {
+  const stocksData = getStoredDataFromStorage();
+
   const { stockHistoricalData, updateStockHistoricalData } =
     useContext(stockContext);
 
   function updateToSevenDays() {
-    const sevenDaysOfStock = getSevenDaysStockData();
-    updateStockHistoricalData(sevenDaysOfStock);
+    const sevenDaysOfStock = getSevenDaysStockData(stocksData!);
+    if (sevenDaysOfStock) {
+      updateStockHistoricalData(sevenDaysOfStock);
+    }
   }
   function updateToSixWeeks() {
-    const sixWeeksOfStocks = getSixWeeksStockData();
-    updateStockHistoricalData(sixWeeksOfStocks);
+    const sixWeeksOfStocks = getSixWeeksStockData(stocksData!);
+    if (sixWeeksOfStocks) {
+      updateStockHistoricalData(sixWeeksOfStocks);
+    }
   }
   function updateToFiveMonths() {
-    const fiveMonthsOfStocks = getFiveMonthsStockData();
-    updateStockHistoricalData(fiveMonthsOfStocks);
+    const fiveMonthsOfStocks = getFiveMonthsStockData(stocksData!);
+    if (fiveMonthsOfStocks) {
+      updateStockHistoricalData(fiveMonthsOfStocks);
+    }
   }
 
   function renderChart() {
