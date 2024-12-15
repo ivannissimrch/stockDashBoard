@@ -1,12 +1,15 @@
-import { expect, it, vi } from "vitest";
+import { it, expect, vi } from "vitest";
 import fetchFinnhubStockData from "./fetchFinnhubStockData";
-import fetchStocksSymbols from "./fetchStocksSymbols";
+import { afterEach } from "node:test";
 
-vi.mock("./fetchFinnhubStockData", async () => ({
-  default: vi.fn(),
-}));
+const mockFetch = vi.fn();
+global.fetch = mockFetch;
 
-const mockStockSymbols = [
+afterEach(() => {
+  mockFetch.mockReset();
+});
+
+const mockResponseSymbol = [
   {
     description: "APPLE INC",
     displaySymbol: "AAPL",
@@ -23,12 +26,6 @@ const mockStockSymbols = [
     description: "APPLIED MATERIALS INC",
     displaySymbol: "AMAT",
     symbol: "AMAT",
-    type: "Common Stock",
-  },
-  {
-    description: "APPLIED ENERGETICS INC",
-    displaySymbol: "AERG",
-    symbol: "AERG",
     type: "Common Stock",
   },
   {
@@ -86,15 +83,15 @@ const mockStockSymbols = [
     type: "ETP",
   },
   {
-    description: "MAN GROUP PLC/JERSEY",
-    displaySymbol: "MNGPF",
-    symbol: "MNGPF",
-    type: "Common Stock",
-  },
-  {
     description: "APPLIED DIGITAL CORP",
     displaySymbol: "APLD",
     symbol: "APLD",
+    type: "Common Stock",
+  },
+  {
+    description: "MAN GROUP PLC/JERSEY",
+    displaySymbol: "MNGPF",
+    symbol: "MNGPF",
     type: "Common Stock",
   },
   {
@@ -109,40 +106,56 @@ const mockStockSymbols = [
     symbol: "CGIE",
     type: "ETP",
   },
+  {
+    description: "COMMODORE APPLIED TECH",
+    displaySymbol: "CXIA",
+    symbol: "CXIA",
+    type: "Common Stock",
+  },
 ];
+const mockResponseDetails = {
+  country: "US",
+  currency: "USD",
+  estimateCurrency: "USD",
+  exchange: "NASDAQ NMS - GLOBAL MARKET",
+  finnhubIndustry: "Technology",
+  ipo: "1980-12-12",
+  logo: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/AAPL.png",
+  marketCapitalization: 3750689.322638749,
+  name: "Apple Inc",
+  phone: "14089961010",
+  shareOutstanding: 15115.82,
+  ticker: "AAPL",
+  weburl: "https://www.apple.com/",
+};
+const mockResponseQuote = {
+  c: 248.13,
+  d: 0.17,
+  dp: 0.0686,
+  h: 249.2902,
+  l: 246.24,
+  o: 247.815,
+  pc: 247.96,
+  t: 1734210000,
+};
 
-it("should expect fethcFinnhubStockData to have been call", async () => {
-  (fetchFinnhubStockData as any).mockResolvedValue({
-    count: 17,
-    result: mockStockSymbols,
+it("should return parse data when successful", async () => {
+  mockFetch.mockResolvedValueOnce({
+    ok: true,
+    json: vi.fn().mockResolvedValueOnce(mockResponseSymbol),
   });
 
-  const userQuery = "apple";
-  const result = await fetchStocksSymbols(userQuery);
-  expect(fetchFinnhubStockData).toHaveBeenCalled();
-
-  expect(result).toEqual(mockStockSymbols);
+  const urlGetSymbol = "https://finnhub.io/api/v1/getQuote";
+  const data = await fetchFinnhubStockData(urlGetSymbol);
+  expect(data).toEqual(mockResponseSymbol);
 });
 
-it("should return a list of stock symbols", async () => {
-  (fetchFinnhubStockData as any).mockResolvedValue({
-    count: 17,
-    result: mockStockSymbols,
+it("should return undefined when response status is not ok", async () => {
+  mockFetch.mockResolvedValueOnce({
+    ok: false,
+    json: vi.fn().mockResolvedValueOnce(mockResponseSymbol),
   });
-  const userQuery = "apple";
-  const result = await fetchStocksSymbols(userQuery);
-  expect(result).toEqual(mockStockSymbols);
-});
-
-it("should expect an empy array if no results", async () => {
-  (fetchFinnhubStockData as any).mockResolvedValue({
-    count: 0,
-    result: [],
-  });
-
-  const userQuery = "no a real stock name";
-  const result = await fetchStocksSymbols(userQuery);
-  expect(fetchFinnhubStockData).toHaveBeenCalled();
-
-  expect(result).toEqual([]);
+  const urlGetSymbol = "https://finnhub.io/api/v1/getQuote";
+  const data = await fetchFinnhubStockData(urlGetSymbol);
+  expect(data).toBeUndefined();
 });

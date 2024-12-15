@@ -1,6 +1,10 @@
-export async function fetchFinnhubStockData<T>(
+import { StockSymbols } from "./fetchStocksSymbols";
+import { StockDetails } from "./fetchStockDetails";
+import { StockQuote } from "./fetchQuote";
+
+export default async function fetchFinnhubStockData(
   url: string
-): Promise<T | undefined> {
+): Promise<StockSymbols | StockDetails | StockQuote | undefined> {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -8,7 +12,6 @@ export async function fetchFinnhubStockData<T>(
       throw new Error(message);
     }
     const results = await response.json();
-
     return results;
   } catch (error: unknown) {
     console.log(error);
