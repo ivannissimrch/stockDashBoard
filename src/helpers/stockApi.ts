@@ -1,7 +1,6 @@
 const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
 const ALPHA_VANTAGE_API_KEY = import.meta.env.VITE_ALPHA_VANTAGE_API_KEY;
-import { fetchFinnhubStockData } from "./fetchFinnhubStockData";
 
 export interface DailyMetaData {
   "1. Information": string;

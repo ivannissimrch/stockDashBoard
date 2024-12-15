@@ -1,4 +1,4 @@
-import { fetchFinnhubStockData } from "./fetchFinnhubStockData";
+import fetchFinnhubStockData from "./fetchFinnhubStockData";
 
 const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";

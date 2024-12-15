@@ -1,9 +1,9 @@
 import { expect, it, vi } from "vitest";
 import fetchQuote from "./fetchQuote";
-import { fetchFinnhubStockData } from "./fetchFinnhubStockData";
+import fetchFinnhubStockData from "./fetchFinnhubStockData";
 
 vi.mock("./fetchFinnhubStockData", () => ({
-  fetchFinnhubStockData: vi.fn(),
+  default: vi.fn(),
 }));
 
 const mockStockQuote = {
