@@ -1,5 +1,6 @@
 import categorizeByTimePeriod from "./categorizeByTimePeriod";
-import { DailyStocksApiResponse, StocksData } from "./stockApi";
+import { StocksData } from "../App";
+import { DailyStocksApiResponse } from "./fetchVantageStockData";
 
 export enum GroupType {
   Month = "month",

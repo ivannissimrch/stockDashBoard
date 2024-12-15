@@ -1,4 +1,4 @@
-import { DailyStocksApiResponse } from "./stockApi";
+import { DailyStocksApiResponse } from "./fetchVantageStockData";
 
 export default function getStoredDataFromStorage() {
   const storedStockData = localStorage.getItem("storedStocksData");
