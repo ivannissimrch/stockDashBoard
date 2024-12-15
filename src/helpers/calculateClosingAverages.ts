@@ -1,4 +1,4 @@
-import { StocksData } from "./stockApi";
+import { StocksData } from "../App";
 
 export default function calculateClosingAverages(
   stocksDataGroups: StocksData[][]

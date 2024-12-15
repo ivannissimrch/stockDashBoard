@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
-import { fetchVantageStockData } from "../helpers/stockApi";
+import fetchVantageStockData from "../helpers/fetchVantageStockData";
 import { stockContext } from "../App";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import fetchStocksSymbols from "../helpers/fetchStocksSymbols";

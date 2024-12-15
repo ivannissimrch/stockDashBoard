@@ -113,31 +113,31 @@ const mockResponseSymbol = [
     type: "Common Stock",
   },
 ];
-const mockResponseDetails = {
-  country: "US",
-  currency: "USD",
-  estimateCurrency: "USD",
-  exchange: "NASDAQ NMS - GLOBAL MARKET",
-  finnhubIndustry: "Technology",
-  ipo: "1980-12-12",
-  logo: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/AAPL.png",
-  marketCapitalization: 3750689.322638749,
-  name: "Apple Inc",
-  phone: "14089961010",
-  shareOutstanding: 15115.82,
-  ticker: "AAPL",
-  weburl: "https://www.apple.com/",
-};
-const mockResponseQuote = {
-  c: 248.13,
-  d: 0.17,
-  dp: 0.0686,
-  h: 249.2902,
-  l: 246.24,
-  o: 247.815,
-  pc: 247.96,
-  t: 1734210000,
-};
+// const mockResponseDetails = {
+//   country: "US",
+//   currency: "USD",
+//   estimateCurrency: "USD",
+//   exchange: "NASDAQ NMS - GLOBAL MARKET",
+//   finnhubIndustry: "Technology",
+//   ipo: "1980-12-12",
+//   logo: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/AAPL.png",
+//   marketCapitalization: 3750689.322638749,
+//   name: "Apple Inc",
+//   phone: "14089961010",
+//   shareOutstanding: 15115.82,
+//   ticker: "AAPL",
+//   weburl: "https://www.apple.com/",
+// };
+// const mockResponseQuote = {
+//   c: 248.13,
+//   d: 0.17,
+//   dp: 0.0686,
+//   h: 249.2902,
+//   l: 246.24,
+//   o: 247.815,
+//   pc: 247.96,
+//   t: 1734210000,
+// };
 
 it("should return parse data when successful", async () => {
   mockFetch.mockResolvedValueOnce({
