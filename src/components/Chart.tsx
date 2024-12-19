@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup } from "@mui/material";
+import { Box, ButtonGroup } from "@mui/material";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useContext } from "react";
 import { stockContext } from "../App";
@@ -6,6 +6,7 @@ import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
 import { getFiveMonthsStockData } from "../helpers/getFiveMonthsStockData";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import getStoredDataFromStorage from "../helpers/getStoredDataFromStorage";
+import Button from "./Button/Button";
 
 export default function Chart() {
   const stocksData = getStoredDataFromStorage();
@@ -68,24 +69,9 @@ export default function Chart() {
         aria-label="Basic button group"
         fullWidth
       >
-        <Button
-          onClick={updateToSevenDays}
-          color={stockHistoricalData?.length === 7 ? "info" : "primary"}
-        >
-          7 days
-        </Button>
-        <Button
-          onClick={updateToSixWeeks}
-          color={stockHistoricalData?.length === 6 ? "info" : "primary"}
-        >
-          6 Weeks
-        </Button>
-        <Button
-          onClick={updateToFiveMonths}
-          color={stockHistoricalData?.length === 5 ? "info" : "primary"}
-        >
-          5 months
-        </Button>
+        <Button onClick={updateToSevenDays}>7 days</Button>
+        <Button onClick={updateToSixWeeks}>6 Weeks</Button>
+        <Button onClick={updateToFiveMonths}>5 months</Button>
       </ButtonGroup>{" "}
       {renderChart()}
     </Box>
