@@ -1,0 +1,17 @@
+.button_styles {
+  width: 125px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: white;
+  border-color: #ebedee;
+  border-width: 1px;
+  box-shadow: none;
+  border-style: solid;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.button_styles:hover {
+  background-color: #18a0fb;
+  color: white;
+}
