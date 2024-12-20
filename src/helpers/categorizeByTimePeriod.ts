@@ -14,4 +14,4 @@ export default function categorizeByTimePeriod(groupBy: GroupType, date: Date) {
     return "";
   }
 }
-ß;
+``;
