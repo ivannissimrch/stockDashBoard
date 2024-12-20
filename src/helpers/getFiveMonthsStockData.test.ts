@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { getFiveMonthsStockData } from "./getFiveMonthsStockData";
+import getFiveMonthsStockData from "./getFiveMonthsStockData";
 import { MOCK_STOCK_DATA } from "./mockStoredStockData";
 
 const mockedFiveMonthsOfClosingAverages = [

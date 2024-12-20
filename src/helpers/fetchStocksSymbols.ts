@@ -9,12 +9,11 @@ export interface StockSymbols {
   type: string;
 }
 
-export default async function fetchStocksSymbols(
-  userQuery: string
-): Promise<StockSymbols[]> {
+export default async function fetchStocksSymbols(userQuery: string) {
   const url = `${FINNHUB_BASE_URL}/search?q=${userQuery}&exchange=US&token=${FINNHUB_API_KEY}`;
-  const results = await fetchFinnhubStockData<{ result: StockSymbols[] }>(url);
-
+  const results = (await fetchFinnhubStockData(url)) as {
+    result: StockSymbols[];
+  };
   if (!results) {
     return [];
   }
