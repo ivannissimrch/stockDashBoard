@@ -22,5 +22,5 @@ export default async function fetchStockDetails(
   stockSymbol: string
 ): Promise<StockDetails | undefined> {
   const url = `${FINNHUB_BASE_URL}/stock/profile2?symbol=${stockSymbol}&token=${FINNHUB_API_KEY}`;
-  return await fetchFinnhubStockData<StockDetails>(url);
+  return await fetchFinnhubStockData(url);
 }

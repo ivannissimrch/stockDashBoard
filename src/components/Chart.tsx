@@ -3,7 +3,7 @@ import { LineChart } from "@mui/x-charts/LineChart";
 import { useContext } from "react";
 import { stockContext } from "../App";
 import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
-import { getFiveMonthsStockData } from "../helpers/getFiveMonthsStockData";
+import getFiveMonthsStockData from "../helpers/getFiveMonthsStockData";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import getStoredDataFromStorage from "../helpers/getStoredDataFromStorage";
 import Button from "./Button/Button";
