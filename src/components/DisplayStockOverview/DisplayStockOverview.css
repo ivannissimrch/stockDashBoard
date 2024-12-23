@@ -1,0 +1,25 @@
+.stock_overview_container {
+  width: 1211.13px;
+  height: 62px;
+  display: flex;
+  margin: 25px auto 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name_symbol_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stock_overview_name {
+  width: 118px;
+  height: 33px;
+  font-family: "Roboto";
+  font-weight: bold;
+  font-size: 18.26px;
+}
+
+.stock_overview_item {
+}

@@ -1,0 +1,14 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f7f9;
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+}
+
+.app_main_container {
+  width: 1856px;
+  height: 1257px;
+}
