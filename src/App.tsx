@@ -1,12 +1,13 @@
-import { Box, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
 import Chart from "./components/Chart";
 import SearchBar from "./components/SearchBar";
-import DisplayStockDetails from "./components/DisplayStockDetails";
+import DisplayStockDetails from "./components/DisplayStockDetails/DisplayStockDetails";
 import { useState } from "react";
 import { createContext } from "react";
 import { StockDetails } from "./helpers/fetchStockDetails";
-import DisplayStockOverview from "./components/DisplayStockOverview";
+import DisplayStockOverview from "./components/DisplayStockOverview/DisplayStockOverview";
+import "./app.css";
+import ChartContainer from "./components/ChartContainer/ChartContainer";
+import DashboardTitle from "./components/DashBoardTitle/DashboardTitle";
 
 interface ContextTypes {
   stockDetails: StockDetails | undefined;
@@ -70,21 +71,17 @@ export default function App() {
         stockHistoricalData,
       }}
     >
-      <Box sx={{ flexGrow: 1 }} height={840}>
-        <Typography variant="h2" gutterBottom>
-          Stock dashboard
-        </Typography>
+      <main className="app_main_container">
+        {/* //TODO latter */}
         <SearchBar />
-        <Grid container spacing={2} columns={{ xs: 12, md: 12 }} margin={2}>
-          <Grid xs={12} md={12} lg={7}>
-            <Chart />
-          </Grid>
-          <Grid xs={12} md={12} lg={5}>
-            <DisplayStockOverview />
-            <DisplayStockDetails />
-          </Grid>
-        </Grid>
-      </Box>
+        <DashboardTitle>Dashboard</DashboardTitle>
+        <ChartContainer>
+          <DisplayStockOverview />
+          {/* //TODO Latter */}
+          <Chart />
+        </ChartContainer>
+        <DisplayStockDetails />
+      </main>
     </stockContext.Provider>
   );
 }
