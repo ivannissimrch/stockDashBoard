@@ -1,7 +1,6 @@
-import Grid from "@mui/material/Unstable_Grid2";
 import Chart from "./components/Chart";
 import SearchBar from "./components/SearchBar";
-import DisplayStockDetails from "./components/DisplayStockDetails";
+import DisplayStockDetails from "./components/DisplayStockDetails/DisplayStockDetails";
 import { useState } from "react";
 import { createContext } from "react";
 import { StockDetails } from "./helpers/fetchStockDetails";
@@ -81,9 +80,7 @@ export default function App() {
           {/* //TODO Latter */}
           <Chart />
         </ChartContainer>
-        <Grid xs={12} md={12} lg={5}>
-          <DisplayStockDetails />
-        </Grid>
+        <DisplayStockDetails />
       </main>
     </stockContext.Provider>
   );

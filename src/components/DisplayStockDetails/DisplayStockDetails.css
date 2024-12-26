@@ -1,0 +1,37 @@
+.stock_details_container {
+  background-color: white;
+  height: 297px;
+  width: 1319px;
+  margin: 20px auto;
+  border-radius: 38px;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.stock_details_title {
+  margin: 0 22px;
+  width: 236px;
+  height: 28px;
+}
+
+.stock_details_list {
+  list-style: none;
+  margin: 0;
+  padding: 28px 22px;
+  width: 1263px;
+  height: 253px;
+}
+
+.stock_details_list_item {
+  display: flex;
+}
+
+.item_left {
+  color: #8c8d96;
+  width: 50%;
+}
+
+.item_right {
+  width: 50%;
+  text-align: end;
+}
