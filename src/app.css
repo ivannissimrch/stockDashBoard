@@ -1,9 +1,18 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f5f7f9;
-  box-sizing: border-box;
+
   height: 100vh;
   margin: 0;
 }
