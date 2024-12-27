@@ -3,7 +3,7 @@ import { stockContext } from "../../App";
 import "./DisplayStockOverview.css";
 
 export default function DisplayStockOverview() {
-  const { stockOverview } = useContext(stockContext);
+  const { stockOverview, stockDetails } = useContext(stockContext);
   const {
     symbol = "",
     price = "",
@@ -14,7 +14,7 @@ export default function DisplayStockOverview() {
     <section className="stock_overview_container">
       <div className="name_symbol_container">
         <span className="stock_overview_item stock_overview_name ">
-          Apple Inc
+          {stockDetails?.name}
         </span>
         <span className="stock_overview_item  ">{symbol}</span>
       </div>
