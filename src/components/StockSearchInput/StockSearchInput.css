@@ -1,0 +1,10 @@
+.search_bar_container {
+  width: 466px;
+  height: 60px;
+  margin-left: 40px;
+}
+
+.search_bar_input_field {
+  padding: 11px 21px;
+  background-color: lightgray;
+}

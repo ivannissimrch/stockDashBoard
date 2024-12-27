@@ -1,12 +1,13 @@
+import "./StockSearchInput.css";
 import { useState, useMemo, useEffect, useContext } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
-import fetchVantageStockData from "../helpers/fetchVantageStockData";
-import { stockContext } from "../App";
-import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
-import fetchStocksSymbols from "../helpers/fetchStocksSymbols";
-import fetchStockDetails from "../helpers/fetchStockDetails";
-import fetchQuote from "../helpers/fetchQuote";
+import fetchVantageStockData from "../../helpers/fetchVantageStockData";
+import { stockContext } from "../../App";
+import getSevenDaysStockData from "../../helpers/getSevenDaysStockData";
+import fetchStocksSymbols from "../../helpers/fetchStocksSymbols";
+import fetchStockDetails from "../../helpers/fetchStockDetails";
+import fetchQuote from "../../helpers/fetchQuote";
 
 interface StockResultWithLabel {
   label: string;
@@ -97,6 +98,7 @@ export default function StockSearchInput() {
 
   return (
     <Autocomplete
+      className="search_bar_container"
       autoComplete
       openOnFocus
       autoSelect
@@ -104,6 +106,7 @@ export default function StockSearchInput() {
       getOptionLabel={(option) => option.label}
       renderInput={(params) => (
         <TextField
+          className="search_bar_input_field"
           {...params}
           placeholder="Search for Stock"
           InputProps={{
@@ -123,7 +126,6 @@ export default function StockSearchInput() {
       onInputChange={handleSearchQueryChange}
       onChange={handleStockSelectionChange}
       id="userQuery"
-      sx={{ width: 300 }}
     />
   );
 }

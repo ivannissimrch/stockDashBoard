@@ -1,5 +1,5 @@
 import Chart from "./components/Chart";
-import SearchBar from "./components/SearchBar";
+import SearchBar from "./components/SearchBar/SearchBar";
 import DisplayStockDetails from "./components/DisplayStockDetails/DisplayStockDetails";
 import { useState } from "react";
 import { createContext } from "react";
@@ -72,12 +72,10 @@ export default function App() {
       }}
     >
       <main className="app_main_container">
-        {/* //TODO latter */}
         <SearchBar />
         <DashboardTitle>Dashboard</DashboardTitle>
         <ChartContainer>
           <DisplayStockOverview />
-          {/* //TODO Latter */}
           <Chart />
         </ChartContainer>
         <DisplayStockDetails />
