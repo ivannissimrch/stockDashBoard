@@ -7,6 +7,22 @@
   align-items: center;
 }
 
+.logo {
+  width: 57px;
+  height: 57px;
+  border-radius: 33px;
+  margin: 0 6px;
+}
+
+.logo_symbol_container {
+  display: flex;
+}
+
+.symbol_name_container {
+  display: flex;
+  flex-direction: column;
+}
+
 .name_symbol_container {
   display: flex;
   flex-direction: column;
