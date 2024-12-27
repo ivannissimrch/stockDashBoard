@@ -51,31 +51,26 @@ export default function Chart() {
         dataset={chartDataset}
         xAxis={[
           {
-            scaleType: "band",
+            scaleType: "point",
             dataKey: "date",
             valueFormatter: (date: string) => date,
           },
         ]}
         series={[{ data: closingPrices, baseline: "min" }]}
-        sx={{ maxWidth: 700, maxHeight: 420 }}
+        sx={{ maxWidth: 1053, maxHeight: 393, color: "blue" }}
+        grid={{ vertical: true, horizontal: true }}
       />
     );
   }
 
   return (
-    <div>
+    <>
       <ButtonGroup>
-        {/* <ButtonGroup
-        variant="contained"
-        aria-label="Basic button group"
-        fullWidth
-      > */}
         <Button onClick={updateToSevenDays}>7 days</Button>
         <Button onClick={updateToSixWeeks}>6 Weeks</Button>
         <Button onClick={updateToFiveMonths}>5 months</Button>
-        {/* </ButtonGroup>{" "} */}
       </ButtonGroup>
       {renderChart()}
-    </div>
+    </>
   );
 }
