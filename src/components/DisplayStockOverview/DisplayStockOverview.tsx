@@ -4,12 +4,7 @@ import "./DisplayStockOverview.css";
 
 export default function DisplayStockOverview() {
   const { stockOverview, stockDetails } = useContext(stockContext);
-  const {
-    symbol = "",
-    price = "",
-    change = "",
-    changePercent = "",
-  } = stockOverview || {};
+  const { symbol = "", price = "", changePercent = "" } = stockOverview || {};
   return (
     <section className="stock_overview_container">
       <div className="logo_symbol_container">
@@ -29,11 +24,8 @@ export default function DisplayStockOverview() {
       </div>
 
       <div>
+        <span className="stock_overview_item change_percent">{`${changePercent}%`}</span>
         <span className="stock_overview_item">{`$${price} USD`}</span>
-        <span className="stock_overview_item">
-          {change}
-          {`(${changePercent}%)`}
-        </span>
       </div>
     </section>
   );
