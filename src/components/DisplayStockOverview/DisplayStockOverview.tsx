@@ -23,9 +23,13 @@ export default function DisplayStockOverview() {
         </div>
       </div>
 
-      <div>
-        <span className="stock_overview_item change_percent">{`${changePercent}%`}</span>
-        <span className="stock_overview_item">{`$${price} USD`}</span>
+      <div className="percent_price_container">
+        <span className="stock_overview_item change_percent">
+          <span></span>
+          {`${changePercent}%`}
+          <span></span>
+        </span>
+        <span className="stock_overview_item price">{`$${price} USD`}</span>
       </div>
     </section>
   );
