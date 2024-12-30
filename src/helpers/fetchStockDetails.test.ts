@@ -25,7 +25,7 @@ const mockStockDetails = {
 it("should expect fethcFinnhubStockData to have been call", async () => {
   (fetchFinnhubStockData as any).mockResolvedValue(mockStockDetails);
   const userQuery = "apple";
-  const result = await fetchStockDetails(userQuery);
+  await fetchStockDetails(userQuery);
   expect(fetchFinnhubStockData).toHaveBeenCalled();
 });
 
