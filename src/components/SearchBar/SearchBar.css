@@ -7,3 +7,10 @@
   height: 129px;
   background-color: white;
 }
+
+@media screen and (max-width: 1450px) {
+  .navbar_container {
+    width: 430px;
+    height: 129px;
+  }
+}

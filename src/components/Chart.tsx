@@ -56,7 +56,12 @@ export default function Chart() {
             valueFormatter: (date: string) => date,
           },
         ]}
-        series={[{ data: closingPrices, baseline: "min" }]}
+        series={[
+          {
+            data: closingPrices,
+            baseline: "min",
+          },
+        ]}
         sx={{ maxWidth: 1053, maxHeight: 393, color: "blue" }}
         grid={{ vertical: true, horizontal: true }}
       />

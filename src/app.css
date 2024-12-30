@@ -95,6 +95,16 @@ textarea:not([rows]) {
 }
 
 .app_main_container {
-  width: 1856px;
+  max-width: 1856px;
   height: 1257px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 1450px) {
+  .app_main_container {
+    width: 430px;
+    height: 1334px;
+  }
 }

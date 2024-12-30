@@ -8,3 +8,10 @@
   margin: 0 auto;
   border-radius: 38px;
 }
+
+@media screen and (max-width: 1450px) {
+  .chart_container {
+    width: 394px;
+    height: 637px;
+  }
+}

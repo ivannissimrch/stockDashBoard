@@ -61,3 +61,54 @@
   font-weight: 600;
   line-height: normal;
 }
+
+@media screen and (max-width: 1450px) {
+  .stock_overview_container {
+    width: 350px;
+    height: 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+
+  .logo_symbol_container {
+    width: 152px;
+    height: 49px;
+  }
+
+  .logo {
+    width: 49px;
+    height: 49px;
+  }
+
+  .symbol_name_container {
+    width: 152px;
+    height: 49px;
+    margin: 0 12px;
+  }
+
+  .stock_overview_name {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-overflow: ellipsis;
+  }
+
+  .percent_price_container {
+    width: 149px;
+    height: 23px;
+  }
+
+  .change_percent {
+    width: 59.1px;
+    height: 23.5px;
+  }
+
+  .price {
+    font-size: 20px;
+    text-overflow: clip;
+    width: 78;
+  }
+}
