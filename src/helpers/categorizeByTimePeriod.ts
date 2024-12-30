@@ -1,4 +1,6 @@
 import { GroupType } from "./organizedStocksInGroups";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { weekNumber } from "weeknumber";
 
 export default function categorizeByTimePeriod(groupBy: GroupType, date: Date) {
@@ -14,4 +16,3 @@ export default function categorizeByTimePeriod(groupBy: GroupType, date: Date) {
     return "";
   }
 }
-``;
