@@ -9,6 +9,8 @@
   border-style: solid;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  font-family: "Roboto";
+  font-size: 11.842px;
 }
 
 .button_styles:hover {

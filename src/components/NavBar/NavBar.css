@@ -18,3 +18,10 @@
   line-height: normal;
   margin-top: 51px;
 }
+
+@media screen and (max-width: 1450px) {
+  .navbar_container {
+    border-bottom: 2px solid #ebecf2;
+    border-right: none;
+  }
+}

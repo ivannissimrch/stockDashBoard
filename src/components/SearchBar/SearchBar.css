@@ -8,9 +8,8 @@
 }
 
 @media screen and (max-width: 1450px) {
-  .navbar_container {
+  .searchbar_container {
     width: 430px;
     height: 129px;
-    background-color: blue;
   }
 }
