@@ -1,0 +1,20 @@
+.navbar_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 1257px;
+  width: 430px;
+  background-color: #ffffff;
+  border-right: 2px solid #ebecf2;
+}
+
+.navbar_title {
+  color: #18a0fb;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-top: 51px;
+}

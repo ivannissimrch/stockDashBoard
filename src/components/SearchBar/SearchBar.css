@@ -1,7 +1,6 @@
-.navbar_container {
+.searchbar_container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
   margin: 0 auto;
   width: 1422px;
   height: 129px;
@@ -12,5 +11,6 @@
   .navbar_container {
     width: 430px;
     height: 129px;
+    background-color: blue;
   }
 }

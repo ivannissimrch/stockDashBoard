@@ -4,7 +4,7 @@ import StockSearchInput from "../StockSearchInput/StockSearchInput";
 
 export default function SearchBar() {
   return (
-    <div className="navbar_container">
+    <div className="searchbar_container">
       <StockSearchInput />
     </div>
   );

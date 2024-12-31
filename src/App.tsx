@@ -8,6 +8,7 @@ import DisplayStockOverview from "./components/DisplayStockOverview/DisplayStock
 import "./app.css";
 import ChartContainer from "./components/ChartContainer/ChartContainer";
 import DashboardTitle from "./components/DashBoardTitle/DashboardTitle";
+import NavBar from "./components/NavBar/NarBar";
 
 interface ContextTypes {
   stockDetails: StockDetails | undefined;
@@ -74,13 +75,16 @@ export default function App() {
       }}
     >
       <main className="app_main_container">
-        <SearchBar />
-        <DashboardTitle>Dashboard</DashboardTitle>
-        <ChartContainer>
-          <DisplayStockOverview />
-          <Chart />
-        </ChartContainer>
-        <DisplayStockDetails />
+        <NavBar />
+        <section className="secondary_container">
+          <SearchBar />
+          <DashboardTitle>Dashboard</DashboardTitle>
+          <ChartContainer>
+            <DisplayStockOverview />
+            <Chart />
+          </ChartContainer>
+          <DisplayStockDetails />
+        </section>
       </main>
     </stockContext.Provider>
   );
