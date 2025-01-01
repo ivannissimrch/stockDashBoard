@@ -94,8 +94,8 @@ textarea:not([rows]) {
 }
 
 .app_main_container {
-  width: 1856px;
-  height: 1257px;
+  width: 116rem;
+  height: 78.563rem;
   display: flex;
 }
 
@@ -106,8 +106,8 @@ textarea:not([rows]) {
 
 @media screen and (max-width: 1450px) {
   .app_main_container {
-    width: 430px;
-    height: 1334px;
+    width: 26.875rem;
+    height: 83.375rem;
     flex-direction: column;
   }
 }
