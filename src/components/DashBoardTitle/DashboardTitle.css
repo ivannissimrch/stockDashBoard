@@ -1,14 +1,27 @@
-.dash_board_title {
+.dashboard_title_container {
+  width: 82.625rem;
+  height: 1.875rem;
+  margin: 2.5rem auto 1.938rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard_title {
   font-family: "Roboto";
   font-weight: 800;
   font-size: 1.602rem;
-  width: 82.625rem;
-  height: 1.875rem;
-  margin: 2.5rem auto;
+  text-align: center;
+}
+
+.title_icon {
+  width: 5.938rem;
+  height: 2.375rem;
+  border-radius: 100px;
 }
 
 @media screen and (max-width: 90.625rem) {
-  .dash_board_title {
+  .dashboard_title {
     width: 7.813rem;
     height: 1.875rem;
     margin-left: 1.625rem;
