@@ -2,14 +2,14 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
-  width: 1422px;
-  height: 129px;
+  width: 88.875rem;
+  height: 8.063rem;
   background-color: white;
 }
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 90.625rem) {
   .searchbar_container {
-    width: 430px;
-    height: 129px;
+    width: 26.875rem;
+    height: 8.063rem;
   }
 }
