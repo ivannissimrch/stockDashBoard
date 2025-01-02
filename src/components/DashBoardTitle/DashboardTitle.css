@@ -1,16 +1,16 @@
 .dash_board_title {
   font-family: "Roboto";
   font-weight: 800;
-  font-size: 25.63px;
-  width: 1322px;
-  height: 30px;
-  margin: 20px auto;
+  font-size: 1.602rem;
+  width: 82.625rem;
+  height: 1.875rem;
+  margin: 2.5rem auto;
 }
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 90.625rem) {
   .dash_board_title {
-    width: 125px;
-    height: 30;
-    margin-left: 26px;
+    width: 7.813rem;
+    height: 1.875rem;
+    margin-left: 1.625rem;
   }
 }
