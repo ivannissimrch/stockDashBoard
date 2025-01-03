@@ -19,6 +19,11 @@
   cursor: pointer;
 }
 
+.button_active {
+  background-color: #18a0fb;
+  color: white;
+}
+
 .button_styles:hover {
   background-color: #18a0fb;
   color: white;
