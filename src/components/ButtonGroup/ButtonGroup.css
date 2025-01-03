@@ -1,14 +1,15 @@
 .button_group {
-  width: 437px;
-  height: 30px;
-  display: flex;
-  justify-content: space-around;
+  width: 27.313rem;
+  height: 1.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.938rem;
 }
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 90.625rem) {
   .button_group {
-    width: 335px;
-    height: 30px;
-    margin: 25px;
+    width: 20.938rem;
+    height: 1.875rem;
+    margin: 1.563rem;
   }
 }
