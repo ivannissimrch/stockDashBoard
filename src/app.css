@@ -104,6 +104,24 @@ textarea:not([rows]) {
   flex-direction: column;
 }
 
+.line_container {
+  display: flex;
+  width: 76.438rem;
+  padding: 0.625rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin: 1.188rem auto 1.875rem auto;
+}
+
+.chart_line {
+  margin: 0.625rem;
+  width: 75.188rem;
+  height: 0.063rem;
+  border: 0.625rem;
+  background-color: #e9e9e9;
+}
+
 @media screen and (max-width: 90.625rem) {
   .app_main_container {
     width: 26.875rem;

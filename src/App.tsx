@@ -81,6 +81,9 @@ export default function App() {
           <DashboardTitle>Dashboard</DashboardTitle>
           <ChartContainer>
             <DisplayStockOverview />
+            <div className="line_container">
+              <hr className="chart_line" />
+            </div>
             <Chart />
           </ChartContainer>
           <DisplayStockDetails />
