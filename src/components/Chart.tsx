@@ -35,7 +35,17 @@ export default function Chart() {
 
   function renderChart() {
     if (!stockHistoricalData) {
-      return <div></div>;
+      return (
+        <LineChart
+          xAxis={[{ data: [] }]}
+          series={[
+            {
+              data: [],
+            },
+          ]}
+          sx={{ maxWidth: 1053, maxHeight: 393, color: "blue" }}
+        />
+      );
     }
     const closingPrices = stockHistoricalData.map((data) => {
       return data.closingPrices;
