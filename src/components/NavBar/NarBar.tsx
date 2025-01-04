@@ -32,8 +32,8 @@ export default function NavBar() {
         <svg
           className="navbar_divider_line"
           xmlns="http://www.w3.org/2000/svg"
-          width="345"
-          height="1"
+          width="430"
+          height="1257"
           viewBox="0 0 345 1"
           fill="none"
         >
