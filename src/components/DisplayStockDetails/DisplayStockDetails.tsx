@@ -14,33 +14,28 @@ export default function DisplayStockDetails() {
   } = stockDetails || {};
   return (
     <section className="stock_details_container">
-      <h3 className="stock_details_title">Company Information</h3>
-      <ul className="stock_details_list">
-        <li className="stock_details_list_item">
-          <span className="item_left">Country</span>
-          <span className="item_right">{country}</span>
-        </li>
-        <li className="stock_details_list_item">
-          <span className="item_left">Currency</span>
-          <span className="item_right">{currency}</span>
-        </li>
-        <li className="stock_details_list_item">
-          <span className="item_left">Exchange</span>
-          <span className="item_right">{exchange}</span>
-        </li>
-        <li className="stock_details_list_item">
-          <span className="item_left">IPO Date</span>
-          <span className="item_right">{ipo}</span>
-        </li>
-        <li className="stock_details_list_item">
-          <span className="item_left">Market Capitalization</span>
-          <span className="item_right">{marketCapitalization}</span>
-        </li>
-        <li className="stock_details_list_item">
-          <span className="item_left">Industry</span>
-          <span className="item_right">{finnhubIndustry}</span>
-        </li>
-      </ul>
+      <div className="stock_details_secondary_container">
+        <h3 className="stock_details_title">Company Information</h3>
+        <div className="list_container">
+          <ul className="stock_details_list_left">
+            <li>Country</li>
+            <li>Currency</li>
+            <li>Exchange</li>
+            <li>IPO Date</li>
+            <li>Market Capitalization</li>
+            <li>Industry</li>
+          </ul>
+
+          <ul className="stock_details_list_right">
+            <li>{country}</li>
+            <li>{currency}</li>
+            <li>{exchange}</li>
+            <li>{ipo}</li>
+            <li>{marketCapitalization}</li>
+            <li>{finnhubIndustry}</li>
+          </ul>
+        </div>
+      </div>
     </section>
   );
 }
