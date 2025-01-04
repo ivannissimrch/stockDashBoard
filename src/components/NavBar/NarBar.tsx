@@ -38,8 +38,8 @@ export default function NavBar() {
           fill="none"
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M345 1L0 1V0L345 0V1Z"
             fill="#E9E9E9"
           />
