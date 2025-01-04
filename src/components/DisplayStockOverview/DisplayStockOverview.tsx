@@ -16,20 +16,17 @@ export default function DisplayStockOverview() {
           )}
         </span>
         <div className="symbol_name_container">
-          <span className="stock_overview_item stock_overview_name ">
-            {stockDetails?.name}
-          </span>
-          <span className="stock_overview_item ">{symbol}</span>
+          <span className="stock_overview_name ">{stockDetails?.name}</span>
+          <span className="stock_overview_symbol">{symbol}</span>
         </div>
       </div>
 
       <div className="percent_price_container">
-        <span className="stock_overview_item change_percent">
-          <span></span>
+        <span className="change_percent">
           {`${changePercent}%`}
-          <span></span>
+          <img src="/src/images/stockOverview/tabler_arrow-narrow-down.svg" />
         </span>
-        <span className="stock_overview_item price">{`$${price}`}</span>
+        <span className="price">{`$${price}`}</span>
       </div>
     </section>
   );
