@@ -54,7 +54,9 @@
 }
 
 .navbar_divider_line {
-  margin: auto 2.688rem 3.155rem 2.625rem;
+  margin: 0 2.688rem 3.155rem 2.625rem;
+  width: 345px;
+  height: 1px;
 }
 
 .settings_contact_container {

@@ -28,23 +28,7 @@ export default function NavBar() {
             />
           </div>
         </div>
-
-        <svg
-          className="navbar_divider_line"
-          xmlns="http://www.w3.org/2000/svg"
-          width="430"
-          height="1257"
-          viewBox="0 0 345 1"
-          fill="none"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M345 1L0 1V0L345 0V1Z"
-            fill="#E9E9E9"
-          />
-        </svg>
-
+        <hr className="navbar_divider_line"></hr>
         <div className="settings_contact_container">
           <div className="settings_container">
             <img
@@ -74,12 +58,12 @@ export default function NavBar() {
       </nav>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="430"
+        width="2"
         height="1256"
-        viewBox="0 0 430 1256"
+        viewBox="0 0 2 1256"
         fill="none"
       >
-        <path d="M0 -1H430V1256H0V-1Z" fill="white" />
+        <path d="M1 1256V0" stroke="#EBECF2" strokeWidth="2" />
       </svg>
     </>
   );
