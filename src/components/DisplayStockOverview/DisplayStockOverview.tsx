@@ -29,7 +29,6 @@ export default function DisplayStockOverview() {
           </span>
           <span className="price">{`$${price}`}</span>
         </div>
-
         <span className="last_updated"></span>
       </div>
     </section>

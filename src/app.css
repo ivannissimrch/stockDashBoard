@@ -106,18 +106,18 @@ textarea:not([rows]) {
 
 .line_container {
   display: flex;
-  width: 75.688rem;
+  width: 76.4375rem;
   padding: 0.625rem;
   flex-direction: column;
   align-items: center;
   gap: 0.625rem;
-  margin: 1.188rem 3.821rem 1.875rem auto;
+  margin: 1.1875rem 3.6875rem 1.875rem 2.5rem;
 }
 
 .chart_line {
   margin: 0.625rem;
-  width: 75.188rem;
-  height: 0.063rem;
+  width: 100%;
+  height: 0.0625rem;
   border: 0.625rem;
   background-color: #e9e9e9;
 }
