@@ -1,9 +1,10 @@
 .button_group {
-  width: 27.313rem;
+  width: 27.3125rem;
   height: 1.875rem;
   display: inline-flex;
   align-items: center;
-  gap: 1.938rem;
+  gap: 1.9375rem;
+  margin-bottom: 2.3125rem;
 }
 
 @media screen and (max-width: 90.625rem) {

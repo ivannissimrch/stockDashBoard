@@ -9,6 +9,12 @@ import "./app.css";
 import ChartContainer from "./components/ChartContainer/ChartContainer";
 import DashboardTitle from "./components/DashBoardTitle/DashboardTitle";
 import NavBar from "./components/NavBar/NarBar";
+import ButtonGroup from "./components/ButtonGroup/ButtonGroup";
+import Button from "./components/Button/Button";
+import getSevenDaysStockData from "./helpers/getSevenDaysStockData";
+import getSixWeeksStockData from "./helpers/getSixWeeksStockData";
+import getFiveMonthsStockData from "./helpers/getFiveMonthsStockData";
+import getStoredDataFromStorage from "./helpers/getStoredDataFromStorage";
 
 interface ContextTypes {
   stockDetails: StockDetails | undefined;
@@ -51,6 +57,8 @@ export default function App() {
     StocksData[] | undefined
   >();
 
+  const stocksData = getStoredDataFromStorage();
+
   function updateStockDetails(newDetails: StockDetails) {
     console.log(newDetails);
     setStockDetails(newDetails);
@@ -61,6 +69,25 @@ export default function App() {
   }
   function updateStockHistoricalData(newData: StocksData[]) {
     setStockHistoricalData(newData);
+  }
+
+  function updateToSevenDays() {
+    const sevenDaysOfStock = getSevenDaysStockData(stocksData!);
+    if (sevenDaysOfStock) {
+      updateStockHistoricalData(sevenDaysOfStock);
+    }
+  }
+  function updateToSixWeeks() {
+    const sixWeeksOfStocks = getSixWeeksStockData(stocksData!);
+    if (sixWeeksOfStocks) {
+      updateStockHistoricalData(sixWeeksOfStocks);
+    }
+  }
+  function updateToFiveMonths() {
+    const fiveMonthsOfStocks = getFiveMonthsStockData(stocksData!);
+    if (fiveMonthsOfStocks) {
+      updateStockHistoricalData(fiveMonthsOfStocks);
+    }
   }
 
   return (
@@ -84,6 +111,11 @@ export default function App() {
             <div className="line_container">
               <hr className="chart_line" />
             </div>
+            <ButtonGroup>
+              <Button onClick={updateToSevenDays}>7 days</Button>
+              <Button onClick={updateToSixWeeks}>6 Weeks</Button>
+              <Button onClick={updateToFiveMonths}>5 months</Button>
+            </ButtonGroup>
             <Chart />
           </ChartContainer>
           <DisplayStockDetails />
