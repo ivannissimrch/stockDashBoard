@@ -10,12 +10,12 @@
 .dashboard_title {
   font-family: "Roboto";
   font-weight: 800;
-  font-size: 1.602rem;
-  text-align: center;
+  font-size: 1.6022rem;
+  margin-top: 0;
 }
 
 .title_icon {
-  width: 5.938rem;
+  width: 5.9375rem;
   height: 2.375rem;
   border-radius: 100px;
   cursor: pointer;
