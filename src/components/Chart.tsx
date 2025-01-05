@@ -1,6 +1,7 @@
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useContext } from "react";
 import { stockContext } from "../App";
+import "./Chart.css";
 
 export default function Chart() {
   const { stockHistoricalData } = useContext(stockContext);
@@ -44,8 +45,8 @@ export default function Chart() {
             baseline: "min",
           },
         ]}
-        sx={{ maxWidth: 1053, maxHeight: 393, color: "blue" }}
         grid={{ vertical: true, horizontal: true }}
+        className="container"
       />
     );
   }
