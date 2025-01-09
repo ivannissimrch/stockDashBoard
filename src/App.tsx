@@ -60,14 +60,13 @@ export default function App() {
   const stocksData = getStoredDataFromStorage();
 
   function updateStockDetails(newDetails: StockDetails) {
-    console.log(newDetails);
     setStockDetails(newDetails);
   }
   function updateStockOverview(newStockOverview: StockOverview) {
-    console.log(newStockOverview);
     setStockOverview(newStockOverview);
   }
   function updateStockHistoricalData(newData: StocksData[]) {
+    console.log(newData);
     setStockHistoricalData(newData);
   }
 

@@ -13,5 +13,6 @@
   .chart_container {
     width: 24.625rem;
     height: 39.813rem;
+    margin: auto;
   }
 }

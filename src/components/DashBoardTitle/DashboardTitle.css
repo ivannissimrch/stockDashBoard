@@ -15,16 +15,24 @@
 }
 
 .title_icon {
-  width: 5.9375rem;
-  height: 2.375rem;
+  width: 95px;
+  height: 38px;
   border-radius: 100px;
   cursor: pointer;
 }
 
 @media screen and (max-width: 90.625rem) {
+  .dashboard_title_container {
+    width: 26.875rem;
+  }
+
   .dashboard_title {
-    width: 7.813rem;
+    width: 7.8125rem;
     height: 1.875rem;
-    margin-left: 1.625rem;
+    margin: 1.5625rem auto 1.4375rem 1.6875rem;
+  }
+
+  .title_icon {
+    margin: 1.3125rem 1.5rem 1.1875rem auto;
   }
 }

@@ -74,13 +74,19 @@ li {
 
 @media screen and (max-width: 90.625rem) {
   .stock_details_container {
-    width: 26.875rem;
+    width: 24.625rem;
+    height: 19.75rem;
+    margin: 1.625rem auto;
+  }
+
+  .stock_details_secondary_container {
+    width: 21.125rem;
     height: 17rem;
   }
 
   .stock_details_list {
     width: 26.875rem;
     height: 17rem;
-    margin: 0 auto;
+    margin: auto;
   }
 }

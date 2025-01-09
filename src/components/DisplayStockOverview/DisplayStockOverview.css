@@ -88,7 +88,7 @@
   line-height: normal;
 }
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 90.625rem) {
   .stock_overview_container {
     width: 21.875rem;
     height: 3.25rem;

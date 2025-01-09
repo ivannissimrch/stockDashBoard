@@ -95,7 +95,22 @@
 
 @media screen and (max-width: 90.625rem) {
   .navbar_container {
-    border-bottom: 2px solid #ebecf2;
+    border-bottom: 0.125rem solid #ebecf2;
     border-right: none;
+    width: 26.875rem;
+    height: 8.0625rem;
+    flex-shrink: 0;
+  }
+
+  .navbar_logo {
+    width: 14.4375rem;
+    height: 2.1875rem;
+    margin: 3.3125rem 10.8125rem auto 1.625rem;
+  }
+
+  .home_dashboard_container,
+  .navbar_divider_line,
+  .settings_contact_container {
+    display: none;
   }
 }
