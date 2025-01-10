@@ -30,3 +30,11 @@
   transform: scale(1.02);
   transition: 0.3s ease-in-out;
 }
+
+@media screen and (max-width: 90.625rem) {
+  .button_styles {
+    width: 5.6875rem;
+    height: 1.875rem;
+    margin: 0.0625rem;
+  }
+}

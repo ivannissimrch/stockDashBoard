@@ -9,8 +9,9 @@
 
 @media screen and (max-width: 90.625rem) {
   .button_group {
+    gap: 1.9375rem;
     width: 20.938rem;
     height: 1.875rem;
-    margin: 1.563rem;
+    margin: 0.1875rem 1rem auto 1rem;
   }
 }
