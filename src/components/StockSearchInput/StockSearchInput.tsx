@@ -8,6 +8,7 @@ import getSevenDaysStockData from "../../helpers/getSevenDaysStockData";
 import fetchStocksSymbols from "../../helpers/fetchStocksSymbols";
 import fetchStockDetails from "../../helpers/fetchStockDetails";
 import fetchQuote from "../../helpers/fetchQuote";
+import { GridSearchIcon } from "@mui/x-data-grid";
 
 interface StockResultWithLabel {
   label: string;
@@ -111,6 +112,7 @@ export default function StockSearchInput() {
           placeholder="Search for Stock"
           InputProps={{
             ...params.InputProps,
+            startAdornment: <GridSearchIcon />,
             endAdornment: (
               <>
                 {isLoading ? (
