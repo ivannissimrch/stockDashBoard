@@ -130,15 +130,15 @@ textarea:not([rows]) {
   }
 
   .line_container {
-    width: 21.25rem;
-    padding: 0.625rem;
-    margin: 1.75rem 1rem 1.25rem 1.125rem;
+    width: 360px;
+    padding: 10px;
+    margin: 28px 16px 20px 18px;
   }
 
   .chart_line {
     width: 100%;
-    height: 0.0625rem;
-    border: 0.0625rem;
+    height: 1px;
+    border: 1px;
     background-color: #e9e9e9;
   }
 }
