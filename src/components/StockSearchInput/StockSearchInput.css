@@ -9,7 +9,7 @@
   background-color: #f5f7f9;
 }
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 90.625rem) {
   .search_bar_container {
     width: 24.4375rem;
     height: 5rem;
