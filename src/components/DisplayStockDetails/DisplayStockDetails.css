@@ -74,19 +74,33 @@ li {
 
 @media screen and (max-width: 90.625rem) {
   .stock_details_container {
-    width: 24.625rem;
-    height: 19.75rem;
-    margin: 1.625rem auto;
+    width: 394px;
+    height: 316px;
+    margin: 22px 28px;
   }
 
   .stock_details_secondary_container {
-    width: 21.125rem;
-    height: 17rem;
+    width: 338px;
+    height: 272px;
+    gap: 26px;
   }
 
   .stock_details_list {
-    width: 26.875rem;
-    height: 17rem;
+    width: 338px;
+    height: 272px;
+    gap: 26px;
     margin: auto;
+  }
+
+  .stock_details_list_left {
+    width: 153px;
+    height: 199px;
+    font-size: 14px;
+  }
+
+  .stock_details_list_right {
+    width: 174px;
+    height: 218px;
+    font-size: 14px;
   }
 }
