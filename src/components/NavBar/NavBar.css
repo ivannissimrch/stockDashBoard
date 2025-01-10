@@ -95,17 +95,17 @@
 
 @media screen and (max-width: 90.625rem) {
   .navbar_container {
-    border-bottom: 0.125rem solid #ebecf2;
+    border-bottom: 3px solid #ebecf2;
     border-right: none;
-    width: 26.875rem;
-    height: 8.0625rem;
+    width: 430px;
+    height: 129px;
     flex-shrink: 0;
   }
 
   .navbar_logo {
-    width: 14.4375rem;
-    height: 2.1875rem;
-    margin: 3.3125rem 10.8125rem auto 1.625rem;
+    width: 231px;
+    height: 35px;
+    margin: 53px 173px auto 26px;
   }
 
   .home_dashboard_container,
