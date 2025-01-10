@@ -23,10 +23,13 @@ export default function DisplayStockOverview() {
 
       <div className="percent_price_update_container">
         <div className="percent_price_container">
-          <span className="change_percent">
-            {`${changePercent}%`}
-            <img src="/src/images/stockOverview/tabler_arrow-narrow-down.svg" />
-          </span>
+          <div className="change_percent">
+            <span>
+              {`${changePercent}%`}
+              <img src="/src/images/stockOverview/tabler_arrow-narrow-down.svg" />
+            </span>
+          </div>
+
           <span className="price">{`$${price}`}</span>
         </div>
         <span className="last_updated"></span>
