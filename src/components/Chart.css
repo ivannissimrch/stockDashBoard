@@ -1,5 +1,5 @@
-.container {
-  max-width: 65.8125rem;
-  max-height: 24.5625rem;
-  margin: auto 8.4375rem 2.6875rem 8.375rem;
+.line_chart_container {
+  width: 82.625rem;
+  height: 41.875rem;
+  padding: 2.375rem;
 }

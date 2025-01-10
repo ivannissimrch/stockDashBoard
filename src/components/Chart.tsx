@@ -16,7 +16,6 @@ export default function Chart() {
               data: [],
             },
           ]}
-          sx={{ maxWidth: 1053, maxHeight: 393, color: "blue" }}
         />
       );
     }
@@ -46,7 +45,7 @@ export default function Chart() {
           },
         ]}
         grid={{ vertical: true, horizontal: true }}
-        className="container"
+        className="line_chart_container"
       />
     );
   }
