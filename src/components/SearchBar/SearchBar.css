@@ -7,7 +7,14 @@
   background-color: white;
 }
 
-@media screen and (max-width: 90.625rem) {
+/* tablet break point */
+@media screen and (max-width: 43rem) {
+  .searchbar_container {
+    width: 44rem;
+  }
+}
+
+@media screen and (max-width: 43rem) {
   .searchbar_container {
     width: 26.875rem;
     height: 8.063rem;

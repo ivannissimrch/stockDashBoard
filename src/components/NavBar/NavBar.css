@@ -93,7 +93,15 @@
   height: 0.921rem;
 }
 
-@media screen and (max-width: 90.625rem) {
+/* tablet break point  */
+@media screen and (max-width: 93rem) {
+  .navbar_container {
+    width: 26.875rem;
+  }
+}
+
+/* mobile break point  */
+@media screen and (max-width: 43rem) {
   .navbar_container {
     border-bottom: 0.1875rem solid #ebecf2;
     border-right: none;

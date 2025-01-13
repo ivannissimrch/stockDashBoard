@@ -31,7 +31,7 @@
   transition: 0.3s ease-in-out;
 }
 
-@media screen and (max-width: 90.625rem) {
+@media screen and (max-width: 43rem) {
   .button_styles {
     width: 5.6875rem;
     height: 1.875rem;

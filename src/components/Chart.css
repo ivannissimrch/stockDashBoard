@@ -4,7 +4,7 @@
   padding: 2.375rem;
 }
 
-@media screen and (max-width: 90.625rem) {
+@media screen and (max-width: 43rem) {
   .line_chart_container {
     width: 17.125rem;
     height: 23.375rem;

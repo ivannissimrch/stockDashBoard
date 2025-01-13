@@ -9,7 +9,16 @@
   border-radius: 2.375rem;
 }
 
-@media screen and (max-width: 90.625rem) {
+/* tablet break point  */
+@media screen and (max-width: 93rem) {
+  .chart_container {
+    width: 44rem;
+    margin: 1.3125rem auto 2.4375rem 2.8125rem;
+  }
+}
+
+/* mobile break point */
+@media screen and (max-width: 43rem) {
   .chart_container {
     width: 24.625rem;
     height: 39.813rem;

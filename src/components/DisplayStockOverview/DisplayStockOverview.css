@@ -98,7 +98,16 @@
   line-height: normal;
 }
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 93rem) {
+  .stock_overview_container {
+    width: 38rem;
+  }
+  .stock_overview_name {
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 43rem) {
   .stock_overview_container {
     width: 21.875rem;
     height: 3.25rem;
