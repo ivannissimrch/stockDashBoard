@@ -8,9 +8,10 @@
 }
 
 /* tablet break point */
-@media screen and (max-width: 43rem) {
+@media screen and (max-width: 93rem) {
   .searchbar_container {
-    width: 44rem;
+    width: 47rem;
+    height: 6.5rem;
   }
 }
 
