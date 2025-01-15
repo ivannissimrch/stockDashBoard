@@ -1,4 +1,5 @@
 import "./NavBar.css";
+import contactUs from "../../images/navbar/Contact_us.svg";
 
 export default function NavBar() {
   return (
@@ -48,11 +49,7 @@ export default function NavBar() {
               alt="phone icon"
               className="icon"
             />
-            <img
-              src="/src/images/navbar/Contact us.svg"
-              alt="contact us"
-              className="contact_us"
-            />
+            <img src={contactUs} alt="contact us" className="contact_us" />
           </div>
         </div>
       </nav>

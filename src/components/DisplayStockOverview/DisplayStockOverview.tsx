@@ -5,6 +5,8 @@ import "./DisplayStockOverview.css";
 export default function DisplayStockOverview() {
   const { stockOverview, stockDetails } = useContext(stockContext);
   const { symbol = "", price = "", changePercent = "" } = stockOverview || {};
+  const isNegativeChange = +changePercent < 0;
+
   return (
     <section className="stock_overview_container">
       <div className="logo_symbol_container">
@@ -26,7 +28,11 @@ export default function DisplayStockOverview() {
           <div className="change_percent_container">
             <span className="place_holder"></span>
             <span className="percent_text">{`${changePercent}%`}</span>
-            <img src="/src/images/stockOverview/tabler_arrow-narrow-down.svg" />
+
+            <img
+              src="/src/images/stockOverview/tabler_arrow-narrow-down.svg"
+              className={`${isNegativeChange ? "percent_arrow_down" : ""}`}
+            />
           </div>
 
           <span className="price">{`$${price}`}</span>

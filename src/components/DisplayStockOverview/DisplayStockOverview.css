@@ -90,6 +90,12 @@
   color: #fff;
 }
 
+.percent_arrow_down {
+  transition-duration: 0.8s;
+  transition-property: transform;
+  transform: rotate(180deg);
+}
+
 .price {
   font-family: Roboto;
   font-size: 1.747rem;
