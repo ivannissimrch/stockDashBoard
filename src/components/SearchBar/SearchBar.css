@@ -12,6 +12,7 @@
   .searchbar_container {
     width: 47rem;
     height: 6.5rem;
+    margin-left: 0.1875rem;
   }
 }
 
@@ -19,5 +20,6 @@
   .searchbar_container {
     width: 26.875rem;
     height: 8.063rem;
+    margin-left: auto;
   }
 }
