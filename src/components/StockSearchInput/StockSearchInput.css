@@ -1,0 +1,20 @@
+.search_bar_container {
+  width: 26.5rem;
+  margin-left: 2.875rem;
+}
+
+.search_bar_input_field {
+  padding: 0.6875rem 1.3125rem;
+  background-color: #f5f7f9;
+  width: 13rem;
+}
+
+/* mobile view */
+@media screen and (max-width: 43rem) {
+  .search_bar_container {
+    width: 24.4375rem;
+    margin: 0 auto;
+    padding: 0.6875rem 1.3125rem;
+    margin: 1.8125rem 1.25rem;
+  }
+}

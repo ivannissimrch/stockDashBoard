@@ -1,0 +1,40 @@
+.button_styles {
+  width: 7.8125rem;
+  height: 1.875rem;
+  border-radius: 6.25rem;
+  font-family: "Roboto";
+  font-size: 0.7401rem;
+  color: #000000;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: 0.0625rem solid #ebedee;
+  background: #fff;
+  display: flex;
+  padding: 0.5rem 0;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.button_active {
+  background-color: #18a0fb;
+  color: white;
+}
+
+.button_styles:hover {
+  background-color: #18a0fb;
+  color: white;
+  transform: scale(1.02);
+  transition: 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 43rem) {
+  .button_styles {
+    width: 5.6875rem;
+    height: 1.875rem;
+    margin: 0.0625rem;
+  }
+}

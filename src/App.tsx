@@ -1,12 +1,20 @@
-import { Box, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
 import Chart from "./components/Chart";
-import SearchBar from "./components/SearchBar";
-import DisplayStockDetails from "./components/DisplayStockDetails";
+import SearchBar from "./components/SearchBar/SearchBar";
+import DisplayStockDetails from "./components/DisplayStockDetails/DisplayStockDetails";
 import { useState } from "react";
 import { createContext } from "react";
-import { StockDetails, StocksData } from "./helpers/stockApi";
-import DisplayStockOverview from "./components/DisplayStockOverview";
+import { StockDetails } from "./helpers/fetchStockDetails";
+import DisplayStockOverview from "./components/DisplayStockOverview/DisplayStockOverview";
+import "./app.css";
+import ChartContainer from "./components/ChartContainer/ChartContainer";
+import DashboardTitle from "./components/DashBoardTitle/DashboardTitle";
+import NavBar from "./components/NavBar/NarBar";
+import ButtonGroup from "./components/ButtonGroup/ButtonGroup";
+import Button from "./components/Button/Button";
+import getSevenDaysStockData from "./helpers/getSevenDaysStockData";
+import getSixWeeksStockData from "./helpers/getSixWeeksStockData";
+import getFiveMonthsStockData from "./helpers/getFiveMonthsStockData";
+import getStoredDataFromStorage from "./helpers/getStoredDataFromStorage";
 
 interface ContextTypes {
   stockDetails: StockDetails | undefined;
@@ -23,6 +31,11 @@ interface StockOverview {
   change: number;
   changePercent: number;
   currency: string;
+}
+
+export interface StocksData {
+  closingPrices: number;
+  date: string;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -44,6 +57,8 @@ export default function App() {
     StocksData[] | undefined
   >();
 
+  const stocksData = getStoredDataFromStorage();
+
   function updateStockDetails(newDetails: StockDetails) {
     setStockDetails(newDetails);
   }
@@ -51,7 +66,27 @@ export default function App() {
     setStockOverview(newStockOverview);
   }
   function updateStockHistoricalData(newData: StocksData[]) {
+    console.log(newData);
     setStockHistoricalData(newData);
+  }
+
+  function updateToSevenDays() {
+    const sevenDaysOfStock = getSevenDaysStockData(stocksData!);
+    if (sevenDaysOfStock) {
+      updateStockHistoricalData(sevenDaysOfStock);
+    }
+  }
+  function updateToSixWeeks() {
+    const sixWeeksOfStocks = getSixWeeksStockData(stocksData!);
+    if (sixWeeksOfStocks) {
+      updateStockHistoricalData(sixWeeksOfStocks);
+    }
+  }
+  function updateToFiveMonths() {
+    const fiveMonthsOfStocks = getFiveMonthsStockData(stocksData!);
+    if (fiveMonthsOfStocks) {
+      updateStockHistoricalData(fiveMonthsOfStocks);
+    }
   }
 
   return (
@@ -65,21 +100,26 @@ export default function App() {
         stockHistoricalData,
       }}
     >
-      <Box sx={{ flexGrow: 1 }} height={840}>
-        <Typography variant="h2" gutterBottom>
-          Stock dashboard
-        </Typography>
-        <SearchBar />
-        <Grid container spacing={2} columns={{ xs: 12, md: 12 }} margin={2}>
-          <Grid xs={12} md={12} lg={7}>
-            <Chart />
-          </Grid>
-          <Grid xs={12} md={12} lg={5}>
+      <main className="app_main_container">
+        <NavBar />
+        <section className="secondary_container">
+          <SearchBar />
+          <DashboardTitle>Dashboard</DashboardTitle>
+          <ChartContainer>
             <DisplayStockOverview />
-            <DisplayStockDetails />
-          </Grid>
-        </Grid>
-      </Box>
+            <div className="line_container">
+              <hr className="chart_line" />
+            </div>
+            <ButtonGroup>
+              <Button onClick={updateToSevenDays}>7 days</Button>
+              <Button onClick={updateToSixWeeks}>6 Weeks</Button>
+              <Button onClick={updateToFiveMonths}>5 months</Button>
+            </ButtonGroup>
+            <Chart />
+          </ChartContainer>
+          <DisplayStockDetails />
+        </section>
+      </main>
     </stockContext.Provider>
   );
 }

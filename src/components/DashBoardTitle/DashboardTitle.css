@@ -1,0 +1,51 @@
+.dashboard_title_container {
+  width: 82.625rem;
+  height: 1.875rem;
+  margin: 2.5rem auto 1.938rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard_title {
+  font-family: "Roboto";
+  font-weight: 800;
+  font-size: 1.6022rem;
+  margin-top: 0;
+}
+
+.title_icon {
+  width: 5.9375rem;
+  height: 2.375rem;
+  border-radius: 6.25rem;
+  cursor: pointer;
+}
+
+/* tablet break point */
+@media screen and (max-width: 93rem) {
+  .dashboard_title_container {
+    width: 44rem;
+    margin: 1.3125rem auto auto 2.8125rem;
+    height: 2.875rem;
+  }
+}
+
+/* mobile view */
+@media screen and (max-width: 43rem) {
+  .dashboard_title_container {
+    width: 26.875rem;
+    margin: 1.25rem auto;
+  }
+
+  .dashboard_title {
+    width: 7.8125rem;
+    height: 1.875rem;
+    margin: 1.5625rem auto 1.4375rem 1.6875rem;
+  }
+
+  .title_icon {
+    width: 5.9375rem;
+    height: 2.375rem;
+    margin: 1.3125rem 1.5rem 1.1875rem auto;
+  }
+}
