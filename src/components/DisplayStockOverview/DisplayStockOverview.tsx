@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { stockContext } from "../../App";
 import "./DisplayStockOverview.css";
+import arrow from "../../images/stockOverview/tabler_arrow-narrow-down.svg";
 
 export default function DisplayStockOverview() {
   const { stockOverview, stockDetails } = useContext(stockContext);
@@ -30,7 +31,7 @@ export default function DisplayStockOverview() {
             <span className="percent_text">{`${changePercent}%`}</span>
 
             <img
-              src="/src/images/stockOverview/tabler_arrow-narrow-down.svg"
+              src={arrow}
               className={`${isNegativeChange ? "percent_arrow_down" : ""}`}
             />
           </div>
