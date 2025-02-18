@@ -12,22 +12,22 @@ export default function NavBar() {
         <div className="home_dashboard_container">
           <div className="home_and_icon_container">
             <img src={home} className="icon" />
-            <h2 className="home_text">Home</h2>
+            <h2 className="nav_text">Home</h2>
           </div>
           <div className="dashboard_and_icon_container">
             <img src={dashboard} className="icon" />
-            <h2 className="dashboard_text">Dashboard</h2>
+            <h2 className="nav_text">Dashboard</h2>
           </div>
         </div>
         <hr className="navbar_divider_line"></hr>
         <div className="settings_contact_container">
           <div className="settings_container">
             <img src={settings} className="icon" />
-            <h2 className="settings">Settings</h2>
+            <h2 className="nav_text">Settings</h2>
           </div>
           <div className="contact_container">
             <img src={phone} className="icon" />
-            <h3 className="contact_us">Contact us</h3>
+            <h3 className="nav_text">Contact us</h3>
           </div>
         </div>
       </nav>
