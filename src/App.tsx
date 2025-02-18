@@ -58,6 +58,7 @@ export default function App() {
   >();
 
   const stocksData = getStoredDataFromStorage();
+  // const chartButtons = ["7 Day", "6 Week", "5 Month"];
 
   function updateStockDetails(newDetails: StockDetails) {
     setStockDetails(newDetails);
@@ -89,6 +90,15 @@ export default function App() {
     }
   }
 
+  function implementDarkMode() {
+    alert("Dark Mode");
+    console.log("dark mode function");
+    setIsDarkMode(true);
+  }
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  console.log(isDarkMode);
+
   return (
     <stockContext.Provider
       value={{
@@ -104,7 +114,7 @@ export default function App() {
         <NavBar />
         <section className="secondary_container">
           <SearchBar />
-          <DashboardTitle>Dashboard</DashboardTitle>
+          <DashboardTitle onClick={implementDarkMode}>Dashboard</DashboardTitle>
           <ChartContainer>
             <DisplayStockOverview />
             <div className="line_container">

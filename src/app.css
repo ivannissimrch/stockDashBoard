@@ -42,6 +42,10 @@ body {
   line-height: 1.5;
   margin: 0;
 }
+.dark_mode {
+  background-color: black;
+  color: white;
+}
 
 /* Set shorter line heights on headings and interactive elements */
 h1,
