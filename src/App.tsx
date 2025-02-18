@@ -58,7 +58,7 @@ export default function App() {
   >();
 
   const stocksData = getStoredDataFromStorage();
-  const chartButtons = ["7 Day", "6 Week", "5 Month"];
+  // const chartButtons = ["7 Day", "6 Week", "5 Month"];
 
   function updateStockDetails(newDetails: StockDetails) {
     setStockDetails(newDetails);
@@ -97,6 +97,7 @@ export default function App() {
   }
 
   const [isDarkMode, setIsDarkMode] = useState(false);
+  console.log(isDarkMode);
 
   return (
     <stockContext.Provider
