@@ -1,17 +1,16 @@
 .button_group {
-  width: 27.3125rem;
+  gap: 1.9375rem;
+  width: 20.938rem;
   height: 1.875rem;
   display: inline-flex;
   align-items: center;
-  gap: 1.9375rem;
   margin-bottom: 2.3125rem;
 }
 
-@media screen and (max-width: 90.625rem) {
+@media screen and (min-width: 1200px) {
   .button_group {
     gap: 1.9375rem;
-    width: 20.938rem;
-    height: 1.875rem;
+    width: 27.3125rem;
     margin: 0.1875rem 1rem auto 1rem;
   }
 }

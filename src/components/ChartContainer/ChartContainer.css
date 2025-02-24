@@ -3,25 +3,8 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  height: 41.875rem;
-  width: 82.625rem;
-  margin: 1.9385rem auto 1.313rem 2.75rem;
+  width: 98%;
+  height: 39.813rem;
+  margin: auto;
   border-radius: 2.375rem;
-}
-
-/* tablet break point  */
-@media screen and (max-width: 93rem) {
-  .chart_container {
-    width: 44rem;
-    margin: 1.3125rem auto 2.4375rem 2.8125rem;
-  }
-}
-
-/* mobile break point */
-@media screen and (max-width: 43rem) {
-  .chart_container {
-    width: 24.625rem;
-    height: 39.813rem;
-    margin: auto;
-  }
 }
