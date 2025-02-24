@@ -31,7 +31,7 @@ export default function NavBar() {
           </div>
         </div>
       </nav>
-      <svg
+      {/* <svg
         xmlns="http://www.w3.org/2000/svg"
         width="2"
         height="1256"
@@ -39,7 +39,7 @@ export default function NavBar() {
         fill="none"
       >
         <path d="M1 1256V0" stroke="#EBECF2" strokeWidth="2" />
-      </svg>
+      </svg> */}
     </>
   );
 }

@@ -1,6 +1,7 @@
 .button_styles {
-  width: 7.8125rem;
+  width: 5.6875rem;
   height: 1.875rem;
+  margin: 0.0625rem;
   border-radius: 6.25rem;
   font-family: "Roboto";
   font-size: 0.7401rem;
@@ -31,10 +32,9 @@
   transition: 0.3s ease-in-out;
 }
 
-@media screen and (max-width: 43rem) {
+@media screen and (min-width: 1200px) {
   .button_styles {
-    width: 5.6875rem;
+    width: 7.8125rem;
     height: 1.875rem;
-    margin: 0.0625rem;
   }
 }
