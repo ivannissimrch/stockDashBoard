@@ -119,6 +119,61 @@ textarea:not([rows]) {
 @media screen and (min-width: 1200px) {
   .app_main_container {
     flex-direction: row;
+    height: 100vh;
     width: 100%;
   }
+
+  .secondary_container {
+    width: 77%;
+  }
+}
+
+/* colors */
+
+.primary_dark_mode_colors {
+  background-color: #000;
+  color: #fff;
+}
+
+.primary_light_mode_colors {
+  background-color: #fff;
+  color: #000;
+}
+
+.secondary_dark_mode_colors {
+  background-color: #505050;
+  color: #fff;
+}
+
+.secondary_light_mode_colors {
+  background-color: #f5f7f9;
+  color: #000;
+}
+
+.accent_dark_mode_colors {
+  color: #fff;
+}
+
+.accent_light_mode_colors {
+  color: #18a0fb;
+}
+
+.icon_dark_mode_colors {
+  filter: invert(94%) sepia(100%) saturate(25%) hue-rotate(13deg)
+    brightness(105%) contrast(108%);
+}
+
+.icon_light_mode_colors {
+  filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(327deg)
+    brightness(96%) contrast(104%);
+}
+
+.containers_dark_colors {
+  background-color: rgba(33, 33, 33, 0.51);
+  color: #fff;
+}
+
+.containers_light_colors {
+  background-color: #fff;
+  color: #000;
 }

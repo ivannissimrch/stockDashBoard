@@ -24,6 +24,7 @@
     "lodash.debounce": "^4.0.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-toggle-dark-mode": "^1.1.1",
     "weeknumber": "^1.2.1"
   },
   "devDependencies": {

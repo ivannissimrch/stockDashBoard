@@ -6,12 +6,9 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  background-color: #ffffff;
 }
 
 .navbar_logo {
-  color: blue;
-  color: #18a0fb;
   text-align: center;
   font-family: Roboto;
   font-size: 30px;
@@ -20,7 +17,7 @@
   line-height: normal;
   width: 14.4375rem;
   height: 2.1875rem;
-  margin: 53px 173px auto 26px;
+  margin: 3.3125rem 10.8125rem auto 1.625rem;
 }
 
 .home_dashboard_container,
@@ -33,6 +30,11 @@
   .navbar_container {
     width: 23%;
     height: 100%;
+    border-bottom: none;
+  }
+
+  .navbar_logo {
+    margin: 3.3125rem auto 0 auto;
   }
 
   .home_dashboard_container {
@@ -60,6 +62,16 @@
     width: 2.125rem;
     height: 2.125rem;
     cursor: pointer;
+  }
+
+  .icon_light {
+    filter: invert(11%) sepia(0%) saturate(0%) hue-rotate(244deg)
+      brightness(100%) contrast(94%);
+  }
+
+  .icon_dark {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg)
+      brightness(102%) contrast(102%);
   }
 
   .icon:hover {

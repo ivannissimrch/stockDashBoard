@@ -3,7 +3,7 @@ import { stockContext } from "../../App";
 import "./DisplayStockDetails.css";
 
 export default function DisplayStockDetails() {
-  const { stockDetails } = useContext(stockContext);
+  const { stockDetails, containersColors } = useContext(stockContext);
   const {
     country = "",
     currency = "",
@@ -13,7 +13,7 @@ export default function DisplayStockDetails() {
     finnhubIndustry = "",
   } = stockDetails || {};
   return (
-    <section className="stock_details_container">
+    <section className={`stock_details_container ${containersColors}`}>
       <div className="stock_details_secondary_container">
         <h3 className="stock_details_title">Company Information</h3>
         <div className="list_container">

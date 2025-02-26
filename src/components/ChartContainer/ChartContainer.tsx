@@ -1,6 +1,13 @@
+import { stockContext } from "../../App";
 import "./ChartContainer.css";
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 
 export default function ChartContainer({ children }: { children: ReactNode }) {
-  return <section className="chart_container">{children}</section>;
+  const { containersColors } = useContext(stockContext);
+
+  return (
+    <section className={`chart_container ${containersColors}`}>
+      {children}
+    </section>
+  );
 }

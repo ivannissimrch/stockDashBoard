@@ -15,6 +15,8 @@ import getSevenDaysStockData from "./helpers/getSevenDaysStockData";
 import getSixWeeksStockData from "./helpers/getSixWeeksStockData";
 import getFiveMonthsStockData from "./helpers/getFiveMonthsStockData";
 import getStoredDataFromStorage from "./helpers/getStoredDataFromStorage";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 interface ContextTypes {
   stockDetails: StockDetails | undefined;
@@ -23,6 +25,11 @@ interface ContextTypes {
   updateStockOverview: (newStockOverview: StockOverview) => void;
   stockHistoricalData: StocksData[] | undefined;
   updateStockHistoricalData: (newDetails: StocksData[]) => void;
+  primaryColors: string;
+  accentColors: string;
+  iconColors: string;
+  containersColors: string;
+  isDarkMode: boolean;
 }
 
 interface StockOverview {
@@ -46,6 +53,11 @@ export const stockContext = createContext<ContextTypes>({
   updateStockOverview: () => {},
   stockHistoricalData: undefined,
   updateStockHistoricalData: () => {},
+  primaryColors: "primary_light_mode_colors",
+  accentColors: "accent_light_mode_colors",
+  iconColors: "icon_light_mode_colors",
+  containersColors: "containers_light_colors",
+  isDarkMode: false,
 });
 
 export default function App() {
@@ -59,6 +71,35 @@ export default function App() {
 
   const stocksData = getStoredDataFromStorage();
   // const chartButtons = ["7 Day", "6 Week", "5 Month"];
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const primaryColors = `${
+    isDarkMode ? "primary_dark_mode_colors" : "primary_light_mode_colors"
+  }`;
+  const secondaryColors = `${
+    isDarkMode ? "secondary_dark_mode_colors" : "secondary_light_mode_colors"
+  }`;
+  const accentColors = `${
+    isDarkMode ? "accent_dark_mode_colors" : "accent_light_mode_colors"
+  }`;
+  const iconColors = `${
+    isDarkMode ? "icon_dark_mode_colors" : "icon_light_mode_colors"
+  }`;
+
+  const containersColors = `${
+    isDarkMode ? "containers_dark_colors" : "containers_light_colors"
+  }`;
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+
+  const lightTheme = createTheme({
+    palette: {
+      mode: "light",
+    },
+  });
 
   function updateStockDetails(newDetails: StockDetails) {
     setStockDetails(newDetails);
@@ -67,7 +108,6 @@ export default function App() {
     setStockOverview(newStockOverview);
   }
   function updateStockHistoricalData(newData: StocksData[]) {
-    console.log(newData);
     setStockHistoricalData(newData);
   }
 
@@ -91,45 +131,50 @@ export default function App() {
   }
 
   function implementDarkMode() {
-    alert("Dark Mode");
-    console.log("dark mode function");
-    setIsDarkMode(true);
+    setIsDarkMode(!isDarkMode);
   }
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  console.log(isDarkMode);
-
   return (
-    <stockContext.Provider
-      value={{
-        stockDetails,
-        updateStockDetails,
-        stockOverview,
-        updateStockOverview,
-        updateStockHistoricalData,
-        stockHistoricalData,
-      }}
-    >
-      <main className="app_main_container">
-        <NavBar />
-        <section className="secondary_container">
-          <SearchBar />
-          <DashboardTitle onClick={implementDarkMode}>Dashboard</DashboardTitle>
-          <ChartContainer>
-            <DisplayStockOverview />
-            <div className="line_container">
-              <hr className="chart_line" />
-            </div>
-            <ButtonGroup>
-              <Button onClick={updateToSevenDays}>7 days</Button>
-              <Button onClick={updateToSixWeeks}>6 Weeks</Button>
-              <Button onClick={updateToFiveMonths}>5 months</Button>
-            </ButtonGroup>
-            <Chart />
-          </ChartContainer>
-          <DisplayStockDetails />
-        </section>
-      </main>
-    </stockContext.Provider>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <stockContext.Provider
+        value={{
+          stockDetails,
+          updateStockDetails,
+          stockOverview,
+          updateStockOverview,
+          updateStockHistoricalData,
+          stockHistoricalData,
+          primaryColors,
+          accentColors,
+          iconColors,
+          containersColors,
+          isDarkMode,
+        }}
+      >
+        <main className={`app_main_container ${secondaryColors}`}>
+          <NavBar />
+          <section className="secondary_container">
+            <SearchBar />
+            <DashboardTitle onClick={implementDarkMode}>
+              Dashboard
+            </DashboardTitle>
+            <ChartContainer>
+              <DisplayStockOverview />
+              <div className="line_container">
+                <hr className="chart_line" />
+              </div>
+              <ButtonGroup>
+                <Button onClick={updateToSevenDays}>7 days</Button>
+                <Button onClick={updateToSixWeeks}>6 Weeks</Button>
+                <Button onClick={updateToFiveMonths}>5 months</Button>
+              </ButtonGroup>
+              <Chart />
+            </ChartContainer>
+            <DisplayStockDetails />
+          </section>
+        </main>
+      </stockContext.Provider>
+    </ThemeProvider>
   );
 }
