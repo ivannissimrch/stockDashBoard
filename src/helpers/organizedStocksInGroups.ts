@@ -27,7 +27,7 @@ export default function organizeStocksInGroups(
       date: timePeriodLabel,
     });
 
-    if (Object.keys(stockDataByGroup).length > maxNumberOfGroups) {
+    if (Object.keys(stockDataByGroup).length > maxNumberOfGroups + 1) {
       break;
     }
   }

@@ -70,6 +70,7 @@ export default function App() {
   >();
 
   const stocksData = getStoredDataFromStorage();
+  console.log(stockHistoricalData);
   // const chartButtons = ["7 Day", "6 Week", "5 Month"];
   const [isDarkMode, setIsDarkMode] = useState(false);
   const primaryColors = `${
@@ -165,9 +166,30 @@ export default function App() {
                 <hr className="chart_line" />
               </div>
               <ButtonGroup>
-                <Button onClick={updateToSevenDays}>7 days</Button>
-                <Button onClick={updateToSixWeeks}>6 Weeks</Button>
-                <Button onClick={updateToFiveMonths}>5 months</Button>
+                <Button
+                  onClick={updateToSevenDays}
+                  active={`${
+                    stockHistoricalData?.length === 7 ? "button_active" : ""
+                  }`}
+                >
+                  7 days
+                </Button>
+                <Button
+                  onClick={updateToSixWeeks}
+                  active={`${
+                    stockHistoricalData?.length === 6 ? "button_active" : ""
+                  }`}
+                >
+                  6 Weeks
+                </Button>
+                <Button
+                  onClick={updateToFiveMonths}
+                  active={`${
+                    stockHistoricalData?.length === 5 ? "button_active" : ""
+                  }`}
+                >
+                  5 months
+                </Button>
               </ButtonGroup>
               <Chart />
             </ChartContainer>
