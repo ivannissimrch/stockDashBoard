@@ -21,7 +21,7 @@ export default function NavBar() {
           <h2 className="nav_text">Dashboard</h2>
         </div>
       </div>
-      <hr className="navbar_divider_line"></hr>
+      <hr className="navbar_divider_line" />
       <div className="settings_contact_container">
         <div className="settings_container">
           <img src={settings} className={`icon ${iconColors}`} />

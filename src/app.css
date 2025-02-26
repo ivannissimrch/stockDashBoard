@@ -119,7 +119,7 @@ textarea:not([rows]) {
 @media screen and (min-width: 1200px) {
   .app_main_container {
     flex-direction: row;
-    height: 100vh;
+    height: 1220px;
     width: 100%;
   }
 
