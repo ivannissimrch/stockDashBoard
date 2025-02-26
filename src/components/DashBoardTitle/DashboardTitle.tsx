@@ -1,6 +1,7 @@
 import "./DashboardTitle.css";
-import { ReactNode } from "react";
-import darkMode from "../../images/dashboardTitle/Dark mode.jpg";
+import { ReactNode, useContext } from "react";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { stockContext } from "../../App";
 
 export default function DashboardTitle({
   children,
@@ -9,10 +10,16 @@ export default function DashboardTitle({
   children: ReactNode;
   onClick: () => void;
 }) {
+  const { isDarkMode } = useContext(stockContext);
+
   return (
     <div className="dashboard_title_container">
       <h2 className="dashboard_title">{children}</h2>
-      <img src={darkMode} className="title_icon" onClick={onClick} />
+      <DarkModeSwitch
+        checked={isDarkMode}
+        onChange={onClick}
+        className="title_icon"
+      />
     </div>
   );
 }
