@@ -126,4 +126,12 @@
   .contact_us {
     width: 5.996rem;
   }
+
+  a {
+    text-decoration: none;
+  }
+
+  .active_section {
+    text-decoration: underline;
+  }
 }

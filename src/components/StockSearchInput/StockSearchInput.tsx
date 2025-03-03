@@ -16,8 +16,12 @@ interface StockResultWithLabel {
 }
 
 export default function StockSearchInput() {
-  const { updateStockDetails, updateStockOverview, updateStockHistoricalData } =
-    useContext(stockContext);
+  const {
+    updateStockDetails,
+    updateStockOverview,
+    updateStockHistoricalData,
+    addToRecentlySeenStocks,
+  } = useContext(stockContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [stockSuggestionList, setStockSuggestionList] = useState<
     StockResultWithLabel[]
@@ -74,6 +78,7 @@ export default function StockSearchInput() {
         };
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
+        addToRecentlySeenStocks({ ...stockOverview, ...selectedStockDetails });
 
         const stockDailyData = await fetchVantageStockData(newValue.symbol);
         //store return value to local storage??

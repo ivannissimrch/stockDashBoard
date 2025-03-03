@@ -1,22 +1,18 @@
-import Chart from "./components/Chart";
-import SearchBar from "./components/SearchBar/SearchBar";
-import DisplayStockDetails from "./components/DisplayStockDetails/DisplayStockDetails";
 import { useState } from "react";
 import { createContext } from "react";
 import { StockDetails } from "./helpers/fetchStockDetails";
-import DisplayStockOverview from "./components/DisplayStockOverview/DisplayStockOverview";
 import "./app.css";
-import ChartContainer from "./components/ChartContainer/ChartContainer";
-import DashboardTitle from "./components/DashBoardTitle/DashboardTitle";
-import NavBar from "./components/NavBar/NarBar";
-import ButtonGroup from "./components/ButtonGroup/ButtonGroup";
-import Button from "./components/Button/Button";
 import getSevenDaysStockData from "./helpers/getSevenDaysStockData";
 import getSixWeeksStockData from "./helpers/getSixWeeksStockData";
 import getFiveMonthsStockData from "./helpers/getFiveMonthsStockData";
 import getStoredDataFromStorage from "./helpers/getStoredDataFromStorage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import RootLayout from "./pages/Root.jsx";
+import HomePage from "./pages/HomePage.js";
+import DashBoardPage from "./pages/DashBoardPage.js";
+import ContactUsPage from "./pages/ContactUsPage.js";
 
 interface ContextTypes {
   stockDetails: StockDetails | undefined;
@@ -26,13 +22,21 @@ interface ContextTypes {
   stockHistoricalData: StocksData[] | undefined;
   updateStockHistoricalData: (newDetails: StocksData[]) => void;
   primaryColors: string;
+  secondaryColors: string;
   accentColors: string;
   iconColors: string;
   containersColors: string;
   isDarkMode: boolean;
+  implementDarkMode: () => void;
+  updateToSevenDays: () => void;
+  updateToSixWeeks: () => void;
+  updateToFiveMonths: () => void;
+  recentlySeenStocks: StockOverview[] | [];
+  addToRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
+  deleteToRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
 }
 
-interface StockOverview {
+export interface StockOverview {
   symbol: string;
   price: number;
   change: number;
@@ -45,6 +49,26 @@ export interface StocksData {
   date: string;
 }
 
+export interface RecentlySeenStocks {
+  symbol: string;
+  price: number;
+  change: number;
+  changePercent: number;
+  country: string;
+  currency: string;
+  estimateCurrency: string;
+  exchange: string;
+  finnhubIndustry: string;
+  ipo: string;
+  logo: string;
+  marketCapitalization: number;
+  name: string;
+  phone: string;
+  shareOutstanding: number;
+  ticker: string;
+  weburl: string;
+}
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const stockContext = createContext<ContextTypes>({
   stockDetails: undefined,
@@ -54,13 +78,46 @@ export const stockContext = createContext<ContextTypes>({
   stockHistoricalData: undefined,
   updateStockHistoricalData: () => {},
   primaryColors: "primary_light_mode_colors",
+  secondaryColors: "secondary_light_mode_colors",
   accentColors: "accent_light_mode_colors",
   iconColors: "icon_light_mode_colors",
   containersColors: "containers_light_colors",
   isDarkMode: false,
+  implementDarkMode: () => {},
+  updateToSevenDays: () => {},
+  updateToSixWeeks: () => {},
+  updateToFiveMonths: () => {},
+  recentlySeenStocks: [],
+  addToRecentlySeenStocks: () => {},
+  deleteToRecentlySeenStocks: () => {},
 });
 
 export default function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+
+      children: [
+        {
+          path: "",
+
+          element: <HomePage />,
+        },
+        {
+          path: "dashboard",
+
+          element: <DashBoardPage />,
+        },
+        {
+          path: "contactUs",
+
+          element: <ContactUsPage />,
+        },
+      ],
+    },
+  ]);
+
   const [stockDetails, setStockDetails] = useState<StockDetails | undefined>();
   const [stockOverview, setStockOverview] = useState<
     StockOverview | undefined
@@ -71,7 +128,10 @@ export default function App() {
 
   const stocksData = getStoredDataFromStorage();
   console.log(stockHistoricalData);
-  // const chartButtons = ["7 Day", "6 Week", "5 Month"];
+
+  const [recentlySeenStocks, setRecentlySeenStocks] = useState<
+    RecentlySeenStocks[] | []
+  >([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const primaryColors = `${
     isDarkMode ? "primary_dark_mode_colors" : "primary_light_mode_colors"
@@ -85,7 +145,6 @@ export default function App() {
   const iconColors = `${
     isDarkMode ? "icon_dark_mode_colors" : "icon_light_mode_colors"
   }`;
-
   const containersColors = `${
     isDarkMode ? "containers_dark_colors" : "containers_light_colors"
   }`;
@@ -135,6 +194,16 @@ export default function App() {
     setIsDarkMode(!isDarkMode);
   }
 
+  function addToRecentlySeenStocks(newStock: RecentlySeenStocks) {
+    setRecentlySeenStocks((prevStocks) => [newStock, ...prevStocks]);
+  }
+
+  function deleteToRecentlySeenStocks(stockToDelete: RecentlySeenStocks) {
+    setRecentlySeenStocks((prev) =>
+      prev.filter((stock) => stockToDelete !== stock)
+    );
+  }
+
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <CssBaseline />
@@ -144,58 +213,24 @@ export default function App() {
           updateStockDetails,
           stockOverview,
           updateStockOverview,
-          updateStockHistoricalData,
           stockHistoricalData,
+          updateStockHistoricalData,
           primaryColors,
+          secondaryColors,
           accentColors,
           iconColors,
           containersColors,
           isDarkMode,
+          implementDarkMode,
+          updateToSevenDays,
+          updateToSixWeeks,
+          updateToFiveMonths,
+          recentlySeenStocks,
+          addToRecentlySeenStocks,
+          deleteToRecentlySeenStocks,
         }}
       >
-        <main className={`app_main_container ${secondaryColors}`}>
-          <NavBar />
-          <section className="secondary_container">
-            <SearchBar />
-            <DashboardTitle onClick={implementDarkMode}>
-              Dashboard
-            </DashboardTitle>
-            <ChartContainer>
-              <DisplayStockOverview />
-              <div className="line_container">
-                <hr className="chart_line" />
-              </div>
-              <ButtonGroup>
-                <Button
-                  onClick={updateToSevenDays}
-                  active={`${
-                    stockHistoricalData?.length === 7 ? "button_active" : ""
-                  }`}
-                >
-                  7 days
-                </Button>
-                <Button
-                  onClick={updateToSixWeeks}
-                  active={`${
-                    stockHistoricalData?.length === 6 ? "button_active" : ""
-                  }`}
-                >
-                  6 Weeks
-                </Button>
-                <Button
-                  onClick={updateToFiveMonths}
-                  active={`${
-                    stockHistoricalData?.length === 5 ? "button_active" : ""
-                  }`}
-                >
-                  5 months
-                </Button>
-              </ButtonGroup>
-              <Chart />
-            </ChartContainer>
-            <DisplayStockDetails />
-          </section>
-        </main>
+        <RouterProvider router={router} />
       </stockContext.Provider>
     </ThemeProvider>
   );
