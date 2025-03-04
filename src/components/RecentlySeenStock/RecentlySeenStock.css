@@ -104,12 +104,15 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .stock_overview_container {
+  .recent_stock_overview_container {
+    display: flex;
     margin: 0;
-    background-color: aquamarine;
-    /* width: 80%; */
-    /* justify-content: center;
-    margin: 2.375rem 3.8206rem auto 3.1081rem; */
+    border: 1px solid gainsboro;
+    width: 98%;
+    justify-content: flex-start;
+    align-items: last baseline;
+    gap: 10px;
+    margin: 1.375rem auto 0 auto;
   }
 
   .stock_overview_name {

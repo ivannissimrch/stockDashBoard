@@ -35,15 +35,15 @@ ol[role="list"] {
 /* Set core body defaults */
 body {
   background-color: #f5f7f9;
-  min-height: 100vh;
+  min-height: 100%;
   line-height: 1.5;
   margin: 0;
 }
 
-.dark_mode {
+/* .dark_mode {
   background-color: black;
   color: white;
-}
+} */
 
 /* Set shorter line heights on headings and interactive elements */
 h1,

@@ -31,7 +31,7 @@ interface ContextTypes {
   updateToSevenDays: () => void;
   updateToSixWeeks: () => void;
   updateToFiveMonths: () => void;
-  recentlySeenStocks: StockOverview[] | [];
+  recentlySeenStocks: RecentlySeenStocks[] | [];
   addToRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
   deleteToRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
 }
