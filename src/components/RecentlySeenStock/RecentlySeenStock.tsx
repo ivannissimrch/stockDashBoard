@@ -3,12 +3,16 @@ import arrow from "../../images/stockOverview/tabler_arrow-narrow-down.svg";
 import { RecentlySeenStocks, stockContext } from "../../App";
 import { useContext } from "react";
 
-export default function RecentlySeenStock({ stock }: RecentlySeenStocks) {
+export default function RecentlySeenStock({
+  stock,
+}: {
+  stock: RecentlySeenStocks;
+}) {
   const { symbol, price, changePercent, logo, name } = stock;
   const { deleteToRecentlySeenStocks } = useContext(stockContext);
   const isNegativeChange = +changePercent < 0;
   return (
-    <section className="stock_overview_container">
+    <section className="recent_stock_overview_container">
       <div className="logo_symbol_container">
         <span className="stock_overview_item">
           <img className="logo" src={logo} alt="company logo" />

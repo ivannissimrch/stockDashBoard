@@ -11,15 +11,18 @@ export default function RootLayout() {
   const { secondaryColors, implementDarkMode } = useContext(stockContext);
   return (
     <>
-      <main className={`app_main_container ${secondaryColors}`}>
+      <main className={`root_app_main_container ${secondaryColors}`}>
         <NavBar />
-        <section className="secondary_container">
+        <section className="root_secondary_container">
           <SearchBar />
           <DashboardTitle onClick={implementDarkMode}>
             {pathname === "/dashboard" ? "Dashboard" : ""}
             {pathname === "/" ? "Recently seen stocks" : ""}
           </DashboardTitle>
-          <Outlet />
+          <section className=" outlet_container">
+            {" "}
+            <Outlet />
+          </section>
         </section>
       </main>
     </>
