@@ -9,11 +9,12 @@
 @media screen and (min-width: 1200px) {
   .root_app_main_container {
     flex-direction: row;
-    height: auto;
+    height: 100vh;
     width: 100%;
   }
   .root_secondary_container {
     width: 77%;
-    /* height: auto; */
+    min-height: 100%;
+    overflow: scroll;
   }
 }
