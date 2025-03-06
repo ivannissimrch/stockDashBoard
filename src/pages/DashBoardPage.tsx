@@ -16,7 +16,7 @@ export default function DashBoardPage() {
     updateToFiveMonths,
   } = useContext(stockContext);
   return (
-    <>
+    <section className="dashboard_page_container">
       <ChartContainer>
         <DisplayStockOverview />
         <hr className="chart_line" />
@@ -49,6 +49,6 @@ export default function DashBoardPage() {
         <Chart />
       </ChartContainer>
       <DisplayStockDetails />
-    </>
+    </section>
   );
 }

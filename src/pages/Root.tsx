@@ -19,7 +19,10 @@ export default function RootLayout() {
             {pathname === "/dashboard" ? "Dashboard" : ""}
             {pathname === "/" ? "Recently seen stocks" : ""}
           </DashboardTitle>
-          <Outlet />
+          <section className=" outlet_container">
+            {" "}
+            <Outlet />
+          </section>
         </section>
       </main>
     </>
