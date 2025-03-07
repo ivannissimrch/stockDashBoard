@@ -1,11 +1,6 @@
 .navbar_container {
-  border-bottom: 0.1875rem solid #ebecf2;
-  border-right: none;
-  width: 98%;
-  height: 8.0625rem;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
+  grid-area: 1 / 1 / 5 / 2;
+  background-color: red;
 }
 
 .navbar_logo {

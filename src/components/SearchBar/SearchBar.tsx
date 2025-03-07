@@ -8,7 +8,7 @@ export default function SearchBar() {
   const { primaryColors } = useContext(stockContext);
 
   return (
-    <div className={`searchbar_container ${primaryColors}`}>
+    <div className={`div2 ${primaryColors}`}>
       <StockSearchInput />
     </div>
   );

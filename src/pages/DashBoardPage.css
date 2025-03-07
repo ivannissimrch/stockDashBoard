@@ -7,7 +7,7 @@
 @media screen and (min-width: 1200px) {
   .dashboard_page_container {
     overflow-y: auto;
-    height: 40.625rem;
-    width: 100%;
+    /* height: 650vh; */
+    background-color: chocolate;
   }
 }

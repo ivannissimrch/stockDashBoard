@@ -1,7 +1,4 @@
 .searchbar_container {
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  width: 98%;
-  height: 8rem;
+  grid-area: 1 / 2 / 2 / 3;
+  background-color: blue;
 }

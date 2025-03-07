@@ -31,8 +31,8 @@ body {
   /* background-color: hsl(var(--clr-white)); */
   background-color: red;
   margin: 0;
+
   line-height: 1.5;
-  min-height: 100vh;
 }
 
 /* make images easier to work with */

@@ -13,7 +13,7 @@ export default function DashboardTitle({
   const { isDarkMode } = useContext(stockContext);
 
   return (
-    <div className="dashboard_title_container">
+    <div className="div3">
       <h2 className="dashboard_title">{children}</h2>
       <DarkModeSwitch
         checked={isDarkMode}

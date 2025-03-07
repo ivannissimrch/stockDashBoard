@@ -13,7 +13,7 @@ export default function NavBar() {
 
   const { primaryColors, accentColors, iconColors } = useContext(stockContext);
   return (
-    <nav className={`navbar_container ${primaryColors}`}>
+    <nav className={`div1 ${primaryColors}`}>
       <h1 className={`navbar_logo colors ${accentColors}`}> Stock Dashboard</h1>
       <div className="home_dashboard_container">
         <Link to="/" className="home_and_icon_container">
