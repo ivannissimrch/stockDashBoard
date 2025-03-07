@@ -1,9 +1,15 @@
 .root_app_main_container {
   display: flex;
   flex-direction: column;
-  width: 98%;
+  width: 100%;
   margin: 0 auto;
-  height: 83.375rem;
+  padding-bottom: 10px;
+  height: auto;
+  background-color: blue;
+}
+
+.root_secondary_container {
+  background-color: yellow;
 }
 
 @media screen and (min-width: 1200px) {
@@ -21,9 +27,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     width: 98%;
-    height: 65vh;
+    height: 67vh;
     margin: auto;
     border-radius: 2.375rem;
+    background-color: red;
   }
 }
