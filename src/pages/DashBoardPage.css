@@ -6,6 +6,8 @@
 
 @media screen and (min-width: 1200px) {
   .dashboard_page_container {
-    overflow-y: scroll;
+    overflow-y: auto;
+    height: 40.625rem;
+    width: 100%;
   }
 }

@@ -9,6 +9,7 @@
 @media screen and (min-width: 1200px) {
   .root_app_main_container {
     flex-direction: row;
+    min-height: 1000px;
     height: 100vh;
     width: 100%;
   }
@@ -22,8 +23,9 @@
     flex-direction: column;
     align-items: center;
     width: 98%;
-    height: 65vh;
+    height: 40.625rem;
     margin: auto;
     border-radius: 2.375rem;
+    /* overflow-y: auto; */
   }
 }
