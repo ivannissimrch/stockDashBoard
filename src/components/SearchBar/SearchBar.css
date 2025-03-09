@@ -3,5 +3,11 @@
   align-items: center;
   margin: 0 auto;
   width: 98%;
-  height: 8rem;
+  height: 6rem;
+}
+
+@media screen and (min-width: 1200px) {
+  .searchbar_container {
+    height: 5.5rem;
+  }
 }
