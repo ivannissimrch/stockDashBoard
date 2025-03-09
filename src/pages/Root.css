@@ -20,7 +20,7 @@
   }
   .root_secondary_container {
     width: 100%;
-    height: 100vh;
+    overflow: scroll;
   }
 
   .outlet_container {
@@ -28,8 +28,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 98%;
-    height: 67vh;
     margin: auto;
     border-radius: 2.375rem;
     background-color: red;
