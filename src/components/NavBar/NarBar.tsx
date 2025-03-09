@@ -37,7 +37,7 @@ export default function NavBar() {
           </h2>
         </Link>
       </div>
-      <hr className="navbar_divider_line" />
+      <hr className={`navbar_divider_line nav_text  ${primaryColors}`} />
       <div className="settings_contact_container">
         {/* <div className="settings_container">
           <img src={settings} className={`icon ${iconColors}`} />
