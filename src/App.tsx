@@ -8,11 +8,10 @@ import getFiveMonthsStockData from "./helpers/getFiveMonthsStockData";
 import getStoredDataFromStorage from "./helpers/getStoredDataFromStorage";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { createBrowserRouter, RouterProvider } from "react-router";
-import RootLayout from "./pages/Root.jsx";
-import HomePage from "./pages/HomePage.js";
 import DashBoardPage from "./pages/DashBoardPage.js";
-import ContactUsPage from "./pages/ContactUsPage.js";
+import NavBar from "./components/NavBar/NarBar.js";
+import DashboardTitle from "./components/DashBoardTitle/DashboardTitle.js";
+import SearchBar from "./components/SearchBar/SearchBar.js";
 
 interface ContextTypes {
   stockDetails: StockDetails | undefined;
@@ -93,31 +92,6 @@ export const stockContext = createContext<ContextTypes>({
 });
 
 export default function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <RootLayout />,
-
-      children: [
-        {
-          path: "",
-
-          element: <HomePage />,
-        },
-        {
-          path: "dashboard",
-
-          element: <DashBoardPage />,
-        },
-        {
-          path: "contactUs",
-
-          element: <ContactUsPage />,
-        },
-      ],
-    },
-  ]);
-
   const [stockDetails, setStockDetails] = useState<StockDetails | undefined>();
   const [stockOverview, setStockOverview] = useState<
     StockOverview | undefined
@@ -127,12 +101,11 @@ export default function App() {
   >();
 
   const stocksData = getStoredDataFromStorage();
-  console.log(stockHistoricalData);
 
   const [recentlySeenStocks, setRecentlySeenStocks] = useState<
     RecentlySeenStocks[] | []
   >([]);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const primaryColors = `${
     isDarkMode ? "primary_dark_mode_colors" : "primary_light_mode_colors"
   }`;
@@ -230,7 +203,16 @@ export default function App() {
           deleteToRecentlySeenStocks,
         }}
       >
-        <RouterProvider router={router} />
+        <main className="app-main-container">
+          <aside className="app-navbar-container">
+            <NavBar />
+          </aside>
+          <section className="app-section-container">
+            <SearchBar />
+            <DashboardTitle />
+            <DashBoardPage />
+          </section>
+        </main>
       </stockContext.Provider>
     </ThemeProvider>
   );

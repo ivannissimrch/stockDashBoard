@@ -22,7 +22,10 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .dashboard_page_container {
-    overflow: auto;
+  .dashboard_title_container {
+    /* position: fixed; */
+    /* margin-top: 100px; */
+    margin-left: 20px;
+    width: 98%;
   }
 }

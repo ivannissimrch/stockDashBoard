@@ -9,5 +9,7 @@
 @media screen and (min-width: 1200px) {
   .searchbar_container {
     height: 5.5rem;
+    width: 100%;
+    /* position: fixed; */
   }
 }

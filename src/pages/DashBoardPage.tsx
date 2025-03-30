@@ -7,7 +7,6 @@ import DisplayStockDetails from "../components/DisplayStockDetails/DisplayStockD
 import { useContext } from "react";
 import { stockContext } from "../App";
 import "./DashBoardPage.css";
-
 export default function DashBoardPage() {
   const {
     stockHistoricalData,
