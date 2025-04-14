@@ -11,7 +11,7 @@
 .navbar_logo {
   text-align: center;
   font-family: Roboto;
-  font-size: 30px;
+  font-size: 1.875rem;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
@@ -20,21 +20,20 @@
   margin: 3.3125rem 10.8125rem auto 1.625rem;
 }
 
-.home_dashboard_container,
-.navbar_divider_line,
-.settings_contact_container {
-  display: none;
-}
-
 @media screen and (min-width: 1200px) {
   .navbar_container {
-    width: 23%;
+    width: 100%;
     height: 100%;
     border-bottom: none;
   }
 
   .navbar_logo {
     margin: 2rem auto 0 auto;
+    font-size: 1.5625rem;
+  }
+
+  .navbar_logo_container {
+    height: 5.5rem;
   }
 
   .home_dashboard_container {
@@ -44,95 +43,5 @@
     height: 41rem;
     gap: 2.5625rem;
     margin: 3rem auto 3.25rem 3.0625rem;
-  }
-
-  .home_and_icon_container {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.875rem;
-  }
-
-  .dashboard_and_icon_container {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.875rem;
-  }
-
-  .icon {
-    width: 2.125rem;
-    height: 2.125rem;
-    cursor: pointer;
-  }
-
-  .icon_light {
-    filter: invert(11%) sepia(0%) saturate(0%) hue-rotate(244deg)
-      brightness(100%) contrast(94%);
-  }
-
-  .icon_dark {
-    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg)
-      brightness(102%) contrast(102%);
-  }
-
-  .icon:hover {
-    transform: scale(1.15);
-    transition: 0.3s ease-in-out;
-  }
-
-  .nav_text {
-    text-align: center;
-    font-family: Roboto;
-    font-size: 21.6px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-  }
-  .navbar_divider_line {
-    display: flex;
-    width: 80%;
-    height: 0.0625rem;
-    border: 0.0625rem;
-    background-color: #e9e9e9;
-  }
-
-  .settings_contact_container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    /* height: 6.5625rem; */
-    gap: 2.3125rem;
-    margin: 3rem auto 16.625rem 3.0625rem;
-  }
-
-  .settings_container {
-    gap: 0.875rem;
-    display: flex;
-    align-items: flex-end;
-  }
-
-  .settings {
-    width: 4.629rem;
-  }
-
-  .contact_container {
-    width: 10.813rem;
-    height: 6.563rem;
-    display: flex;
-    align-items: flex-end;
-
-    gap: 0.688rem;
-  }
-
-  .contact_us {
-    width: 5.996rem;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  .active_section {
-    text-decoration: underline;
   }
 }

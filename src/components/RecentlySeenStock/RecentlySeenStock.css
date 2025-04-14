@@ -1,32 +1,18 @@
-.stock_overview_container {
-  height: 3.875rem;
+.recent_stock_overview_container {
+  /* height: 4rem;
   display: flex;
   width: 94%;
   justify-content: space-between;
-  margin: 2.4375rem 1.375rem 0 1.375rem;
-  align-items: center;
+  align-items: center; */
+  visibility: hidden;
 }
 
-.logo {
-  min-width: 3.5625rem;
-  height: 3.5625rem;
+.recent_logo {
+  min-width: 3rem;
+  height: 3rem;
   border-radius: 50%;
 }
-
-.logo_symbol_container {
-  display: flex;
-  gap: 1.1875rem;
-  height: 3.5625rem;
-}
-
-.symbol_name_container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-  height: 3.5625rem;
-}
-
-.stock_overview_name {
+.recent_name {
   height: 1.4375rem;
   min-width: 5.25rem;
   overflow: hidden;
@@ -37,65 +23,7 @@
   line-height: normal;
 }
 
-.stock_overview_symbol {
-  font-family: Roboto;
-  font-size: 0.9375rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-.percent_price_update_container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.6875rem;
-  width: 11.1875rem;
-  height: 3.875rem;
-}
-
-.percent_price_container {
-  display: flex;
-  gap: 0.625rem;
-  align-items: center;
-  align-self: center;
-  width: 9.3125rem;
-  height: 1.4375rem;
-}
-
-.change_percent_container {
-  display: flex;
-  border-radius: 6.25rem;
-  padding: 0.1875rem 0.375rem 0.1875rem 0.75rem;
-  min-width: 4.0625rem;
-  height: 1.1875rem;
-  align-items: center;
-  justify-content: center;
-  background-color: #46b453;
-}
-
-.place_holder {
-  width: 6.2914rem;
-  height: 0.6664rem;
-  margin-right: -0.125rem;
-}
-
-.percent_text {
-  font-family: Roboto;
-  font-size: 0.7rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  color: #fff;
-}
-
-.percent_arrow_down {
-  transition-duration: 0.8s;
-  transition-property: transform;
-  transform: rotate(180deg);
-}
-
-.price {
+.recent_price {
   font-family: Roboto;
   font-size: 1.25rem;
   font-style: normal;
@@ -105,31 +33,37 @@
 
 @media screen and (min-width: 1200px) {
   .recent_stock_overview_container {
+    visibility: visible;
+    height: 4rem;
     display: flex;
-    margin: 0;
-    border: 1px solid gainsboro;
-    width: 98%;
-    justify-content: flex-start;
-    align-items: last baseline;
-    gap: 10px;
-    margin: 1.375rem auto 0 auto;
+    width: 94%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 10px;
+    padding: 5px;
   }
 
-  .stock_overview_name {
+  .recent_logo {
+    min-width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+  .recent_name {
+    height: 1.4375rem;
+    max-width: 5.25rem;
+    overflow: hidden;
+    font-family: Roboto;
     font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 
-  .stock_overview_symbol {
-    font-size: 0.9375rem;
-  }
-
-  .percent_price_container {
-    align-self: stretch;
-    min-width: 11.1875rem;
-    max-width: 23rem;
-    height: 2.0625rem;
-  }
-  .price {
-    font-size: 1.747rem;
+  .recent_price {
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 }

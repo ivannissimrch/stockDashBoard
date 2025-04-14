@@ -1,5 +1,7 @@
 import fetchFinnhubStockData from "./fetchFinnhubStockData";
 
+//use axios
+
 const FINNHUB_API_KEY = import.meta.env.VITE_FINNHUB_API_KEY;
 const FINNHUB_BASE_URL = "https://finnhub.io/api/v1";
 export interface StockSymbols {

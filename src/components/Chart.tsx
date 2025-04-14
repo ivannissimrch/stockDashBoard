@@ -1,10 +1,10 @@
 import { LineChart } from "@mui/x-charts/LineChart";
-import { useContext } from "react";
-import { stockContext } from "../App";
 import "./Chart.css";
+import { useStocksContext } from "./StocksContextProvider";
+import { Skeleton } from "@mui/material";
 
 export default function Chart() {
-  const { stockHistoricalData } = useContext(stockContext);
+  const { stockHistoricalData, isStocksInfoLoading } = useStocksContext();
 
   function renderChart() {
     if (!stockHistoricalData) {
@@ -28,7 +28,9 @@ export default function Chart() {
       };
     });
 
-    return (
+    return isStocksInfoLoading ? (
+      <Skeleton width="98%" height="100%" className="line_chart_container" />
+    ) : (
       <LineChart
         dataset={chartDataset}
         xAxis={[
