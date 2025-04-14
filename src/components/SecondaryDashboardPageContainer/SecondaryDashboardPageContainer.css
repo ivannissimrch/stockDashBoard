@@ -1,4 +1,4 @@
-.chart_container {
+.SecondaryDashboardPageContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,12 +9,11 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .chart_container {
+  .SecondaryDashboardPageContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 98%;
-    /* height: 30rem; */
     margin: auto;
     border-radius: 2.375rem;
   }

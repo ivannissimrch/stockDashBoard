@@ -1,14 +1,12 @@
 import "./StockSearchInput.css";
-import { useState, useMemo, useEffect, useContext } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import debounce from "lodash.debounce";
-import fetchVantageStockData from "../../helpers/fetchVantageStockData";
-import { stockContext } from "../../App";
 import getSevenDaysStockData from "../../helpers/getSevenDaysStockData";
 import fetchStocksSymbols from "../../helpers/fetchStocksSymbols";
-import fetchStockDetails from "../../helpers/fetchStockDetails";
-import fetchQuote from "../../helpers/fetchQuote";
 import { GridSearchIcon } from "@mui/x-data-grid";
+import { useStocksContext } from "../StocksContextProvider";
+import fetchAllDataForStocks from "../../helpers/fetchAllDataForStocks";
 
 interface StockResultWithLabel {
   label: string;
@@ -21,7 +19,10 @@ export default function StockSearchInput() {
     updateStockOverview,
     updateStockHistoricalData,
     addToRecentlySeenStocks,
-  } = useContext(stockContext);
+    setStocksInfoLoadingToFalse,
+    setStocksInfoLoadingToTrue,
+  } = useStocksContext();
+
   const [searchQuery, setSearchQuery] = useState("");
   const [stockSuggestionList, setStockSuggestionList] = useState<
     StockResultWithLabel[]
@@ -66,8 +67,11 @@ export default function StockSearchInput() {
     newValue: StockResultWithLabel | null
   ) {
     if (newValue) {
-      const selectedStockDetails = await fetchStockDetails(newValue.symbol);
-      const stockQuote = await fetchQuote(newValue.symbol);
+      setStocksInfoLoadingToTrue();
+      const [selectedStockDetails, stockQuote, stockDailyData] =
+        await fetchAllDataForStocks(newValue.symbol);
+      setStocksInfoLoadingToFalse();
+
       if (stockQuote && selectedStockDetails) {
         const stockOverview = {
           symbol: newValue.symbol,
@@ -79,15 +83,12 @@ export default function StockSearchInput() {
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
         addToRecentlySeenStocks({ ...stockOverview, ...selectedStockDetails });
-
-        const stockDailyData = await fetchVantageStockData(newValue.symbol);
-        //store return value to local storage??
+        //store return value to local storage this is only storing stockdailydata
         localStorage.setItem(
           "storedStocksData",
           JSON.stringify(stockDailyData)
         );
-        const sevenDaysStocks = getSevenDaysStockData(stockDailyData!);
-
+        const sevenDaysStocks = getSevenDaysStockData(stockDailyData);
         if (sevenDaysStocks) {
           updateStockHistoricalData(sevenDaysStocks);
         }

@@ -1,13 +1,11 @@
+import { useStocksContext } from "../StocksContextProvider";
 import "./DashboardTitle.css";
-import { useContext } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import { stockContext } from "../../App";
 
 export default function DashboardTitle() {
-  const { isDarkMode, implementDarkMode } = useContext(stockContext);
-
+  const { isDarkMode, implementDarkMode, secondaryColors } = useStocksContext();
   return (
-    <div className="dashboard_title_container">
+    <div className={`dashboard_title_container ${secondaryColors}`}>
       <h2 className="dashboard_title">Dashboard</h2>
       <DarkModeSwitch
         checked={isDarkMode}
