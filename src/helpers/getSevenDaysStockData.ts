@@ -1,4 +1,4 @@
-import { DailyStocksApiResponse } from "./fetchVantageStockData";
+import { DailyStocksApiResponse } from "../types";
 
 export default function getSevenDaysStockData(
   stocksData: DailyStocksApiResponse

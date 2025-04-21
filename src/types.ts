@@ -1,5 +1,3 @@
-import { DailyStocksApiResponse } from "./helpers/fetchVantageStockData";
-
 export interface StockOverview {
   symbol: string;
   price: number;
@@ -73,4 +71,23 @@ export interface ContextTypes {
   setStocksInfoLoadingToTrue: () => void;
   stocksData: DailyStocksApiResponse | undefined;
   updateStocksData: (newDailyData: DailyStocksApiResponse) => void;
+}
+
+export interface StockTimeSeries {
+  "1. open": string;
+  "2. high": string;
+  "3. low": string;
+  "4. close": string;
+  "5. volume": string;
+}
+
+export interface DailyStocksApiResponse {
+  [key: string]: StockTimeSeries;
+}
+
+export interface StockSymbols {
+  description: string;
+  displaySymbol: string;
+  symbol: string;
+  type: string;
 }

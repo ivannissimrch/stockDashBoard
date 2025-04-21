@@ -7,6 +7,7 @@ import fetchStocksSymbols from "../../helpers/fetchStocksSymbols";
 import { GridSearchIcon } from "@mui/x-data-grid";
 import { useStocksContext } from "../StocksContextProvider";
 import fetchAllDataForStocks from "../../helpers/fetchAllDataForStocks";
+import { StockSymbols } from "../../types";
 
 interface StockResultWithLabel {
   label: string;
@@ -33,7 +34,7 @@ export default function StockSearchInput() {
   async function fetchStockSuggestions(searchInputText: string) {
     setIsLoading(true);
     try {
-      const stocks = await fetchStocksSymbols(searchInputText);
+      const stocks: StockSymbols[] = await fetchStocksSymbols(searchInputText);
       const results = stocks.map((stock) => ({
         label: `${stock.description} ${stock.symbol}`,
         symbol: stock.symbol,
