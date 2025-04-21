@@ -21,6 +21,7 @@ export default function StockSearchInput() {
     addToRecentlySeenStocks,
     setStocksInfoLoadingToFalse,
     setStocksInfoLoadingToTrue,
+    updateStocksData,
   } = useStocksContext();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -83,11 +84,8 @@ export default function StockSearchInput() {
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
         addToRecentlySeenStocks({ ...stockOverview, ...selectedStockDetails });
-        //store return value to local storage this is only storing stockdailydata
-        localStorage.setItem(
-          "storedStocksData",
-          JSON.stringify(stockDailyData)
-        );
+
+        updateStocksData(stockDailyData);
         const sevenDaysStocks = getSevenDaysStockData(stockDailyData);
         if (sevenDaysStocks) {
           updateStockHistoricalData(sevenDaysStocks);

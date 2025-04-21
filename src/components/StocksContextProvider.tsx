@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
-import getStoredDataFromStorage from "../helpers/getStoredDataFromStorage";
+import React, { createContext, useContext } from "react";
 import {
   ContextTypes,
   RecentlySeenStocks,
@@ -10,6 +9,8 @@ import {
 import getFiveMonthsStockData from "../helpers/getFiveMonthsStockData";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
+import { usePersistedState } from "../hooks/usePersistedState";
+import { DailyStocksApiResponse } from "../helpers/fetchVantageStockData";
 
 export const stocksContext = createContext<ContextTypes>({
   stockDetails: undefined,
@@ -34,6 +35,8 @@ export const stocksContext = createContext<ContextTypes>({
   isStocksInfoLoading: false,
   setStocksInfoLoadingToFalse: () => {},
   setStocksInfoLoadingToTrue: () => {},
+  stocksData: undefined,
+  updateStocksData: () => {},
 });
 
 export default function StocksContextProvider({
@@ -41,16 +44,26 @@ export default function StocksContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [stockDetails, setStockDetails] = useState<StockDetails | undefined>();
-  const [stockOverview, setStockOverview] = useState<
+  const [stocksData, setStocksData] = usePersistedState<
+    DailyStocksApiResponse | undefined
+  >("stocksData", undefined);
+
+  function updateStocksData(newDailyData: DailyStocksApiResponse) {
+    setStocksData(newDailyData);
+  }
+
+  const [stockDetails, setStockDetails] = usePersistedState<
+    StockDetails | undefined
+  >("stockDetails", undefined);
+  const [stockOverview, setStockOverview] = usePersistedState<
     StockOverview | undefined
-  >();
-  const [stockHistoricalData, setStockHistoricalData] = useState<
+  >("stockOverview", undefined);
+  const [stockHistoricalData, setStockHistoricalData] = usePersistedState<
     StocksData[] | undefined
-  >();
-  const [recentlySeenStocks, setRecentlySeenStocks] = useState<
+  >("stockHistoricalData", undefined);
+  const [recentlySeenStocks, setRecentlySeenStocks] = usePersistedState<
     RecentlySeenStocks[] | []
-  >([]);
+  >("recentlySeenStocks", []);
 
   function updateStockDetails(newDetails: StockDetails) {
     setStockDetails(newDetails);
@@ -91,7 +104,10 @@ export default function StocksContextProvider({
   }
 
   //loading state
-  const [isStocksInfoLoading, setIsStocksInfoLoading] = useState(false);
+  const [isStocksInfoLoading, setIsStocksInfoLoading] = usePersistedState(
+    "isStocksInfoLoading",
+    false
+  );
   function setStocksInfoLoadingToFalse() {
     setIsStocksInfoLoading(false);
   }
@@ -100,12 +116,8 @@ export default function StocksContextProvider({
   }
   //loading state
 
-  // local storage
-  const stocksData = getStoredDataFromStorage();
-  // local storage
-
   //Theme colors
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = usePersistedState("isDarkMode", true);
   const primaryColors = `${
     isDarkMode ? "primary_dark_mode_colors" : "primary_light_mode_colors"
   }`;
@@ -151,6 +163,8 @@ export default function StocksContextProvider({
         isStocksInfoLoading,
         setStocksInfoLoadingToFalse,
         setStocksInfoLoadingToTrue,
+        stocksData,
+        updateStocksData,
       }}
     >
       {children}
