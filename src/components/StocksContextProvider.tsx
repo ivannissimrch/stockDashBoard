@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import {
   ContextTypes,
+  DailyStocksApiResponse,
   RecentlySeenStocks,
   StockDetails,
   StockOverview,
@@ -10,7 +11,6 @@ import getFiveMonthsStockData from "../helpers/getFiveMonthsStockData";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
 import { usePersistedState } from "../hooks/usePersistedState";
-import { DailyStocksApiResponse } from "../helpers/fetchVantageStockData";
 
 export const stocksContext = createContext<ContextTypes>({
   stockDetails: undefined,
