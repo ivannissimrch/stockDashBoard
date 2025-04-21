@@ -1,5 +1,5 @@
+import { DailyStocksApiResponse } from "../types";
 import calculateClosingAverages from "./calculateClosingAverages";
-import { DailyStocksApiResponse } from "./fetchVantageStockData";
 import organizeStocksInGroups from "./organizedStocksInGroups";
 import { GroupType } from "./organizedStocksInGroups";
 
