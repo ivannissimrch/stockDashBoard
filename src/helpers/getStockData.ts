@@ -29,13 +29,7 @@ export default function useGetStockData() {
         updateStockOverview(stockOverview);
         updateStockDetails(selectedStockDetails);
         addToRecentlySeenStocks({ ...stockOverview, ...selectedStockDetails });
-
         const stockDailyData = await fetchVantageStockData(newValue.symbol);
-        //store return value to local storage??
-        localStorage.setItem(
-          "storedStocksData",
-          JSON.stringify(stockDailyData)
-        );
         const sevenDaysStocks = getSevenDaysStockData(stockDailyData!);
 
         if (sevenDaysStocks) {
