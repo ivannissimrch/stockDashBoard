@@ -1,4 +1,4 @@
-import { StocksData } from "../App";
+import { StocksData } from "../types";
 
 export default function calculateClosingAverages(
   stocksDataGroups: StocksData[][]
