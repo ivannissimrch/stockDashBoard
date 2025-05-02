@@ -4,17 +4,25 @@ import { useStocksContext } from "../StocksContextProvider";
 import { Skeleton } from "@mui/material";
 
 export default function DisplayStockOverview() {
-  const { stockOverview, stockDetails, isStocksInfoLoading } =
-    useStocksContext();
-  const { symbol = "", price = "", changePercent = "" } = stockOverview || {};
+  const { recentlySeenStocks, isStocksInfoLoading } = useStocksContext();
+  const {
+    symbol = "",
+    price = "",
+    changePercent = "",
+  } = recentlySeenStocks[0].stockOverview || {};
   const isNegativeChange = +changePercent < 0;
+  console.log(recentlySeenStocks[0]);
 
   return (
     <section className="stock_overview_container">
       <div className="logo_symbol_container">
         <span className="stock_overview_item">
           {!isStocksInfoLoading ? (
-            <img className="logo" src={stockDetails?.logo} alt="company logo" />
+            <img
+              className="logo"
+              src={recentlySeenStocks[0].stockDetails?.logo}
+              alt="company logo"
+            />
           ) : (
             <Skeleton variant="circular" width={57} height={57} />
           )}
@@ -22,7 +30,7 @@ export default function DisplayStockOverview() {
         <div className="symbol_name_container">
           <span className="stock_overview_name ">
             {!isStocksInfoLoading ? (
-              stockDetails?.name
+              recentlySeenStocks[0].stockDetails?.name
             ) : (
               <Skeleton variant="rounded" width={210} height={30} />
             )}

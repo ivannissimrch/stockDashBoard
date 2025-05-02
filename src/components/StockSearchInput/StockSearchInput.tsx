@@ -16,13 +16,11 @@ interface StockResultWithLabel {
 
 export default function StockSearchInput() {
   const {
-    updateStockDetails,
-    updateStockOverview,
     updateStockHistoricalData,
     addToRecentlySeenStocks,
     setStocksInfoLoadingToFalse,
     setStocksInfoLoadingToTrue,
-    updateStocksData,
+    recentlySeenStocks,
   } = useStocksContext();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,6 +67,24 @@ export default function StockSearchInput() {
     newValue: StockResultWithLabel | null
   ) {
     if (newValue) {
+      console.log(newValue.symbol);
+
+      //check if value is already store
+      const isOnLocalStorage = recentlySeenStocks.filter((stock) => {
+        console.log(stock);
+        return stock.stockOverview.symbol === newValue.symbol;
+      });
+      console.log(isOnLocalStorage);
+      if (isOnLocalStorage) {
+        reOrderRecentlySeenStocks(stock);
+        const sevenDaysStocks = getSevenDaysStockData(stockData);
+        if (sevenDaysStocks) {
+          updateStockHistoricalData(sevenDaysStocks);
+        }
+
+        return;
+      }
+
       setStocksInfoLoadingToTrue();
       const [selectedStockDetails, stockQuote, stockDailyData] =
         await fetchAllDataForStocks(newValue.symbol);
@@ -82,11 +98,15 @@ export default function StockSearchInput() {
           changePercent: stockQuote.dp,
           currency: selectedStockDetails.currency,
         };
-        updateStockOverview(stockOverview);
-        updateStockDetails(selectedStockDetails);
-        addToRecentlySeenStocks({ ...stockOverview, ...selectedStockDetails });
 
-        updateStocksData(stockDailyData);
+        addToRecentlySeenStocks({
+          active: true,
+          stockOverview: stockOverview,
+          stockDetails: selectedStockDetails,
+          stockData: stockDailyData,
+        });
+
+        // updateStocksData(stockDailyData);
         const sevenDaysStocks = getSevenDaysStockData(stockDailyData);
         if (sevenDaysStocks) {
           updateStockHistoricalData(sevenDaysStocks);

@@ -1,11 +1,9 @@
-import { DailyStocksApiResponse } from "../types";
+import { StocksData } from "../types";
 import calculateClosingAverages from "./calculateClosingAverages";
 import organizeStocksInGroups from "./organizedStocksInGroups";
 import { GroupType } from "./organizedStocksInGroups";
 
-export default function getSixWeeksStockData(
-  stocksData: DailyStocksApiResponse
-) {
+export default function getSixWeeksStockData(stocksData: StocksData[]) {
   const sixWeeksDailyData = organizeStocksInGroups(
     GroupType.Week,
     6,

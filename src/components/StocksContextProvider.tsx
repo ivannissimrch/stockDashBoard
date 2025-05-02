@@ -1,24 +1,12 @@
-import React, { createContext, useContext } from "react";
-import {
-  ContextTypes,
-  DailyStocksApiResponse,
-  RecentlySeenStocks,
-  StockDetails,
-  StockOverview,
-  StocksData,
-} from "../types";
+import React, { createContext, useContext, useState } from "react";
+import { ContextTypes, RecentlySeenStocks, StocksData } from "../types";
 import getFiveMonthsStockData from "../helpers/getFiveMonthsStockData";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
 import { usePersistedState } from "../hooks/usePersistedState";
+import { getItem } from "../helpers/localStorage";
 
 export const stocksContext = createContext<ContextTypes>({
-  stockDetails: undefined,
-  updateStockDetails: () => {},
-  stockOverview: undefined,
-  updateStockOverview: () => {},
-  stockHistoricalData: undefined,
-  updateStockHistoricalData: () => {},
   primaryColors: "primary_light_mode_colors",
   secondaryColors: "secondary_light_mode_colors",
   accentColors: "accent_light_mode_colors",
@@ -26,17 +14,18 @@ export const stocksContext = createContext<ContextTypes>({
   containersColors: "containers_light_colors",
   isDarkMode: false,
   implementDarkMode: () => {},
+  stockHistoricalData: undefined,
+  updateStockHistoricalData: () => {},
   updateToSevenDays: () => {},
   updateToSixWeeks: () => {},
   updateToFiveMonths: () => {},
   recentlySeenStocks: [],
   addToRecentlySeenStocks: () => {},
   deleteToRecentlySeenStocks: () => {},
+  reOrderRecentlySeenStocks: () => {},
   isStocksInfoLoading: false,
   setStocksInfoLoadingToFalse: () => {},
   setStocksInfoLoadingToTrue: () => {},
-  stocksData: undefined,
-  updateStocksData: () => {},
 });
 
 export default function StocksContextProvider({
@@ -44,20 +33,6 @@ export default function StocksContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [stocksData, setStocksData] = usePersistedState<
-    DailyStocksApiResponse | undefined
-  >("stocksData", undefined);
-
-  function updateStocksData(newDailyData: DailyStocksApiResponse) {
-    setStocksData(newDailyData);
-  }
-
-  const [stockDetails, setStockDetails] = usePersistedState<
-    StockDetails | undefined
-  >("stockDetails", undefined);
-  const [stockOverview, setStockOverview] = usePersistedState<
-    StockOverview | undefined
-  >("stockOverview", undefined);
   const [stockHistoricalData, setStockHistoricalData] = usePersistedState<
     StocksData[] | undefined
   >("stockHistoricalData", undefined);
@@ -65,49 +40,60 @@ export default function StocksContextProvider({
     RecentlySeenStocks[] | []
   >("recentlySeenStocks", []);
 
-  function updateStockDetails(newDetails: StockDetails) {
-    setStockDetails(newDetails);
-  }
-  function updateStockOverview(newStockOverview: StockOverview) {
-    setStockOverview(newStockOverview);
-  }
   function updateStockHistoricalData(newData: StocksData[]) {
     setStockHistoricalData(newData);
   }
   function updateToSevenDays() {
-    const sevenDaysOfStock = getSevenDaysStockData(stocksData!);
+    const sevenDaysOfStock = getSevenDaysStockData(
+      recentlySeenStocks[0].stockData!
+    );
     if (sevenDaysOfStock) {
       updateStockHistoricalData(sevenDaysOfStock);
     }
   }
   function updateToSixWeeks() {
-    const sixWeeksOfStocks = getSixWeeksStockData(stocksData!);
+    const sixWeeksOfStocks = getSixWeeksStockData(
+      recentlySeenStocks[0].stockData!
+    );
     if (sixWeeksOfStocks) {
       updateStockHistoricalData(sixWeeksOfStocks);
     }
   }
   function updateToFiveMonths() {
-    const fiveMonthsOfStocks = getFiveMonthsStockData(stocksData!);
+    const fiveMonthsOfStocks = getFiveMonthsStockData(
+      recentlySeenStocks[0].stockData!
+    );
     if (fiveMonthsOfStocks) {
       updateStockHistoricalData(fiveMonthsOfStocks);
     }
   }
 
   function addToRecentlySeenStocks(newStock: RecentlySeenStocks) {
+    console.log(newStock);
     setRecentlySeenStocks((prevStocks) => [newStock, ...prevStocks]);
   }
 
+  function reOrderRecentlySeenStocks(firstStock: RecentlySeenStocks) {
+    const filteredStocks = recentlySeenStocks.filter(
+      (stock) => stock.stockOverview.symbol !== firstStock.stockOverview.symbol
+    );
+
+    setRecentlySeenStocks([firstStock, ...filteredStocks]);
+  }
+
   function deleteToRecentlySeenStocks(stockToDelete: RecentlySeenStocks) {
+    console.log(stockToDelete);
+    console.log(recentlySeenStocks);
     setRecentlySeenStocks((prev) =>
-      prev.filter((stock) => stockToDelete !== stock)
+      prev.filter(
+        (stock) =>
+          stockToDelete.stockOverview.symbol !== stock.stockOverview.symbol
+      )
     );
   }
 
   //loading state
-  const [isStocksInfoLoading, setIsStocksInfoLoading] = usePersistedState(
-    "isStocksInfoLoading",
-    false
-  );
+  const [isStocksInfoLoading, setIsStocksInfoLoading] = useState(false);
   function setStocksInfoLoadingToFalse() {
     setIsStocksInfoLoading(false);
   }
@@ -117,7 +103,10 @@ export default function StocksContextProvider({
   //loading state
 
   //Theme colors
-  const [isDarkMode, setIsDarkMode] = usePersistedState("isDarkMode", true);
+  const [isDarkMode, setIsDarkMode] = usePersistedState(
+    "isDarkMode",
+    getItem("isDarkMode") === true ? true : false
+  );
   const primaryColors = `${
     isDarkMode ? "primary_dark_mode_colors" : "primary_light_mode_colors"
   }`;
@@ -141,12 +130,6 @@ export default function StocksContextProvider({
   return (
     <stocksContext.Provider
       value={{
-        stockDetails,
-        updateStockDetails,
-        stockOverview,
-        updateStockOverview,
-        stockHistoricalData,
-        updateStockHistoricalData,
         primaryColors,
         secondaryColors,
         accentColors,
@@ -154,17 +137,18 @@ export default function StocksContextProvider({
         containersColors,
         isDarkMode,
         implementDarkMode,
+        stockHistoricalData,
+        updateStockHistoricalData,
         updateToSevenDays,
         updateToSixWeeks,
         updateToFiveMonths,
         recentlySeenStocks,
         addToRecentlySeenStocks,
         deleteToRecentlySeenStocks,
+        reOrderRecentlySeenStocks,
         isStocksInfoLoading,
         setStocksInfoLoadingToFalse,
         setStocksInfoLoadingToTrue,
-        stocksData,
-        updateStocksData,
       }}
     >
       {children}
