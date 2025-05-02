@@ -9,11 +9,11 @@ import NoData from "./NoData";
 import SecondaryDashboardPageContainer from "../components/SecondaryDashboardPageContainer/SecondaryDashboardPageContainer";
 
 export default function DashBoardPage() {
-  const { stockHistoricalData, secondaryColors } = useStocksContext();
+  const { recentlySeenStocks, secondaryColors } = useStocksContext();
 
   return (
     <main className={`dashboard_page_container ${secondaryColors}`}>
-      {stockHistoricalData ? (
+      {recentlySeenStocks.length > 0 ? (
         <>
           <SecondaryDashboardPageContainer>
             <DisplayStockOverview />

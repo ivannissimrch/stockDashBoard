@@ -26,33 +26,20 @@ export interface StocksData {
   date: string;
 }
 
+export interface Stocks {
+  stockOverview: StockOverview;
+  stockDetails: StockDetails;
+  stockData: StocksData[];
+}
+
 export interface RecentlySeenStocks {
-  symbol: string;
-  price: number;
-  change: number;
-  changePercent: number;
-  country: string;
-  currency: string;
-  estimateCurrency: string;
-  exchange: string;
-  finnhubIndustry: string;
-  ipo: string;
-  logo: string;
-  marketCapitalization: number;
-  name: string;
-  phone: string;
-  shareOutstanding: number;
-  ticker: string;
-  weburl: string;
+  active: boolean;
+  stockOverview: StockOverview;
+  stockDetails: StockDetails;
+  stockData: StocksData[];
 }
 
 export interface ContextTypes {
-  stockDetails: StockDetails | undefined;
-  updateStockDetails: (newDetails: StockDetails) => void;
-  stockOverview: StockOverview | undefined;
-  updateStockOverview: (newStockOverview: StockOverview) => void;
-  stockHistoricalData: StocksData[] | undefined;
-  updateStockHistoricalData: (newDetails: StocksData[]) => void;
   primaryColors: string;
   secondaryColors: string;
   accentColors: string;
@@ -60,17 +47,18 @@ export interface ContextTypes {
   containersColors: string;
   isDarkMode: boolean;
   implementDarkMode: () => void;
+  stockHistoricalData: StocksData[] | undefined;
+  updateStockHistoricalData: (newDetails: StocksData[]) => void;
   updateToSevenDays: () => void;
   updateToSixWeeks: () => void;
   updateToFiveMonths: () => void;
   recentlySeenStocks: RecentlySeenStocks[] | [];
   addToRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
   deleteToRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
+  reOrderRecentlySeenStocks: (newFirstStock: RecentlySeenStocks) => void;
   isStocksInfoLoading: boolean;
   setStocksInfoLoadingToFalse: () => void;
   setStocksInfoLoadingToTrue: () => void;
-  stocksData: DailyStocksApiResponse | undefined;
-  updateStocksData: (newDailyData: DailyStocksApiResponse) => void;
 }
 
 export interface StockTimeSeries {

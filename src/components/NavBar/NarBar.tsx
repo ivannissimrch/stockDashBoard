@@ -15,7 +15,7 @@ export default function NavBar() {
       </div>
 
       {recentlySeenStocks.map((stock) => (
-        <RecentlySeenStock key={stock.symbol} stock={stock} />
+        <RecentlySeenStock key={stock.stockOverview.symbol} stock={stock} />
       ))}
     </nav>
   );

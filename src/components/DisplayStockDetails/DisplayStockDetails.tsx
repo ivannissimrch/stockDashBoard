@@ -3,7 +3,7 @@ import { useStocksContext } from "../StocksContextProvider";
 import "./DisplayStockDetails.css";
 
 export default function DisplayStockDetails() {
-  const { stockDetails, containersColors, isStocksInfoLoading } =
+  const { recentlySeenStocks, containersColors, isStocksInfoLoading } =
     useStocksContext();
   const {
     country = "",
@@ -12,7 +12,7 @@ export default function DisplayStockDetails() {
     ipo = "",
     marketCapitalization = "",
     finnhubIndustry = "",
-  } = stockDetails || {};
+  } = recentlySeenStocks[0].stockDetails || {};
   return (
     <section className={`stock_details_container ${containersColors}`}>
       {isStocksInfoLoading ? (
