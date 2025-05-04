@@ -21,8 +21,9 @@ export const stocksContext = createContext<ContextTypes>({
   updateToFiveMonths: () => {},
   recentlySeenStocks: [],
   addToRecentlySeenStocks: () => {},
-  deleteToRecentlySeenStocks: () => {},
+  deleteFromRecentlySeenStocks: () => {},
   reOrderRecentlySeenStocks: () => {},
+  upDateRecentlySeenStocks: () => {},
   isStocksInfoLoading: false,
   setStocksInfoLoadingToFalse: () => {},
   setStocksInfoLoadingToTrue: () => {},
@@ -69,8 +70,19 @@ export default function StocksContextProvider({
   }
 
   function addToRecentlySeenStocks(newStock: RecentlySeenStocks) {
-    console.log(newStock);
     setRecentlySeenStocks((prevStocks) => [newStock, ...prevStocks]);
+  }
+
+  function upDateRecentlySeenStocks(stock: RecentlySeenStocks) {
+    setRecentlySeenStocks((prev) =>
+      prev.map((prevStock) => {
+        if (prevStock.stockOverview.symbol === stock.stockOverview.symbol) {
+          return stock;
+        } else {
+          return prevStock;
+        }
+      })
+    );
   }
 
   function reOrderRecentlySeenStocks(firstStock: RecentlySeenStocks) {
@@ -81,7 +93,7 @@ export default function StocksContextProvider({
     setRecentlySeenStocks([firstStock, ...filteredStocks]);
   }
 
-  function deleteToRecentlySeenStocks(stockToDelete: RecentlySeenStocks) {
+  function deleteFromRecentlySeenStocks(stockToDelete: RecentlySeenStocks) {
     console.log(stockToDelete);
     console.log(recentlySeenStocks);
     setRecentlySeenStocks((prev) =>
@@ -144,8 +156,9 @@ export default function StocksContextProvider({
         updateToFiveMonths,
         recentlySeenStocks,
         addToRecentlySeenStocks,
-        deleteToRecentlySeenStocks,
+        deleteFromRecentlySeenStocks,
         reOrderRecentlySeenStocks,
+        upDateRecentlySeenStocks,
         isStocksInfoLoading,
         setStocksInfoLoadingToFalse,
         setStocksInfoLoadingToTrue,

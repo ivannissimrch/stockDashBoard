@@ -54,8 +54,9 @@ export interface ContextTypes {
   updateToFiveMonths: () => void;
   recentlySeenStocks: RecentlySeenStocks[] | [];
   addToRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
-  deleteToRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
+  deleteFromRecentlySeenStocks: (stockOverview: RecentlySeenStocks) => void;
   reOrderRecentlySeenStocks: (newFirstStock: RecentlySeenStocks) => void;
+  upDateRecentlySeenStocks: (stock: RecentlySeenStocks) => void;
   isStocksInfoLoading: boolean;
   setStocksInfoLoadingToFalse: () => void;
   setStocksInfoLoadingToTrue: () => void;
