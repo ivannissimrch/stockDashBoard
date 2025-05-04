@@ -3,20 +3,62 @@ import { useStocksContext } from "../StocksContextProvider";
 import { RecentlySeenStocks } from "../../types";
 import DeleteForeverSharpIcon from "@mui/icons-material/DeleteForeverSharp";
 import getSevenDaysStockData from "../../helpers/getSevenDaysStockData";
+import { usePersistedState } from "../../hooks/usePersistedState";
+import fetchAllDataForStocks from "../../helpers/fetchAllDataForStocks";
 
 export default function RecentlySeenStock({
   stock,
 }: {
   stock: RecentlySeenStocks;
 }) {
-  const { stockOverview, stockDetails, stockData } = stock;
+  async function updateStockData(stockSymbol: string) {
+    const [selectedStockDetails, stockQuote, stockDailyData] =
+      await fetchAllDataForStocks(stockSymbol);
+    if (stockQuote && selectedStockDetails) {
+      const stockOverview = {
+        symbol: stockSymbol,
+        price: stockQuote.pc,
+        change: stockQuote.d,
+        changePercent: stockQuote.dp,
+        currency: selectedStockDetails.currency,
+      };
+
+      upDateRecentlySeenStocks({
+        active: true,
+        stockOverview: stockOverview,
+        stockDetails: selectedStockDetails,
+        stockData: stockDailyData,
+      });
+    }
+  }
+
   const {
-    deleteToRecentlySeenStocks,
+    deleteFromRecentlySeenStocks,
     primaryColors,
     secondaryColors,
     reOrderRecentlySeenStocks,
     updateStockHistoricalData,
+    upDateRecentlySeenStocks,
   } = useStocksContext();
+
+  const { stockOverview, stockDetails, stockData } = stock;
+  const stockDataDates = Object.keys(stockData);
+  const lastUpdateDateFromApi = stockDataDates[0];
+
+  const [lastUpdateDateFromLocal, setLastUpdateDateFromLocal] =
+    usePersistedState("lastUpdateDateFromLocal", lastUpdateDateFromApi);
+
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, "0");
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const year = today.getFullYear();
+  const todaysDate = `${year}-${month}-${day}`;
+
+  if (lastUpdateDateFromLocal !== todaysDate) {
+    console.log("fetch and update values");
+    updateStockData(stock.stockOverview.symbol);
+    setLastUpdateDateFromLocal(todaysDate);
+  }
 
   return (
     <button
@@ -37,7 +79,7 @@ export default function RecentlySeenStock({
         sx={{ color: `${primaryColors}` }}
         onClick={(event) => {
           event.stopPropagation();
-          deleteToRecentlySeenStocks(stock);
+          deleteFromRecentlySeenStocks(stock);
         }}
       />
     </button>

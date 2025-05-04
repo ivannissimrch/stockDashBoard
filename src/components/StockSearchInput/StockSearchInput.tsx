@@ -21,6 +21,7 @@ export default function StockSearchInput() {
     setStocksInfoLoadingToFalse,
     setStocksInfoLoadingToTrue,
     recentlySeenStocks,
+    reOrderRecentlySeenStocks,
   } = useStocksContext();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -70,20 +71,20 @@ export default function StockSearchInput() {
       console.log(newValue.symbol);
 
       //check if value is already store
-      const isOnLocalStorage = recentlySeenStocks.filter((stock) => {
-        console.log(stock);
+      const isOnLocalStorage = recentlySeenStocks.find((stock) => {
         return stock.stockOverview.symbol === newValue.symbol;
       });
-      console.log(isOnLocalStorage);
       if (isOnLocalStorage) {
-        reOrderRecentlySeenStocks(stock);
-        const sevenDaysStocks = getSevenDaysStockData(stockData);
+        reOrderRecentlySeenStocks(isOnLocalStorage);
+        const sevenDaysStocks = getSevenDaysStockData(
+          isOnLocalStorage.stockData
+        );
         if (sevenDaysStocks) {
           updateStockHistoricalData(sevenDaysStocks);
         }
-
         return;
       }
+      //check if value is already store
 
       setStocksInfoLoadingToTrue();
       const [selectedStockDetails, stockQuote, stockDailyData] =
