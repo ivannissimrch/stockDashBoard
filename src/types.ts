@@ -21,6 +21,7 @@ export interface StockDetails {
   weburl: string;
 }
 
+//fix this type?
 export interface StocksData {
   closingPrices: number;
   date: string;

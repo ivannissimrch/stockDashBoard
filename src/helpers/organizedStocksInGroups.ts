@@ -1,4 +1,4 @@
-import { StocksData } from "../types";
+import { DailyStocksApiResponse, StocksData } from "../types";
 import categorizeByTimePeriod from "./categorizeByTimePeriod";
 
 export enum GroupType {
@@ -9,8 +9,9 @@ export enum GroupType {
 export default function organizeStocksInGroups(
   groupBy: GroupType,
   maxNumberOfGroups: number,
-  stockDataFromStorage: StocksData[]
+  stockDataFromStorage: DailyStocksApiResponse
 ) {
+  console.log(stockDataFromStorage);
   const stockDataByGroup: { [key: string]: StocksData[] } = {};
 
   for (const stockDateLabel of Object.keys(stockDataFromStorage)) {
