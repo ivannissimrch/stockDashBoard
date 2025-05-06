@@ -21,7 +21,6 @@ export interface StockDetails {
   weburl: string;
 }
 
-//fix this type?
 export interface StocksData {
   closingPrices: number;
   date: string;
@@ -37,7 +36,7 @@ export interface RecentlySeenStocks {
   active: boolean;
   stockOverview: StockOverview;
   stockDetails: StockDetails;
-  stockData: StocksData[];
+  stockData: DailyStocksApiResponse;
 }
 
 export interface ContextTypes {
