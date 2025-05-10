@@ -90,6 +90,8 @@ export default function StockSearchInput() {
       const [selectedStockDetails, stockQuote, stockDailyData] =
         await fetchAllDataForStocks(newValue.symbol);
       setStocksInfoLoadingToFalse();
+      const lastUpdate = Date.now();
+      console.log(lastUpdate);
 
       if (stockQuote && selectedStockDetails) {
         const stockOverview = {
