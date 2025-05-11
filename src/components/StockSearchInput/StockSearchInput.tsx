@@ -68,8 +68,6 @@ export default function StockSearchInput() {
     newValue: StockResultWithLabel | null
   ) {
     if (newValue) {
-      console.log(newValue.symbol);
-
       //check if value is already store
       const isOnLocalStorage = recentlySeenStocks.find((stock) => {
         return stock.stockOverview.symbol === newValue.symbol;
