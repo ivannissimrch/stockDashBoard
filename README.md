@@ -4,7 +4,7 @@ A simple application designed to search for stocks by name, view their current i
 
 ## Features
 
-- **Stock Search:** Quickly search for stocks by their name.
+- **Stock Search:** Search for stocks by their name.
 - **Detailed Stock Information:** Access details for each stock, including:
   - Company Name
   - Company Logo
@@ -37,10 +37,10 @@ For historical data, the application shows the last 7 days of closing prices and
 
 ### Recently Seen Feature
 
-When a stock is searched, its information is stored in local storage. If you access the stock again from the "Recently Seen" list, the application will first try to load data from the cache (local storage). If the cached data is not older than 15 minutes, it will be displayed without making an API request. This leads to faster load times and fewer API calls.
+When a stock is searched, its information is stored in local storage. If you access the stock again from the "Recently Seen" list, the application will load data from the cache (local storage). If the cached data is not older than 15 minutes, it will be displayed without making an API request. This leads to faster load times and fewer API calls.
 
-If the cached data is older than 15 minutes, the application will refetch the quote from the Finnhub API.
-If the cache data is older than one day, the application will refetch the historical stock data from Alpha Vantage.
+If the cached data is older than 15 minutes, the application will refetch the quote from the Finnhub API and update the price and change percentage.
+If the cache data is older than one day, the application will refetch the historical stock data from Alpha Vantage and update the values.
 
 ## Technologies Used
 
@@ -58,7 +58,7 @@ If the cache data is older than one day, the application will refetch the histor
 4. Add environment variables
    At the root folder, create a .env file
 
-   and add he following.
+   and add the following.
 
 VITE_FINNHUB_API_KEY = finnhub-api-key-no-quotes
 VITE_ALPHA_VANTAGE_API_KEY = alpha-vantage-api-key-no-quotes
