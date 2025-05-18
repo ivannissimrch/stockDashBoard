@@ -33,7 +33,7 @@ export interface Stocks {
 }
 
 export interface RecentlySeenStocks {
-  active: boolean;
+  lastUpdated: number;
   stockOverview: StockOverview;
   stockDetails: StockDetails;
   stockData: DailyStocksApiResponse;

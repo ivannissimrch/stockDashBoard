@@ -33,6 +33,10 @@ export default function StockSearchInput() {
   async function fetchStockSuggestions(searchInputText: string) {
     setIsLoading(true);
     try {
+      if (searchInputText === "") {
+        console.log("return");
+        return;
+      }
       const stocks: StockSymbols[] = await fetchStocksSymbols(searchInputText);
       const results = stocks.map((stock) => ({
         label: `${stock.description} ${stock.symbol}`,
@@ -88,20 +92,19 @@ export default function StockSearchInput() {
       const [selectedStockDetails, stockQuote, stockDailyData] =
         await fetchAllDataForStocks(newValue.symbol);
       setStocksInfoLoadingToFalse();
-      const lastUpdate = Date.now();
-      console.log(lastUpdate);
 
       if (stockQuote && selectedStockDetails) {
         const stockOverview = {
           symbol: newValue.symbol,
-          price: stockQuote.pc,
+          price: stockQuote.c,
           change: stockQuote.d,
           changePercent: stockQuote.dp,
           currency: selectedStockDetails.currency,
         };
+        const timeStamp = Date.now();
 
         addToRecentlySeenStocks({
-          active: true,
+          lastUpdated: timeStamp,
           stockOverview: stockOverview,
           stockDetails: selectedStockDetails,
           stockData: stockDailyData,

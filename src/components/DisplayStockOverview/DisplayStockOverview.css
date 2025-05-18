@@ -71,6 +71,13 @@
   height: 1.1875rem;
   align-items: center;
   justify-content: center;
+}
+
+.bg-red {
+  background-color: rgb(225, 31, 31);
+}
+
+.bg-green {
   background-color: #46b453;
 }
 

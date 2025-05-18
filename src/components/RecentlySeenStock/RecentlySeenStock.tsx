@@ -9,27 +9,6 @@ interface stocksProps {
 }
 
 export default function RecentlySeenStock({ stock }: stocksProps) {
-  // async function updateStockData(stockSymbol: string) {
-  //   const [selectedStockDetails, stockQuote, stockDailyData] =
-  //     await fetchAllDataForStocks(stockSymbol);
-  //   if (stockQuote && selectedStockDetails) {
-  //     const stockOverview = {
-  //       symbol: stockSymbol,
-  //       price: stockQuote.pc,
-  //       change: stockQuote.d,
-  //       changePercent: stockQuote.dp,
-  //       currency: selectedStockDetails.currency,
-  //     };
-
-  //     upDateRecentlySeenStocks({
-  //       active: true,
-  //       stockOverview: stockOverview,
-  //       stockDetails: selectedStockDetails,
-  //       stockData: stockDailyData,
-  //     });
-  //   }
-  // }
-
   const {
     deleteFromRecentlySeenStocks,
     primaryColors,
@@ -39,23 +18,6 @@ export default function RecentlySeenStock({ stock }: stocksProps) {
   } = useStocksContext();
 
   const { stockDetails, stockData } = stock;
-  // const stockDataDates = Object.keys(stockData);
-  // const lastUpdateDateFromApi = stockDataDates[0];
-
-  // const [lastUpdateDateFromLocal, setLastUpdateDateFromLocal] =
-  //   usePersistedState("lastUpdateDateFromLocal", lastUpdateDateFromApi);
-
-  // const today = new Date();
-  // const day = String(today.getDate()).padStart(2, "0");
-  // const month = String(today.getMonth() + 1).padStart(2, "0");
-  // const year = today.getFullYear();
-  // const todaysDate = `${year}-${month}-${day}`;
-
-  // if (lastUpdateDateFromLocal !== todaysDate) {
-  //   console.log("fetch and update values");
-  //   updateStockData(stock.stockOverview.symbol);
-  //   setLastUpdateDateFromLocal(todaysDate);
-  // }
 
   function handleClick() {
     reOrderRecentlySeenStocks(stock);
