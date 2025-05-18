@@ -11,11 +11,7 @@ export default function DisplayStockOverview() {
     changePercent = "",
   } = recentlySeenStocks[0].stockOverview || {};
   const isNegativeChange = +changePercent < 0;
-  const date = new Date(recentlySeenStocks[0].lastUpdated);
-  const hours = date.getHours().toString().padStart(2, "0");
-  const minutes = date.getMinutes().toString().padStart(2, "0");
-
-  console.log(hours, minutes);
+  console.log(recentlySeenStocks);
 
   return (
     <section className="stock_overview_container">
@@ -67,7 +63,7 @@ export default function DisplayStockOverview() {
               </div>
               <span className="price">{`$${price}`}</span>
             </div>
-            <div className="last_updated">{`Last updated at : ${hours} ${minutes}`}</div>{" "}
+            <div className="last_updated">{`Last updated at : ${recentlySeenStocks[0].quoteLastUpdate}`}</div>{" "}
           </>
         ) : (
           <Skeleton variant="rounded" width={150} height={23} />

@@ -102,9 +102,15 @@ export default function StockSearchInput() {
           currency: selectedStockDetails.currency,
         };
         const timeStamp = Date.now();
+        const currentTime = new Date();
+        const hours = currentTime.getHours().toString().padStart(2, "0");
+        const minutes = currentTime.getMinutes().toString().padStart(2, "0");
+        console.log(Object.keys(stockDailyData)[0]);
 
         addToRecentlySeenStocks({
           lastUpdated: timeStamp,
+          quoteLastUpdate: `${hours} : ${minutes}`,
+          historicalDataLastUpdate: Object.keys(stockDailyData)[0],
           stockOverview: stockOverview,
           stockDetails: selectedStockDetails,
           stockData: stockDailyData,

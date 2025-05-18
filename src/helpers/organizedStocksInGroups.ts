@@ -11,13 +11,10 @@ export default function organizeStocksInGroups(
   maxNumberOfGroups: number,
   stockDataFromStorage: DailyStocksApiResponse
 ) {
-  console.log(stockDataFromStorage);
   const stockDataByGroup: { [key: string]: StocksData[] } = {};
-
   for (const stockDateLabel of Object.keys(stockDataFromStorage)) {
     const date = new Date(stockDateLabel);
     const timePeriodLabel = categorizeByTimePeriod(groupBy, date);
-
     const closingPrices = parseFloat(
       stockDataFromStorage[stockDateLabel]["4. close"]
     );
@@ -32,5 +29,5 @@ export default function organizeStocksInGroups(
     }
   }
 
-  return Object.values(stockDataByGroup).filter((group) => group.length > 2);
+  return Object.values(stockDataByGroup).filter((group) => group.length >= 2);
 }

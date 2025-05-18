@@ -35,7 +35,6 @@ export interface Stocks {
 export interface RecentlySeenStocks {
   lastUpdated: number;
   quoteLastUpdate: string;
-  historicalDataLastUpdate: string;
   stockOverview: StockOverview;
   stockDetails: StockDetails;
   stockData: DailyStocksApiResponse;
