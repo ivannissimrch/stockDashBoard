@@ -11,6 +11,7 @@ export default function DisplayStockOverview() {
     changePercent = "",
   } = recentlySeenStocks[0].stockOverview || {};
   const isNegativeChange = +changePercent < 0;
+  console.log(recentlySeenStocks);
 
   return (
     <section className="stock_overview_container">
@@ -47,7 +48,11 @@ export default function DisplayStockOverview() {
         {!isStocksInfoLoading ? (
           <>
             <div className="percent_price_container">
-              <div className="change_percent_container">
+              <div
+                className={`change_percent_container ${
+                  isNegativeChange ? "bg-red" : "bg-green"
+                } `}
+              >
                 <span className="place_holder"></span>
                 <span className="percent_text">{`${changePercent}%`}</span>
 
@@ -56,10 +61,9 @@ export default function DisplayStockOverview() {
                   className={`${isNegativeChange ? "percent_arrow_down" : ""}`}
                 />
               </div>
-
               <span className="price">{`$${price}`}</span>
             </div>
-            <div className="last_updated"></div>{" "}
+            <div className="last_updated">{`Last updated at : ${recentlySeenStocks[0].quoteLastUpdate}`}</div>{" "}
           </>
         ) : (
           <Skeleton variant="rounded" width={150} height={23} />

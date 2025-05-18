@@ -33,6 +33,10 @@ export default function StockSearchInput() {
   async function fetchStockSuggestions(searchInputText: string) {
     setIsLoading(true);
     try {
+      if (searchInputText === "") {
+        console.log("return");
+        return;
+      }
       const stocks: StockSymbols[] = await fetchStocksSymbols(searchInputText);
       const results = stocks.map((stock) => ({
         label: `${stock.description} ${stock.symbol}`,
@@ -68,8 +72,6 @@ export default function StockSearchInput() {
     newValue: StockResultWithLabel | null
   ) {
     if (newValue) {
-      console.log(newValue.symbol);
-
       //check if value is already store
       const isOnLocalStorage = recentlySeenStocks.find((stock) => {
         return stock.stockOverview.symbol === newValue.symbol;
@@ -90,20 +92,25 @@ export default function StockSearchInput() {
       const [selectedStockDetails, stockQuote, stockDailyData] =
         await fetchAllDataForStocks(newValue.symbol);
       setStocksInfoLoadingToFalse();
-      const lastUpdate = Date.now();
-      console.log(lastUpdate);
 
       if (stockQuote && selectedStockDetails) {
         const stockOverview = {
           symbol: newValue.symbol,
-          price: stockQuote.pc,
+          price: stockQuote.c,
           change: stockQuote.d,
           changePercent: stockQuote.dp,
           currency: selectedStockDetails.currency,
         };
+        const timeStamp = Date.now();
+        const currentTime = new Date();
+        const hours = currentTime.getHours().toString().padStart(2, "0");
+        const minutes = currentTime.getMinutes().toString().padStart(2, "0");
+        console.log(Object.keys(stockDailyData)[0]);
 
         addToRecentlySeenStocks({
-          active: true,
+          lastUpdated: timeStamp,
+          quoteLastUpdate: `${hours} : ${minutes}`,
+          historicalDataLastUpdate: Object.keys(stockDailyData)[0],
           stockOverview: stockOverview,
           stockDetails: selectedStockDetails,
           stockData: stockDailyData,

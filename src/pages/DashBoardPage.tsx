@@ -1,6 +1,5 @@
 import DisplayStockOverview from "../components/DisplayStockOverview/DisplayStockOverview";
 import ButtonGroup from "../components/ButtonGroup/ButtonGroup";
-
 import Chart from "../components/Chart";
 import DisplayStockDetails from "../components/DisplayStockDetails/DisplayStockDetails";
 import "./DashBoardPage.css";

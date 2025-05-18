@@ -82,7 +82,9 @@ select {
 }
 
 .secondary_light_mode_colors {
-  background-color: #f5f7f9;
+  /* background-color: #eceff2; */
+  /* background-color: #f5f7f9; */
+  background-color: #cce0ee;
   color: #000;
 }
 
