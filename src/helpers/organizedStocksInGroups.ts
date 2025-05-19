@@ -29,7 +29,5 @@ export default function organizeStocksInGroups(
     }
   }
 
-  console.log(stockDataByGroup);
-
   return Object.values(stockDataByGroup).filter((group) => group);
 }
