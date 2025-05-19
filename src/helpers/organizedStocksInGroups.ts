@@ -24,10 +24,10 @@ export default function organizeStocksInGroups(
       date: timePeriodLabel,
     });
 
-    if (Object.keys(stockDataByGroup).length >= maxNumberOfGroups + 1) {
+    if (Object.keys(stockDataByGroup).length >= maxNumberOfGroups) {
       break;
     }
   }
 
-  return Object.values(stockDataByGroup).filter((group) => group.length >= 2);
+  return Object.values(stockDataByGroup).filter((group) => group);
 }
