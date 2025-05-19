@@ -38,6 +38,7 @@ export default function Chart() {
             scaleType: "point",
             dataKey: "date",
             valueFormatter: (date: string) => date,
+            reverse: true,
           },
         ]}
         series={[
