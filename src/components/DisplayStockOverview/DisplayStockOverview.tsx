@@ -11,8 +11,6 @@ export default function DisplayStockOverview() {
     changePercent = "",
   } = recentlySeenStocks[0].stockOverview || {};
   const isNegativeChange = +changePercent < 0;
-  console.log(recentlySeenStocks);
-
   return (
     <section className="stock_overview_container">
       <div className="logo_symbol_container">
