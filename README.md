@@ -79,5 +79,4 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 - [ ] Complete cache functionality.
 - [ ] Update mobile design to include recently seen stocks.
 - [ ] Add a stock buying simulation functionality.
-- [ ] Implement real-time price updates via WebSockets.
-- [ ] Integrate an AI agent to provide assistance with app usage and information about stocks.
+
