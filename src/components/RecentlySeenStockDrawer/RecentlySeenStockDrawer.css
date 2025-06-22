@@ -1,0 +1,30 @@
+.recent_stock_drawer_overview_container {
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px;
+}
+
+.recent_stock_drawer_logo {
+  min-width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+.recent_stock_drawer_name {
+  height: 1.4375rem;
+  width: 100px;
+  overflow: hidden;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+@media screen and (min-width: 1200px) {
+  .recent_stock_drawer_overview_container {
+    display: none;
+  }
+}
