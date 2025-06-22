@@ -1,3 +1,4 @@
+import AsideDrawer from "../Drawer/AsideDrawer";
 import RecentlySeenStock from "../RecentlySeenStock/RecentlySeenStock";
 import { useStocksContext } from "../StocksContextProvider";
 import "./NavBar.css";
@@ -8,6 +9,9 @@ export default function NavBar() {
   return (
     <nav className={`navbar_container ${primaryColors}`}>
       <div className="navbar_logo_container">
+        <div className={`hamburger_menu ${primaryColors}`}>
+          <AsideDrawer />
+        </div>
         <h1 className={`navbar_logo colors ${accentColors}`}>
           {" "}
           Stock Dashboard
