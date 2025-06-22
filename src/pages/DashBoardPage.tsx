@@ -11,7 +11,7 @@ export default function DashBoardPage() {
   const { recentlySeenStocks, secondaryColors } = useStocksContext();
 
   return (
-    <main className={`dashboard_page_container ${secondaryColors}`}>
+    <section className={`dashboard_page_container ${secondaryColors}`}>
       {recentlySeenStocks.length > 0 ? (
         <>
           <SecondaryDashboardPageContainer>
@@ -25,6 +25,6 @@ export default function DashBoardPage() {
       ) : (
         <NoData />
       )}
-    </main>
+    </section>
   );
 }

@@ -1,28 +1,22 @@
 import "./app.css";
 import { ThemeProvider } from "@mui/material/styles";
-import DashBoardPage from "./pages/DashBoardPage.js";
-import NavBar from "./components/NavBar/NarBar.js";
-import DashboardTitle from "./components/DashBoardTitle/DashboardTitle.js";
-import SearchBar from "./components/SearchBar/SearchBar.js";
+import DashBoardPage from "./pages/DashBoardPage";
+import NavBar from "./components/NavBar/NavBar";
+import DashboardTitle from "./components/DashBoardTitle/DashboardTitle";
+import SearchBar from "./components/SearchBar/SearchBar";
 import { createTheme } from "@mui/material";
-import { useStocksContext } from "./components/StocksContextProvider.js";
+import { useStocksContext } from "./components/StocksContextProvider";
 
 export default function App() {
   const { isDarkMode, secondaryColors } = useStocksContext();
-  const darkTheme = createTheme({
+  const theme = createTheme({
     palette: {
-      mode: "dark",
-    },
-  });
-
-  const lightTheme = createTheme({
-    palette: {
-      mode: "light",
+      mode: isDarkMode ? "dark" : "light",
     },
   });
 
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme}>
       <main className={`app-main-container ${secondaryColors}`}>
         <aside className="app-navbar-container">
           <NavBar />
