@@ -2,7 +2,7 @@ import React, {
   createContext,
   useCallback,
   useContext,
-  useEffect,
+  // useEffect,
   useState,
 } from "react";
 import { ContextTypes, RecentlySeenStocks, StocksData } from "../types";
@@ -10,9 +10,9 @@ import getFiveMonthsStockData from "../helpers/getFiveMonthsStockData";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
 import { usePersistedState } from "../hooks/usePersistedState";
-import { getItem } from "../helpers/localStorage";
-import fetchQuote from "../helpers/fetchQuote";
-import fetchHistoricalData from "../helpers/fetchHistoricalData";
+// import fetchQuote from "../helpers/fetchQuote";
+// import fetchHistoricalData from "../helpers/fetchHistoricalData";
+import useAutoUpdateStock from "../hooks/useAutoUpdateStock";
 
 export const stocksContext = createContext<ContextTypes>({
   primaryColors: "primary_light_mode_colors",
@@ -124,10 +124,7 @@ export default function StocksContextProvider({
   //loading state
 
   //Theme colors
-  const [isDarkMode, setIsDarkMode] = usePersistedState(
-    "isDarkMode",
-    getItem("isDarkMode") === true ? true : false
-  );
+  const [isDarkMode, setIsDarkMode] = usePersistedState("isDarkMode", false);
   const primaryColors = `${
     isDarkMode ? "primary_dark_mode_colors" : "primary_light_mode_colors"
   }`;
@@ -150,65 +147,7 @@ export default function StocksContextProvider({
 
   //Update stocks quote and historical data using an time interval
   const currentStock = recentlySeenStocks[0];
-
-  useEffect(() => {
-    if (!currentStock) {
-      return;
-    }
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, "0");
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const year = today.getFullYear();
-    const todaysDate = `${year}-${month}-${day}`;
-
-    const intervalId = setInterval(() => {
-      if (todaysDate !== currentStock.historicalDataLastUpdate) {
-        //update historical data and date of historical data
-        fetchHistoricalData(currentStock.stockOverview.symbol).then(
-          (updateStockHistoricalData) => {
-            const updatedStock = {
-              ...currentStock,
-              stockData: updateStockHistoricalData,
-              historicalDataLastUpdate: todaysDate,
-            };
-            updateRecentlySeenStocks(updatedStock);
-          }
-        );
-      }
-
-      const currentTime = new Date();
-      const hours = currentTime.getHours().toString().padStart(2, "0");
-      const minutes = currentTime.getMinutes().toString().padStart(2, "0");
-      const timeDifferenceInMinutes =
-        (Date.now() - currentStock.lastUpdated) / (1000 * 60);
-      console.log(
-        "Time difrenence in minutes since last update",
-        timeDifferenceInMinutes
-      );
-      console.log("current time in minutes", minutes);
-      //calculate time hours and minutes
-      const quoteLastUpdate = `${hours} : ${minutes}`;
-
-      if (timeDifferenceInMinutes > 15) {
-        fetchQuote(currentStock.stockOverview.symbol).then((data) => {
-          const updatedStock = {
-            ...currentStock,
-            lastUpdated: Date.now(),
-            quoteLastUpdate: quoteLastUpdate,
-            stockOverview: {
-              ...currentStock.stockOverview,
-              price: data.c,
-              changePercent: data.dp,
-            },
-          };
-          updateRecentlySeenStocks(updatedStock);
-        });
-      }
-    }, 30000); //repeat every 30 seconds
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [currentStock, updateRecentlySeenStocks]);
+  useAutoUpdateStock(currentStock);
 
   return (
     <stocksContext.Provider
