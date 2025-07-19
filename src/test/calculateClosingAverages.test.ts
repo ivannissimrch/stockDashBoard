@@ -1,4 +1,4 @@
-import calculateClosingAverages from "./calculateClosingAverages";
+import calculateClosingAverages from "../helpers/calculateClosingAverages";
 import { expect, it } from "vitest";
 
 it("should return averages of closing prices", () => {
