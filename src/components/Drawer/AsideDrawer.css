@@ -1,6 +1,10 @@
 .aside_drawer_title {
   width: 300px;
   padding: 5px;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 @media screen and (min-width: 1200px) {
