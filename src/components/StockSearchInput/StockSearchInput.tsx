@@ -8,6 +8,7 @@ import { GridSearchIcon } from "@mui/x-data-grid";
 import { useStocksContext } from "../StocksContextProvider";
 import fetchAllDataForStocks from "../../helpers/fetchAllDataForStocks";
 import { StockSymbols } from "../../types";
+import logError from "../../helpers/logError";
 
 interface StockResultWithLabel {
   label: string;
@@ -34,7 +35,6 @@ export default function StockSearchInput() {
     setIsLoading(true);
     try {
       if (searchInputText === "") {
-        console.log("return");
         return;
       }
       const stocks: StockSymbols[] = await fetchStocksSymbols(searchInputText);
@@ -44,7 +44,7 @@ export default function StockSearchInput() {
       }));
       setStockSuggestionList(results);
     } catch (error) {
-      console.log(error);
+      logError(error);
     } finally {
       setIsLoading(false);
     }
