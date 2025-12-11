@@ -1,17 +1,9 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  // useEffect,
-  useState,
-} from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import { ContextTypes, RecentlySeenStocks, StocksData } from "../types";
 import getFiveMonthsStockData from "../helpers/getFiveMonthsStockData";
 import getSevenDaysStockData from "../helpers/getSevenDaysStockData";
 import getSixWeeksStockData from "../helpers/getSixWeeksStockData";
 import { usePersistedState } from "../hooks/usePersistedState";
-// import fetchQuote from "../helpers/fetchQuote";
-// import fetchHistoricalData from "../helpers/fetchHistoricalData";
 import useAutoUpdateStock from "../hooks/useAutoUpdateStock";
 
 export const stocksContext = createContext<ContextTypes>({
@@ -103,8 +95,6 @@ export default function StocksContextProvider({
   }
 
   function deleteFromRecentlySeenStocks(stockToDelete: RecentlySeenStocks) {
-    console.log(stockToDelete);
-    console.log(recentlySeenStocks);
     setRecentlySeenStocks((prev) =>
       prev.filter(
         (stock) =>
