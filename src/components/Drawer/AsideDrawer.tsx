@@ -1,6 +1,6 @@
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
-import { useStocksContext } from "../StocksContextProvider";
+import { useRecentlySeenStocksContext } from "../../contexts/RecentlySeenStocksContext";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import RecentlySeenStockDrawer from "../RecentlySeenStockDrawer/RecentlySeenStockDrawer";
@@ -8,7 +8,7 @@ import "./AsideDrawer.css";
 
 export default function AsideDrawer() {
   const anchor = "left";
-  const { recentlySeenStocks } = useStocksContext();
+  const { recentlySeenStocks } = useRecentlySeenStocksContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer =

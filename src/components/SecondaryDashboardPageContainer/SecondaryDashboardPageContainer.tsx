@@ -1,4 +1,4 @@
-import { useStocksContext } from "../StocksContextProvider";
+import { useThemeContext } from "../../ThemeContext";
 import "./SecondaryDashboardPageContainer.css";
 import { ReactNode } from "react";
 
@@ -7,7 +7,7 @@ export default function SecondaryDashboardPageContainer({
 }: {
   children: ReactNode;
 }) {
-  const { containersColors } = useStocksContext();
+  const { containersColors } = useThemeContext();
   return (
     <section className={`SecondaryDashboardPageContainer ${containersColors}`}>
       {children}

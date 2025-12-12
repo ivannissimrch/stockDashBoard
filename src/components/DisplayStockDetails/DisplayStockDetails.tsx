@@ -1,10 +1,11 @@
 import Skeleton from "@mui/material/Skeleton";
-import { useStocksContext } from "../StocksContextProvider";
+import { useRecentlySeenStocksContext } from "../../contexts/RecentlySeenStocksContext";
 import "./DisplayStockDetails.css";
+import { useThemeContext } from "../../ThemeContext";
 
 export default function DisplayStockDetails() {
-  const { recentlySeenStocks, containersColors, isStocksInfoLoading } =
-    useStocksContext();
+  const { recentlySeenStocks, isRecentlySeenLoading } = useRecentlySeenStocksContext();
+  const { containersColors } = useThemeContext();
   const {
     country = "",
     currency = "",
@@ -15,7 +16,7 @@ export default function DisplayStockDetails() {
   } = recentlySeenStocks[0].stockDetails || {};
   return (
     <section className={`stock_details_container ${containersColors}`}>
-      {isStocksInfoLoading ? (
+      {isRecentlySeenLoading ? (
         <>
           <Skeleton width="100%" height="20%" />
           <Skeleton width="100%" height="20%" />

@@ -1,6 +1,6 @@
 import "./ButtonGroup.css";
 import Button from "../Button/Button";
-import { useStocksContext } from "../StocksContextProvider";
+import { useHistoricalDataContext } from "../../contexts/HistoricalDataContext";
 import { Skeleton } from "@mui/material";
 
 export default function ButtonGroupContainer() {
@@ -9,12 +9,12 @@ export default function ButtonGroupContainer() {
     updateToSevenDays,
     updateToSixWeeks,
     updateToFiveMonths,
-    isStocksInfoLoading,
-  } = useStocksContext();
+    isHistoricalLoading,
+  } = useHistoricalDataContext();
 
   return (
     <div className="button_group">
-      {!isStocksInfoLoading ? (
+      {!isHistoricalLoading ? (
         <>
           {" "}
           <Button

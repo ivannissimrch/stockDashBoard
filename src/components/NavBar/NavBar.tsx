@@ -1,11 +1,13 @@
+import { useThemeContext } from "../../ThemeContext";
 import AsideDrawer from "../Drawer/AsideDrawer";
 import RecentlySeenStock from "../RecentlySeenStock/RecentlySeenStock";
-import { useStocksContext } from "../StocksContextProvider";
+import { useRecentlySeenStocksContext } from "../../contexts/RecentlySeenStocksContext";
 import "./NavBar.css";
 
 export default function NavBar() {
-  const { primaryColors, accentColors, recentlySeenStocks } =
-    useStocksContext();
+  const { recentlySeenStocks } = useRecentlySeenStocksContext();
+  const { primaryColors, accentColors } = useThemeContext();
+
   return (
     <nav className={`navbar_container ${primaryColors}`}>
       <div className="navbar_logo_container">

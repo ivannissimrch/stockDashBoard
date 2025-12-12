@@ -1,9 +1,9 @@
 import "./SearchBar.css";
 import StockSearchInput from "../StockSearchInput/StockSearchInput";
-import { useStocksContext } from "../StocksContextProvider";
+import { useThemeContext } from "../../ThemeContext";
 
 export default function SearchBar() {
-  const { primaryColors } = useStocksContext();
+  const { primaryColors } = useThemeContext();
 
   return (
     <div className={`searchbar_container ${primaryColors}`}>
