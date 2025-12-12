@@ -1,10 +1,10 @@
 import "./DisplayStockOverview.css";
 import arrow from "../../images/stockOverview/tabler_arrow-narrow-down.svg";
-import { useStocksContext } from "../StocksContextProvider";
+import { useRecentlySeenStocksContext } from "../../contexts/RecentlySeenStocksContext";
 import { Skeleton } from "@mui/material";
 
 export default function DisplayStockOverview() {
-  const { recentlySeenStocks, isStocksInfoLoading } = useStocksContext();
+  const { recentlySeenStocks, isRecentlySeenLoading } = useRecentlySeenStocksContext();
   const {
     symbol = "",
     price = "",
@@ -15,7 +15,7 @@ export default function DisplayStockOverview() {
     <section className="stock_overview_container">
       <div className="logo_symbol_container">
         <span className="stock_overview_item">
-          {!isStocksInfoLoading ? (
+          {!isRecentlySeenLoading ? (
             <img
               className="logo"
               src={recentlySeenStocks[0].stockDetails?.logo}
@@ -27,14 +27,14 @@ export default function DisplayStockOverview() {
         </span>
         <div className="symbol_name_container">
           <span className="stock_overview_name ">
-            {!isStocksInfoLoading ? (
+            {!isRecentlySeenLoading ? (
               recentlySeenStocks[0].stockDetails?.name
             ) : (
               <Skeleton variant="rounded" width={210} height={30} />
             )}
           </span>
           <span className="stock_overview_symbol">
-            {!isStocksInfoLoading ? (
+            {!isRecentlySeenLoading ? (
               symbol
             ) : (
               <Skeleton variant="rounded" width={210} height={20} />
@@ -43,7 +43,7 @@ export default function DisplayStockOverview() {
         </div>
       </div>
       <div className="percent_price_update_container">
-        {!isStocksInfoLoading ? (
+        {!isRecentlySeenLoading ? (
           <>
             <div className="percent_price_container">
               <div

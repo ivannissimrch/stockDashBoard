@@ -26,12 +26,6 @@ export interface StocksData {
   date: string;
 }
 
-export interface Stocks {
-  stockOverview: StockOverview;
-  stockDetails: StockDetails;
-  stockData: StocksData[];
-}
-
 export interface RecentlySeenStocks {
   lastUpdated: number;
   quoteLastUpdate: string;
@@ -41,14 +35,11 @@ export interface RecentlySeenStocks {
   stockData: DailyStocksApiResponse;
 }
 
+export interface RecentlySeenStockProps {
+  stock: RecentlySeenStocks;
+}
+
 export interface ContextTypes {
-  primaryColors: string;
-  secondaryColors: string;
-  accentColors: string;
-  iconColors: string;
-  containersColors: string;
-  isDarkMode: boolean;
-  implementDarkMode: () => void;
   stockHistoricalData: StocksData[] | undefined;
   updateStockHistoricalData: (newDetails: StocksData[]) => void;
   updateToSevenDays: () => void;
@@ -62,6 +53,16 @@ export interface ContextTypes {
   isStocksInfoLoading: boolean;
   setStocksInfoLoadingToFalse: () => void;
   setStocksInfoLoadingToTrue: () => void;
+}
+
+export interface ThemeContextTypes {
+  primaryColors: string;
+  secondaryColors: string;
+  accentColors: string;
+  iconColors: string;
+  containersColors: string;
+  isDarkMode: boolean;
+  implementDarkMode: () => void;
 }
 
 export interface StockTimeSeries {

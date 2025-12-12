@@ -1,21 +1,16 @@
 import "./RecentlySeenStockDrawer.css";
-import { useStocksContext } from "../StocksContextProvider";
+import { useRecentlySeenStocksContext } from "../../contexts/RecentlySeenStocksContext";
+import { useHistoricalDataContext } from "../../contexts/HistoricalDataContext";
 import { RecentlySeenStocks } from "../../types";
 import DeleteForeverSharpIcon from "@mui/icons-material/DeleteForeverSharp";
 import getSevenDaysStockData from "../../helpers/getSevenDaysStockData";
+import { useThemeContext } from "../../ThemeContext";
 
-interface stocksProps {
-  stock: RecentlySeenStocks;
-}
-
-export default function RecentlySeenStockDrawer({ stock }: stocksProps) {
-  const {
-    deleteFromRecentlySeenStocks,
-    primaryColors,
-    secondaryColors,
-    reOrderRecentlySeenStocks,
-    updateStockHistoricalData,
-  } = useStocksContext();
+export default function RecentlySeenStockDrawer({ stock }: { stock: RecentlySeenStocks }) {
+  const { deleteFromRecentlySeenStocks, reOrderRecentlySeenStocks } =
+    useRecentlySeenStocksContext();
+  const { updateStockHistoricalData } = useHistoricalDataContext();
+  const { primaryColors, secondaryColors } = useThemeContext();
 
   const { stockDetails, stockData } = stock;
 

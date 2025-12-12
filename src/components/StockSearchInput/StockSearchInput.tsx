@@ -5,7 +5,8 @@ import debounce from "lodash.debounce";
 import getSevenDaysStockData from "../../helpers/getSevenDaysStockData";
 import fetchStocksSymbols from "../../helpers/fetchStocksSymbols";
 import { GridSearchIcon } from "@mui/x-data-grid";
-import { useStocksContext } from "../StocksContextProvider";
+import { useRecentlySeenStocksContext } from "../../contexts/RecentlySeenStocksContext";
+import { useHistoricalDataContext } from "../../contexts/HistoricalDataContext";
 import fetchAllDataForStocks from "../../helpers/fetchAllDataForStocks";
 import { StockSymbols } from "../../types";
 import logError from "../../helpers/logError";
@@ -17,13 +18,13 @@ interface StockResultWithLabel {
 
 export default function StockSearchInput() {
   const {
-    updateStockHistoricalData,
     addToRecentlySeenStocks,
-    setStocksInfoLoadingToFalse,
-    setStocksInfoLoadingToTrue,
     recentlySeenStocks,
     reOrderRecentlySeenStocks,
-  } = useStocksContext();
+    setRecentlySeenLoading,
+  } = useRecentlySeenStocksContext();
+
+  const { updateStockHistoricalData } = useHistoricalDataContext();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [stockSuggestionList, setStockSuggestionList] = useState<
@@ -88,10 +89,10 @@ export default function StockSearchInput() {
       }
       //check if value is already store
 
-      setStocksInfoLoadingToTrue();
+      setRecentlySeenLoading(true);
       const [selectedStockDetails, stockQuote, stockDailyData] =
         await fetchAllDataForStocks(newValue.symbol);
-      setStocksInfoLoadingToFalse();
+      setRecentlySeenLoading(false);
 
       if (stockQuote && selectedStockDetails) {
         const stockOverview = {

@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { RecentlySeenStocks } from "../types";
 import fetchHistoricalData from "../helpers/fetchHistoricalData";
 import fetchQuote from "../helpers/fetchQuote";
-import { useStocksContext } from "../components/StocksContextProvider";
+import { useRecentlySeenStocksContext } from "../contexts/RecentlySeenStocksContext";
 
 export default function useAutoUpdate(currentStock: RecentlySeenStocks) {
-  const { updateRecentlySeenStocks } = useStocksContext();
+  const { updateRecentlySeenStocks } = useRecentlySeenStocksContext();
   useEffect(() => {
     if (!currentStock) {
       return;

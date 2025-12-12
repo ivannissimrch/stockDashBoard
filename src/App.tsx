@@ -5,10 +5,10 @@ import NavBar from "./components/NavBar/NavBar";
 import DashboardTitle from "./components/DashBoardTitle/DashboardTitle";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { createTheme } from "@mui/material";
-import { useStocksContext } from "./components/StocksContextProvider";
+import { useThemeContext } from "./ThemeContext";
 
 export default function App() {
-  const { isDarkMode, secondaryColors } = useStocksContext();
+  const { isDarkMode, secondaryColors } = useThemeContext();
   const theme = createTheme({
     palette: {
       mode: isDarkMode ? "dark" : "light",

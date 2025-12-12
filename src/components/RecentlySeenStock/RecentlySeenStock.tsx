@@ -1,21 +1,16 @@
 import "./RecentlySeenStock.css";
-import { useStocksContext } from "../StocksContextProvider";
+import { useRecentlySeenStocksContext } from "../../contexts/RecentlySeenStocksContext";
+import { useHistoricalDataContext } from "../../contexts/HistoricalDataContext";
 import { RecentlySeenStocks } from "../../types";
 import DeleteForeverSharpIcon from "@mui/icons-material/DeleteForeverSharp";
 import getSevenDaysStockData from "../../helpers/getSevenDaysStockData";
+import { useThemeContext } from "../../ThemeContext";
 
-interface stocksProps {
-  stock: RecentlySeenStocks;
-}
-
-export default function RecentlySeenStock({ stock }: stocksProps) {
-  const {
-    deleteFromRecentlySeenStocks,
-    primaryColors,
-    secondaryColors,
-    reOrderRecentlySeenStocks,
-    updateStockHistoricalData,
-  } = useStocksContext();
+export default function RecentlySeenStock({ stock }: { stock: RecentlySeenStocks }) {
+  const { deleteFromRecentlySeenStocks, reOrderRecentlySeenStocks } =
+    useRecentlySeenStocksContext();
+  const { updateStockHistoricalData } = useHistoricalDataContext();
+  const { primaryColors, secondaryColors } = useThemeContext();
 
   const { stockDetails, stockData } = stock;
 
@@ -32,8 +27,6 @@ export default function RecentlySeenStock({ stock }: stocksProps) {
     >
       <img className="recent_logo" src={stockDetails.logo} alt="company logo" />
       <h4 className="recent_name ">{stockDetails.name}</h4>
-      {/* <h4 className="recent_price">{`$${stockOverview.price}`}</h4> */}
-
       <DeleteForeverSharpIcon
         sx={{ color: `${primaryColors}` }}
         onClick={(event) => {
