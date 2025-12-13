@@ -4,10 +4,12 @@ import { useHistoricalDataContext } from "../contexts/HistoricalDataContext";
 import { Skeleton } from "@mui/material";
 
 export default function Chart() {
-  const { stockHistoricalData, isHistoricalLoading } = useHistoricalDataContext();
+  const { stockHistoricalData, isHistoricalLoading } =
+    useHistoricalDataContext();
 
   function renderChart() {
-    if (!stockHistoricalData) {
+    if (!stockHistoricalData) return;
+    if (Number.isNaN(stockHistoricalData[0].closingPrices)) {
       return (
         <LineChart
           xAxis={[{ data: [] }]}

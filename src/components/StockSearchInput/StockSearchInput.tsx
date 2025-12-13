@@ -62,10 +62,14 @@ export default function StockSearchInput() {
 
   function handleSearchQueryChange(
     _event: React.SyntheticEvent<Element, Event>,
-    value: string
+    value: string,
+    reason: string
   ) {
     setSearchQuery(value);
-    debounceFetchStockSuggestions(value);
+
+    if (reason === "input") {
+      debounceFetchStockSuggestions(value);
+    }
   }
 
   async function handleStockSelectionChange(
@@ -88,11 +92,15 @@ export default function StockSearchInput() {
         return;
       }
       //check if value is already store
-
       setRecentlySeenLoading(true);
-      const [selectedStockDetails, stockQuote, stockDailyData] =
-        await fetchAllDataForStocks(newValue.symbol);
+      const result = await fetchAllDataForStocks(newValue.symbol);
       setRecentlySeenLoading(false);
+
+      if (!result) {
+        return;
+      }
+
+      const [selectedStockDetails, stockQuote, stockDailyData] = result;
 
       if (stockQuote && selectedStockDetails) {
         const stockOverview = {
