@@ -6,6 +6,8 @@ import DashboardTitle from "./components/DashBoardTitle/DashboardTitle";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { createTheme } from "@mui/material";
 import { useThemeContext } from "./ThemeContext";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./components/ErrorFallback/ErrorFallback";
 
 export default function App() {
   const { isDarkMode, secondaryColors } = useThemeContext();
@@ -19,12 +21,16 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <main className={`app-main-container ${secondaryColors}`}>
         <aside className="app-navbar-container">
-          <NavBar />
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <NavBar />
+          </ErrorBoundary>
         </aside>
         <section className="app-section-container">
           <SearchBar />
           <DashboardTitle />
-          <DashBoardPage />
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <DashBoardPage />
+          </ErrorBoundary>
         </section>
       </main>
     </ThemeProvider>
