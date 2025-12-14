@@ -8,10 +8,12 @@ export default async function fetchQuote(stockSymbol: string) {
     const quote = await axios.get(
       `${FINNHUB_BASE_URL}/quote?symbol=${stockSymbol}&token=${FINNHUB_API_KEY}`
     );
-    if (!quote.data) return null;
+    if (!quote.data) {
+      throw new Error("No quote data returned from API");
+    }
     return quote.data;
   } catch (error) {
     logError(error);
-    return null;
+    throw error;
   }
 }
