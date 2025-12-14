@@ -18,7 +18,6 @@ export default function useAutoUpdate(currentStock: RecentlySeenStocks) {
         //update historical data and date of historical data
         fetchHistoricalData(currentStock.stockOverview.symbol)
           .then((updateStockHistoricalData) => {
-            if (!updateStockHistoricalData) return;
             const updatedStock = {
               ...currentStock,
               stockData: updateStockHistoricalData,
@@ -40,7 +39,6 @@ export default function useAutoUpdate(currentStock: RecentlySeenStocks) {
       if (timeDifferenceInMinutes > 15) {
         fetchQuote(currentStock.stockOverview.symbol)
           .then((data) => {
-            if (!data) return;
             const updatedStock = {
               ...currentStock,
               lastUpdated: Date.now(),

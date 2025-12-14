@@ -7,53 +7,49 @@ export default function Chart() {
   const { stockHistoricalData, isHistoricalLoading } =
     useHistoricalDataContext();
 
-  function renderChart() {
-    if (!stockHistoricalData) return;
-    if (Number.isNaN(stockHistoricalData[0].closingPrices)) {
-      return (
-        <LineChart
-          xAxis={[{ data: [] }]}
-          series={[
-            {
-              data: [],
-            },
-          ]}
-        />
-      );
-    }
-    const closingPrices = stockHistoricalData.map((data) => {
-      return data.closingPrices;
-    });
-    const chartDataset = stockHistoricalData.map((data) => {
-      return {
-        date: data.date,
-      };
-    });
-
-    return isHistoricalLoading ? (
+  if (isHistoricalLoading) {
+    return (
       <Skeleton width="98%" height="100%" className="line_chart_container" />
-    ) : (
+    );
+  }
+
+  if (!stockHistoricalData) {
+    return null;
+  }
+
+  if (Number.isNaN(stockHistoricalData[0].closingPrices)) {
+    return (
       <LineChart
-        dataset={chartDataset}
-        xAxis={[
-          {
-            scaleType: "point",
-            dataKey: "date",
-            valueFormatter: (date: string) => date,
-            reverse: true,
-          },
-        ]}
-        series={[
-          {
-            data: closingPrices,
-            baseline: "min",
-          },
-        ]}
-        grid={{ vertical: true, horizontal: true }}
+        xAxis={[{ data: [] }]}
+        series={[{ data: [] }]}
         className="line_chart_container"
       />
     );
   }
 
-  return <>{renderChart()}</>;
+  // Valid data - show chart
+  const closingPrices = stockHistoricalData.map((data) => data.closingPrices);
+  const chartDataset = stockHistoricalData.map((data) => ({ date: data.date }));
+
+  return (
+    <LineChart
+      dataset={chartDataset}
+      xAxis={[
+        {
+          scaleType: "point",
+          dataKey: "date",
+          valueFormatter: (date: string) => date,
+          reverse: true,
+        },
+      ]}
+      series={[
+        {
+          data: closingPrices,
+          baseline: "min",
+        },
+      ]}
+      grid={{ vertical: true, horizontal: true }}
+      className="line_chart_container"
+    />
+  );
 }
